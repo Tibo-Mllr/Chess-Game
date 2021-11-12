@@ -1,5 +1,5 @@
 class Pion:
-    def __init__(self, X, color):
+    def __init__(self, X, color):  # Initialisation du pion
         self.Pos_X = X
 
         if color == 'White':
@@ -11,6 +11,7 @@ class Pion:
         self.Moved = False
 
     def move(self, c):
+        # Peut bouger de 2 SI ET SEULEMENT SI il n'a pas bougé
         if not self.Moved:
             if self.Color == 'White':
                 self.Pos_Y += min(c, 2)
@@ -25,6 +26,7 @@ class Pion:
             else:
                 self.Pos_Y -= 1
 
+    # Mouvement spécial pour manger
     def eat(self, d):
         self.move(1)
         if d == 'R':
@@ -32,12 +34,14 @@ class Pion:
         else:
             self.Pos_X -= 1
 
+    # Changement en une autre pièce une fois arrivé au bout
     def change(self, choice):
         if self.Y_Pos in [7, 0]:
-            self = choice(self.X_pos, self.Y_pos)
+            self = choice(self.X_pos, self.Y_pos, self.Color)
 
 
 class Roi:
+    # Initialisation du Roi
     def __init__(self, color):
         self.Pos_X = 4
 
@@ -66,6 +70,7 @@ class Roi:
             self.Pos_Y -= 1
 
         # Puis mouvements diagonaux
+        # Par convention si deux mouvements : 'g' ou 'd' PUIS 'h' ou 'b'
         if len(d) == 2:
             if d[1] == 'h':
                 self.Pos_Y += 1
