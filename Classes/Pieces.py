@@ -72,6 +72,8 @@ class Roi:
             else:
                 self.Pos_Y -= 1
 
+        self.Moved = True
+
     def rock(self, d):
         if not self.Checked and not self.Moved:
             if d == 'd':
