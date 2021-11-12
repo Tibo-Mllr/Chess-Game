@@ -70,9 +70,9 @@ class Roi:
             self.Pos_Y -= 1
 
         # Puis mouvements diagonaux
-        # Par convention si deux mouvements : 'g' ou 'd' PUIS 'h' ou 'b'
-        if len(d) == 2:
-            if d[1] == 'h':
+        # Par convention si deux mouvements : 'g' ou 'd' PUIS '_' PUIS 'h' ou 'b'
+        if len(d) == 3:
+            if d[2] == 'h':
                 self.Pos_Y += 1
             else:
                 self.Pos_Y -= 1
