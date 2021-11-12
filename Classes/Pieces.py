@@ -37,7 +37,8 @@ class Pion:
     # Changement en une autre pièce une fois arrivé au bout
     def change(self, choice):
         if self.Y_Pos in [7, 0]:
-            self = choice(self.X_pos, self.Y_pos, self.Color)
+            # ATTENTION : Concordance à vérifier
+            self = choice(self.Color, 'g', True, self.Pos_X, self.Y_pos)
 
 
 class Roi:
