@@ -73,4 +73,24 @@ def Echiquier():
 
 def MenuStart():
 
-	Menu = pygame.display.set_mode((500, 500), RESIZABLE)
+	Menu = pygame.display.set_mode((500, 335), RESIZABLE)
+	
+	#Importation du fond
+	Fond = image.load("FondMenu.jpg").convert()
+	Fond = pygame.transform.scale(Fond, (500, 335))
+	Menu.blit(Fond, (0,0))
+	pygame.font.init()
+	TexteMenu = pygame.font.SysFont('Times New Roman', 30)
+	TexteMenu2 = TexteMenu.render('Garry Kasparov simulator', True , (0, 0, 0))
+	Menu.blit(TexteMenu2, (100,30))
+
+	#Création des boutons
+	
+	pygame.display.flip()
+
+	while True:
+		for event in pygame.event.get():    #On parcours la liste de tous les événements reçus
+			if event.type == QUIT:    	 	#Si un de ces événements est de type QUIT
+				pygame.quit()     			#On arrête le programme
+
+MenuStart()
