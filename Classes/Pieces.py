@@ -9,7 +9,7 @@ class Pion:
 
         self.Color = color
         self.Moved = False
-
+        self.name = 'pion'
     def move(self, c):
         # Peut bouger de 2 SI ET SEULEMENT SI il n'a pas bougé
         if not self.Moved:
@@ -54,7 +54,7 @@ class Roi:
         self.Moved = False
         self.Checked = False
         self.Color = color
-
+        self.name = 'roi'
     def move(self, d):
 
         # Mouvements normaux
@@ -104,6 +104,7 @@ class Tour:
             self.Color = color
         self.Color=color
         self.Moved=False
+        self.name = 'tour'
 
     def petit_rock(self):
         if self.Moved==False : #and Condition roi pas mis en échec et pas de pièce sur le chemin
@@ -135,6 +136,8 @@ class Dame:
             self.Pos_X = X
             self.Pos_Y = Y
         self.Color = color
+        self.name = 'dame'
+
     def move_normal(self,valeur,direction): #longueur dans [|-7;7|], direction = horizontale ou verticale
         if direction=='horizontale' :#and pas de pièce en chemin
             self.Pos_X+=valeur
@@ -174,6 +177,7 @@ class Fou :
             self.Pos_X = X
             self.Pos_Y = Y
         self.Color=color
+        self.name ='fou'
     
     def move(self,valeur,direction): #direction =h_d ou h_g ou b_d ou b_g
         if direction=='h_d': #and pas de pièce en chemin
@@ -207,6 +211,7 @@ class Cavalier:
             self.Pos_X = X
             self.Pos_Y = Y
         self.Color=color
+        self.name = 'cavalier'
     
     def move(self,valeur,direction): #direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
 
