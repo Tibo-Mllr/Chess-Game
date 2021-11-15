@@ -419,6 +419,7 @@ def echec_si_mvt(piece , x, y):
     newplateau((piece.Pos_X , piece.Pos_Y)) = ''
     newplateau((x,y)) = piece
     echec_si_mvt = False
+
     
 
 
