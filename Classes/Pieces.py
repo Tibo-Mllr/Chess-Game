@@ -255,9 +255,9 @@ class Tour:
         Arguments
         ---------
         valeur : entier
-            nombre de case duquel on veut se déplacer : de 0 à 7
+            nombre algébrique de case duquel on veut se déplacer : de -7 à 7
         direction : chaîne de caractères
-            Direction algébrique du déplacement : 'horizontale' ou 'verticale'
+            Direction du déplacement : 'horizontale' ou 'verticale'
 
         Sortie
         ------
@@ -288,6 +288,7 @@ class Dame:
         self.name = 'dame'
         self.points = 9
     # longueur dans [|-7;7|], direction = horizontale ou verticale
+
     def move_normal(self, valeur, direction):
         if direction == 'horizontale':  # and pas de pièce en chemin
             self.Pos_X += valeur
