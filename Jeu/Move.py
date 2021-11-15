@@ -140,7 +140,7 @@ def mvt_possible_tour(tour): #nouvelle fonction de deplacement possible de la to
                     if case_color(tour.Pos_X , Tour.PosY + i):
                         mvt_possible = mvt_possible + [(tour.Pos_X , Tour.PosY + i)]
     return mvt_possible
-                
+
 
 
 
@@ -148,10 +148,50 @@ def mvt_possible_tour(tour): #nouvelle fonction de deplacement possible de la to
 
 def mvt_possible_fou(fou):
     mvt_possible = []
-    ihautgauche = 1
-    ibasgauche = 1
-    ihautdroite = 1
-    ibasdroite = 1
+    finhautgauche = False
+    finbasgauche = False
+    finhautdroite = False
+    finbasdroite = False
+    if fou.Pos_X != 8 and fou.Pos_Y != 0: 
+        for i in range( 1 , min(8-fou.Pos_X , 1+ fou.Pos_Y)):
+             if finhautgauche == False:
+                if case_libre(fou.Pos_X + i , fou.Pos_Y - i):
+                    mvt_possible = mvt_possible + [(fou.Pos_X + i , fou.Pos_Y - i)]
+                else:
+                    finhautgauche = True
+                    if case_color(fou.Pos_X + i , fou.Pos_Y - i) != fou.Color:
+                        mvt_possible = mvt_possible + [(fou.Pos_X + i , fou.Pos_Y - i)]
+    if fou.Pos_X != 0 and fou.Pos_Y != 0:
+        for i in range( 1 , min (1+ fou.Pos_X, 1+ fou.Pos_Y)):
+            if finbasgauche == False:
+                if case_libre(fou.Pos_X - i , fou.Pos_Y - i):
+                    mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_Y - i)]
+                else:
+                    finbasgauche = True
+                    if case_color(fou.Pos_X - i , fou.Pos_Y - i) != fou.Color:
+                        mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_Y - i)]
+    if fou.Pos_X != 8 and fou.Pos_Y != 8:
+        for i in range ( 1 , min(8-fou.Pos_X , 8-fou.Pos_Y)):
+            if finhautdroite == False:
+                if case_libre(fou.Pos_X + i , fou.Pos_Y + i):
+                    mvt_possible = mvt_possible + (fou.Pos_X + i , fou.Pos_Y + i)
+                else:
+                    finhautdroite = True
+                    if case_color(fou.Pos_X + i , fou.Pos_Y + i) != fou.Color:
+                        mvt_possible = mvt_possible + [(fou.Pos_X + i , fou.Pos_Y + i)]
+    if fou.Pos_X != 0 and fou.Pos_Y != 8:
+        for i in range ( 1 , min(1 + fou.Pos_X , 8 - fou.Pos_Y)):
+            if finbasdroite == False:
+                if case_libre(fou.Pos_X - i , fou.Pos_X + i):
+                    mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_X + i)]
+                else:
+                    finbasdroite = True
+                    if case_color(fou.Pos_X - i , fou.Pos_X + i) != 0:
+                        mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_X + i)]
+    return mvt_possible
+    
+
+
     """if fou.pos_X < 8 and fou.Pos_Y >= 0:
         while fou.Pos_X + ihautgauche < 8 and fou.Pos_Y - ihautgauche >=0 and case_libre(fou.Pos_X + ihautgauche , fou.Pos_Y - ihautgauche):
             mvt_possible = mvt_possible + (fou.Pos_X + ihautgauche , fou.Pos_Y - ihautgauche)
