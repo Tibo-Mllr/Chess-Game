@@ -22,10 +22,10 @@ def test_Roi():
     Roi1.move('h')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 1)
 
-    Roi1.move('b_g')
+    Roi1.move('g_b')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 0)
 
-    Roi1.move('d_h')
+    Roi1.move('h_d')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (7, 1)
 
     Roi1.rock('g')
