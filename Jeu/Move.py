@@ -1,4 +1,5 @@
-from chess.py import *
+from Chess import *
+import copy
 
 plateau = {(0,0):'' , (0,1):'' , (0,2):'' , (0,3):'' , (0,4):'' , (0,5):'' , (0,6):'' , (0,7):'' , (1,0):'' , (1,1):'' , (1,2):'' , (1,3):'' , (1,4):'' , (1,5):'' , (1,6):'' , (1,7):'' , (2,0):'' , (2,1):'' , (2,2):'' , (2,3):'' , (2,4):'' , (2,5):'' , (2,6):'' , (2,7):'' , (3,0):'' , (3,1):'' , (3,2):'' , (3,3):'' , (3,4):'' , (3,5):'' , (3,6):'' , (3,7):'' , (4,0):'' , (4,1):'' , (4,2):'' , (4,3):'' , (4,4):'' , (4,5):'' , (4,6):'' , (4,7):'' , (5,0):'' , (5,1):'' , (5,2):'' , (5,3):'' , (5,4):'' , (5,5):'' , (5,6):'' , (5,7):'' , (6,0):'' , (6,1):'' , (6,2):'' , (6,3):'' , (6,4):'' , (6,5):'' , (6,6):'' , (6,7):'' , (7,0):'' , (7,1):'' , (7,2):'' , (7,3):'' , (7,4):'' , (7,5):'' , (7,6):'' , (7,7):''}
 
@@ -44,58 +45,7 @@ def mvt_possible_pion(pion): #Renvoie une liste de coup possible d'un pion donn�
             mvt_possible = mvt_possible + [(pion.Pos_X - 1 , pion.Pos_Y)]
     return mvt_possible
 
-"""
-def mvt_possible_tour(tour):
-    mvt_possible = []
-    ihaut = 1
-    finhaut = 1
-    ibas = -1
-    finbas = 1
-    igauche = -1
-    fingauche = 1
-    idroite = 1
-    findroite = 1
-    
-    il va falloir rajouter des if au cas ou la piece est sur une extremité pour eviter d"appliquer la fction case_libre sur un couple de coordonnées en dehors de la grille
-    VOIR COMMENTAIRES FOU
 
-    on va plutot regarder la position de base de la tour puis on va deteermineer le nombr d cxase maximum d dplacemeent ^possibl en
-    considérant le plateau vide et on aura juste a implémenterr unee variable fin au cas ou ca bute sur quelque chose
-    Comme ça pas de while juste un for avec une verification de la variable de fin
-    plus facile a implémenter
-    
-    while case_libre(tour.Pos_X + ihaut , tour.Pos_Y) and tour.Pos_X+ihaut < 8: #répertorie les deplacements possibles vers le haut
-        mvt_possible = mvt_possible + [(tour.Pos_X + ihaut , tour.Pos_Y)] #rajoute les cases libres une à une tant qu'elles sont vides
-        ihaut = ihaut + 1
-    if tour.Pos_X + ihaut < 8:
-        if case_libre(tour.Pos_X + ihaut , tour.Pos_Y) == False: #si on bute sur une piece verifie la couleur et rajoute la case si on peut la manger
-            if case_color(tour.Pos_X + ihaut , tour.Pos_Y) != tour.Color:
-                mvt_possible = mvt_possible + [(tour.Pos_X + ihaut , tour.Pos_Y)]
-    while case_libre(tour.Pos_X + ibas , tour.Pos_Y) and tour.Pos_X+ibas >= 0: #répertorie les deplacements possibles vers le bas
-        mvt_possible = mvt_possible + [(tour.Pos_X + ibas , tour.Pos_Y)] #rajoute les cases libres une à une tant qu'elles sont vides
-        ibas = ibas - 1
-    if tour.Pos_X + ibas >= 0:
-        if case_libre(tour.Pos_X + ibas , tour.Pos_Y) == False: #si on bute sur une piece verifie la couleur et rajoute la case si on peut la manger
-            if case_color(tour.Pos_X + ihaut , tour.Pos_Y) != tour.Color:
-                mvt_possible = mvt_possible + [(tour.Pos_X + ibas , tour.Pos_Y)]
-    while case_libre(tour.Pos_X , tour.Pos_Y + idroite) and tour.Pos_Y+idroite < 8: #repertorie les deplacements à droite
-        mvt_possible = mvt_possible + [(tour.Pos_X , tour.Pos_Y + idroite)] #rajoute les cases libres une à une tant qu'elles sont vides
-        idroite = idroite + 1
-    if tour.Pos_Y + idroite < 8:
-        if case_libre(tour.Pos_X , tour.Pos_Y + idroite) == False: #si on bute sur une piece verifie la couleur et rajoute la case si on peut la manger
-            if case_color(tour.Pos_X , tour.Pos_Y + idroite) != tour.Color:
-                mvt_possible = mvt_possible + [(tour.Pos_X , tour.Pos_Y + idroite)]
-    while case_libre(tour.Pos_X , tour.Pos_Y + igauche) and tour.Pos_Y+igauche >= 0: #repertorie les deplacements à droite
-        mvt_possible = mvt_possible + [(tour.Pos_X , tour.Pos_Y + igauche)] #rajoute les cases libres une à une tant qu'elles sont vides
-        igauche = igauche + 1
-    if tour.Pos_Y + igauche >=0:
-        if case_libre(tour.Pos_X , tour.Pos_Y + igauche) == False: #si on bute sur une piece verifie la couleur et rajoute la case si on peut la manger
-            if case_color(tour.Pos_X , tour.Pos_Y + igauche) != tour.Color:
-                mvt_possible = mvt_possible + [(tour.Pos_X , tour.Pos_Y + igauche)]
-
-    return mvt_possible
-
-""" 
 
 def mvt_possible_tour(tour): #nouvelle fonction de deplacement possible de la tour
     mvt_possible = []
