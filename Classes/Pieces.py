@@ -10,10 +10,8 @@ class Pion:
         self.Color = color
         self.Moved = False
         self.name = 'pion'
-<<<<<<< HEAD
-=======
+        self.points = 1
 
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
     def move(self, c):
         # Peut bouger de 2 SI ET SEULEMENT SI il n'a pas bougé
         if not self.Moved:
@@ -59,10 +57,7 @@ class Roi:
         self.Checked = False
         self.Color = color
         self.name = 'roi'
-<<<<<<< HEAD
-=======
 
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
     def move(self, d):
 
         # Mouvements normaux
@@ -113,14 +108,10 @@ class Tour:
             self.Pos_X = X
             self.Pos_Y = Y
             self.Color = color
-<<<<<<< HEAD
-        self.Color=color
-        self.Moved=False
-=======
         self.Color = color
         self.Moved = False
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
         self.name = 'tour'
+        self.points = 5
 
     def petit_rock(self):
         if self.Moved == False:  # and Condition roi pas mis en échec et pas de pièce sur le chemin
@@ -156,40 +147,7 @@ class Dame:
             self.Pos_Y = Y
         self.Color = color
         self.name = 'dame'
-
-<<<<<<< HEAD
-    def move_normal(self,valeur,direction): #longueur dans [|-7;7|], direction = horizontale ou verticale
-        if direction=='horizontale' :#and pas de pièce en chemin
-            self.Pos_X+=valeur
-        elif direction=='verticale': #and pas de pièce en chemin
-            self.Pos_Y+=valeur
-    
-    def move_diagonal(self,valeur,direction): #direction =h_d ou h_g ou b_d ou b_g
-        if direction=='h_d': #and pas de pièce en chemin
-            self.Pos_X+=valeur
-            self.Pos_Y+=valeur
-        
-        elif direction=='h_g': #and pas de pièce en chemin
-            self.Pos_X-=valeur
-            self.Pos_Y+=valeur
-        
-        elif direction=='b_d': #and pas de pièce en chemin
-            self.Pos_X+=valeur
-            self.Pos_Y-=valeur
-        elif direction=='b_g': #and pas de pièce en chemin
-            self.Pos_X-=valeur
-            self.Pos_Y-=valeur
-
-        
-class Fou :
-    
-    def __init__(self,cote,color,Change = False, X=3, Y=3): #cote = d ou g, color = White ou Black
-        if not Change :
-            if cote == 'g' :   
-                self.Pos_X=2
-            if cote == 'd' :
-                self.Pos_X=5
-=======
+        self.points = 9
     # longueur dans [|-7;7|], direction = horizontale ou verticale
     def move_normal(self, valeur, direction):
         if direction == 'horizontale':  # and pas de pièce en chemin
@@ -223,7 +181,6 @@ class Fou:
                 self.Pos_X = 2
             if cote == 'd':
                 self.Pos_X = 5
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
             if color == 'White':
                 self.Pos_Y = 0
             if color == 'Black':
@@ -231,28 +188,9 @@ class Fou:
         if Change:  # Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
-<<<<<<< HEAD
-        self.Color=color
-        self.name ='fou'
-    
-    def move(self,valeur,direction): #direction =h_d ou h_g ou b_d ou b_g
-        if direction=='h_d': #and pas de pièce en chemin
-            self.Pos_X+=valeur
-            self.Pos_Y+=valeur
-        
-        elif direction=='h_g': #and pas de pièce en chemin
-            self.Pos_X-=valeur
-            self.Pos_Y+=valeur
-        
-        elif direction=='b_d': #and pas de pièce en chemin
-            self.Pos_X+=valeur
-            self.Pos_Y-=valeur
-        elif direction=='b_g': #and pas de pièce en chemin
-            self.Pos_X-=valeur
-            self.Pos_Y-=valeur
-=======
         self.Color = color
         self.name = 'fou'
+        self.points = 3
 
     def move(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
         if direction == 'h_d':  # and pas de pièce en chemin
@@ -270,7 +208,6 @@ class Fou:
             self.Pos_X -= valeur
             self.Pos_Y -= valeur
 
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
 
 class Cavalier:
 
@@ -288,18 +225,12 @@ class Cavalier:
         if Change:  # Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
-<<<<<<< HEAD
-        self.Color=color
-        self.name = 'cavalier'
-    
-    def move(self,valeur,direction): #direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
-=======
         self.Color = color
         self.name = 'cavalier'
+        self.points = 3
 
     # direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
     def move(self, valeur, direction):
->>>>>>> e16acf96c0e7f8c44e7e16dd64c153848f56d8cd
 
         if direction == 'h_d_d':
             self.Pos_X += 2
