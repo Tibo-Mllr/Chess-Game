@@ -49,7 +49,7 @@ class Roi:
         if color == 'White':
             self.Pos_Y = 0
         if color == 'Black':
-            self.Pos_y = 7
+            self.Pos_Y = 7
 
         self.Moved = False
         self.Checked = False
@@ -89,14 +89,15 @@ class Roi:
 class Tour:
     
     def __init__(self,cote,color,Change = False, X=3, Y=3): #cote = d ou g, color = White ou Black
-        if cote == 'g' :   
-            self.Pos_X=0
-        if cote == 'd' :
-            self.Pos_X=7
-        if color == 'White':
-            self.Pos_Y=0
-        if color == 'Black':
-            self.Pos_Y=7
+        if not Change :
+            if cote == 'g' :   
+                self.Pos_X=0
+            if cote == 'd' :
+                self.Pos_X=7
+            if color == 'White':
+                self.Pos_Y=0
+            if color == 'Black':
+                self.Pos_Y=7
         if Change : #Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
@@ -133,7 +134,6 @@ class Dame:
         if Change : #Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
-            self.Color = color
         self.Color = color
     def move_normal(self,valeur,direction): #longueur dans [|-7;7|], direction = horizontale ou verticale
         if direction=='horizontale' :#and pas de pièce en chemin
@@ -161,18 +161,18 @@ class Dame:
 class Fou :
     
     def __init__(self,cote,color,Change = False, X=3, Y=3): #cote = d ou g, color = White ou Black
-        if cote == 'g' :   
-            self.Pos_X=2
-        if cote == 'd' :
-            self.Pos_X=5
-        if color == 'White':
-            self.Pos_Y=0
-        if color == 'Black':
-            self.Pos_Y=7
+        if not Change :
+            if cote == 'g' :   
+                self.Pos_X=2
+            if cote == 'd' :
+                self.Pos_X=5
+            if color == 'White':
+                self.Pos_Y=0
+            if color == 'Black':
+                self.Pos_Y=7
         if Change : #Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
-            self.Color = color
         self.Color=color
     
     def move(self,valeur,direction): #direction =h_d ou h_g ou b_d ou b_g
@@ -194,18 +194,18 @@ class Fou :
 class Cavalier:
 
     def __init__(self,cote,color,Change = False, X=3, Y=3): #cote = d ou g, color = White ou Black
-        if cote == 'g' :   
-            self.Pos_X=1
-        if cote == 'd' :
-            self.Pos_X=6
-        if color == 'White':
-            self.Pos_Y=0
-        if color == 'Black':
-            self.Pos_Y=7
+        if not Change :
+            if cote == 'g' :   
+                self.Pos_X=1
+            if cote == 'd' :
+                self.Pos_X=6
+            if color == 'White':
+                self.Pos_Y=0
+            if color == 'Black':
+                self.Pos_Y=7
         if Change : #Au cas où ce soit une transformation de pion
             self.Pos_X = X
             self.Pos_Y = Y
-            self.Color = color
         self.Color=color
     
     def move(self,valeur,direction): #direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
