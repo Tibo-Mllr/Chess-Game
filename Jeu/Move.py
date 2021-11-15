@@ -25,7 +25,7 @@ def mvt_possible_pion(pion): #Renvoie une liste de coup possible d'un pion donn�
             if case_libre(pion.Pos_X + 1 , pion.Pos_Y + 1) == False: 
                 if case_color(pion.Pos_X + 1 , pion.Pos_Y - 1) == 'Black':
                     mvt_possible = mvt_possible + [(pion.Pos_X + 1 , pion.Pos_Y + 1)]
-        if pion.Moved == False and case_libre(pion.Pos_X + 1 , pion.Pos_Y) and case_libre(pion.Pos_X + 2 , pion.Pos_Y): #verifie si le pion peut avancer de 2 si il n'a pas encore bougé
+        if pion.Pos_X == 1 and case_libre(pion.Pos_X + 1 , pion.Pos_Y) and case_libre(pion.Pos_X + 2 , pion.Pos_Y): #verifie si le pion peut avancer de 2 si il n'a pas encore bougé
             mvt_possible = mvt_possible + [(pion.Pos_X + 2 , pion.Pos_Y)]
         if case_libre(pion.Pos_X + 1 , pion.Pos_Y): #verifie si le pion peut avancer de 1
             mvt_possible = mvt_possible + [(pion.Pos_X + 1 , pion.Pos_Y)]
@@ -133,12 +133,12 @@ def mvt_possible_tour(tour): #nouvelle fonction de deplacement possible de la to
     if tour.Pos_Y != 8:  #on verifie les deplacements a droite et on s'arrete quand on bute sur une piece et en ajoutant les coordonnées de celle-ci si on peut la manger
         for i in range(1 , 8-tour.Pos_Y ):
             if findroite == False:
-                if case_libre(tour.Pos_X , Tour.PosY + i):
-                    mvt_possible = mvt_possible + [(tour.Pos_X , Tour.PosY + i)]
+                if case_libre(tour.Pos_X , tour.PosY + i):
+                    mvt_possible = mvt_possible + [(tour.Pos_X , tour.PosY + i)]
                 else:
                     findroite = True
-                    if case_color(tour.Pos_X , Tour.PosY + i):
-                        mvt_possible = mvt_possible + [(tour.Pos_X , Tour.PosY + i)]
+                    if case_color(tour.Pos_X , tour.PosY + i):
+                        mvt_possible = mvt_possible + [(tour.Pos_X , tour.PosY + i)]
     return mvt_possible
 
 
@@ -171,7 +171,7 @@ def mvt_possible_fou(fou):
                     if case_color(fou.Pos_X - i , fou.Pos_Y - i) != fou.Color:
                         mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_Y - i)]
     if fou.Pos_X != 8 and fou.Pos_Y != 8:
-        for i in range ( 1 , min(8-fou.Pos_X , 8-fou.Pos_Y)):
+        for i in range( 1 , min(8-fou.Pos_X , 8-fou.Pos_Y)):
             if finhautdroite == False:
                 if case_libre(fou.Pos_X + i , fou.Pos_Y + i):
                     mvt_possible = mvt_possible + (fou.Pos_X + i , fou.Pos_Y + i)
@@ -180,7 +180,7 @@ def mvt_possible_fou(fou):
                     if case_color(fou.Pos_X + i , fou.Pos_Y + i) != fou.Color:
                         mvt_possible = mvt_possible + [(fou.Pos_X + i , fou.Pos_Y + i)]
     if fou.Pos_X != 0 and fou.Pos_Y != 8:
-        for i in range ( 1 , min(1 + fou.Pos_X , 8 - fou.Pos_Y)):
+        for i in range( 1 , min(1 + fou.Pos_X , 8 - fou.Pos_Y)):
             if finbasdroite == False:
                 if case_libre(fou.Pos_X - i , fou.Pos_X + i):
                     mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_X + i)]
@@ -189,26 +189,244 @@ def mvt_possible_fou(fou):
                     if case_color(fou.Pos_X - i , fou.Pos_X + i) != 0:
                         mvt_possible = mvt_possible + [(fou.Pos_X - i , fou.Pos_X + i)]
     return mvt_possible
+
+def mvt_possible_dame(dame):
+    mvt_possible = []
+    finhaut = False #variables qui determineront quand s'arrete la boucle for
+    finbas = False
+    fingauche = False
+    findroite = False
+    if dame.Pos_X != 7: #on verifie les deplacements en haut et on s'arrete quand on bute sur une piece et en ajoutant les coordonnées de celle-ci si on peut la manger
+        for i in range(1,8 - dame.Pos_X ):
+            if finhaut == False:
+                if case_libre(dame.Pos_X + i , dame.Pos_y):
+                    mvt_possible = mvt_possible + [(dame.Pos_X + i , dame.Pos_y)]
+                else:
+                    finhaut = True
+                    if case_color(dame.Pos_X + i , dame.Pos_y) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X + i , dame.Pos_y)]
+    if dame.Pos_Y != 0: #on verifie les deplacements en bas et on s'arrete quand on bute sur une piece et en ajoutant les coordonnées de celle-ci si on peut la manger
+        for i in range(1 , dame.Pos_X + 1):
+            if finbas == False:
+                if case_libre(dame.Pos_X - i , dame.Pos_Y):
+                    mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_Y)]
+                else:
+                    finbas = True
+                    if case_color(dame.Pos_X - i , dame.Pos_Y) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_Y)]
+    if dame.Pos_Y != 0:  #on verifie les deplacements a gauche et on s'arrete quand on bute sur une piece et en ajoutant les coordonnées de celle-ci si on peut la manger
+        for i in range(1, dame.Pos_Y + 1):
+            if fingauche == False:
+                if case_libre(dame.Pos_X , dame.Pos_Y - i):
+                    mvt_possible = mvt_possible + [(dame.Pos_X , dame.Pos_Y - i)]
+                else:
+                    fingauche = True
+                    if case_color(dame.Pos_X , dame.Pos_Y - i) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X , dame.Pos_Y - i)]
+    if dame.Pos_Y != 8:  #on verifie les deplacements a droite et on s'arrete quand on bute sur une piece et en ajoutant les coordonnées de celle-ci si on peut la manger
+        for i in range(1 , 8-dame.Pos_Y ):
+            if findroite == False:
+                if case_libre(dame.Pos_X , dame.PosY + i):
+                    mvt_possible = mvt_possible + [(dame.Pos_X , dame.PosY + i)]
+                else:
+                    findroite = True
+                    if case_color(dame.Pos_X , dame.PosY + i):
+                        mvt_possible = mvt_possible + [(dame.Pos_X , dame.PosY + i)]
+    finhautgauche = False
+    finbasgauche = False
+    finhautdroite = False
+    finbasdroite = False
+    if dame.Pos_X != 8 and dame.Pos_Y != 0: 
+        for i in range( 1 , min(8-dame.Pos_X , 1+ dame.Pos_Y)):
+             if finhautgauche == False:
+                if case_libre(dame.Pos_X + i , dame.Pos_Y - i):
+                    mvt_possible = mvt_possible + [(dame.Pos_X + i , dame.Pos_Y - i)]
+                else:
+                    finhautgauche = True
+                    if case_color(dame.Pos_X + i , dame.Pos_Y - i) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X + i , dame.Pos_Y - i)]
+    if dame.Pos_X != 0 and dame.Pos_Y != 0:
+        for i in range( 1 , min (1+ dame.Pos_X, 1+ dame.Pos_Y)):
+            if finbasgauche == False:
+                if case_libre(dame.Pos_X - i , dame.Pos_Y - i):
+                    mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_Y - i)]
+                else:
+                    finbasgauche = True
+                    if case_color(dame.Pos_X - i , dame.Pos_Y - i) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_Y - i)]
+    if dame.Pos_X != 8 and dame.Pos_Y != 8:
+        for i in range( 1 , min(8-dame.Pos_X , 8-dame.Pos_Y)):
+            if finhautdroite == False:
+                if case_libre(dame.Pos_X + i , dame.Pos_Y + i):
+                    mvt_possible = mvt_possible + (dame.Pos_X + i , dame.Pos_Y + i)
+                else:
+                    finhautdroite = True
+                    if case_color(dame.Pos_X + i , dame.Pos_Y + i) != dame.Color:
+                        mvt_possible = mvt_possible + [(dame.Pos_X + i , dame.Pos_Y + i)]
+    if dame.Pos_X != 0 and dame.Pos_Y != 8:
+        for i in range( 1 , min(1 + dame.Pos_X , 8 - dame.Pos_Y)):
+            if finbasdroite == False:
+                if case_libre(dame.Pos_X - i , dame.Pos_X + i):
+                    mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_X + i)]
+                else:
+                    finbasdroite = True
+                    if case_color(dame.Pos_X - i , dame.Pos_X + i) != 0:
+                        mvt_possible = mvt_possible + [(dame.Pos_X - i , dame.Pos_X + i)]
+    return mvt_possible
+
+
+def mvt_possible_cavalier(cavalier):
+    mvt_possible = []
+    if cavalier.Pos_X < 6:
+        if cavalier.Pos_Y != 0:
+            if case_libre(cavalier.Pos_X + 2, cavalier.Pos_Y - 1):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X + 2, cavalier.Pos_Y - 1)]
+            else:
+                if case_color(cavalier.Pos_X + 2, cavalier.Pos_Y - 1) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X + 2, cavalier.Pos_Y - 1)]
+        if cavalier.Pos_Y != 7:   
+            if case_libre(cavalier.Pos_X + 2, cavalier.Pos_Y + 1):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X + 2, cavalier.Pos_Y + 1)]
+            else:
+                if case_color(cavalier.Pos_X + 2, cavalier.Pos_Y + 1) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X + 2, cavalier.Pos_Y + 1)]
+    if cavalier.Pos_X > 1:
+        if cavalier.Pos_Y != 0:
+            if case_libre(cavalier.Pos_X - 2, cavalier.Pos_Y - 1):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X - 2, cavalier.Pos_Y - 1)]
+            else:
+                if case_color(cavalier.Pos_X - 2, cavalier.Pos_Y - 1) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X - 2, cavalier.Pos_Y - 1)]
+        if cavalier.Pos_Y != 7:   
+            if case_libre(cavalier.Pos_X - 2, cavalier.Pos_Y + 1):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X - 2, cavalier.Pos_Y + 1)]
+            else:
+                if case_color(cavalier.Pos_X - 2, cavalier.Pos_Y + 1) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X - 2, cavalier.Pos_Y + 1)]
+    if cavalier.Pos_Y < 6:
+        if cavalier.Pos_X != 0:
+            if case_libre(cavalier.Pos_X - 1 , cavalier.Pos_Y + 2):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X - 1 , cavalier.Pos_Y + 2)]
+            else:
+                if case_color(cavalier.Pos_X - 1 , cavalier.Pos_Y + 2) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X - 1 , cavalier.Pos_Y + 2)]
+        if cavalier.Pos_X != 7:
+            if case_libre(cavalier.Pos_X + 1 , cavalier.Pos_Y + 2 ):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X + 1 , cavalier.Pos_Y + 2 )]
+            else:
+                if case_color(cavalier.Pos_X + 1 , cavalier.Pos_Y + 2 ) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X + 1 , cavalier.Pos_Y + 2 )]
+    if cavalier.Pos_Y > 1:
+        if cavalier.Pos_X != 0:
+            if case_libre(cavalier.Pos_X - 1 , cavalier.Pos_Y - 2):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X - 1 , cavalier.Pos_Y - 2)]
+            else:
+                if case_color(cavalier.Pos_X - 1 , cavalier.Pos_Y - 2) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X - 1 , cavalier.Pos_Y - 2)]
+        if cavalier.Pos_X != 7:
+            if case_libre(cavalier.Pos_X + 1 , cavalier.Pos_Y - 2 ):
+                mvt_possible = mvt_possible + [(cavalier.Pos_X + 1 , cavalier.Pos_Y - 2 )]
+            else:
+                if case_color(cavalier.Pos_X + 1 , cavalier.Pos_Y - 2 ) != cavalier.Color:
+                    mvt_possible = mvt_possible + [(cavalier.Pos_X + 1 , cavalier.Pos_Y - 2 )]
+    return mvt_possible
+
+def mvt_possible_gen(piece):
+    if piece.name == 'cavalier':
+        return mvt_possible_cavalier(piece)
+    if piece.name == 'roi':
+        return mvt_possible_roi(piece)
+    if piece.name == 'dame':
+        return mvt_possible_dame(piece)
+    if piece.name == 'fou':
+        return mvt_possible_fou(piece)
+    if piece.name == 'tour':
+        return mvt_possible_tour(piece)
+    if piece.name == 'pion':
+        return mvt_possible_pion(piece)
+
+def roi_en_echec(roi):
+    echec = False
+    for piece in plateau:
+        if (roi.Pos_X , roi.Pos_Y) in mvt_possible_gen(piece):
+            echec = True
+    return echec
+
+def echec_si_mouvement_du_roi(roi , x , y): # a revoir
+    newplateau = copy.deepcopy(plateau)
+    newplateau((roi.Pos_X , roi.Pos_Y)) = ''
+    newplateau((x,y)) = roi
+    echec_si_mvt = False
+    for piece in newplateau:
+        if (x , y) in mvt_possible_gen(piece):
+            echec = True
+    return echec_si_mvt
+
+def mvt_possible_roi(roi): 
+    mvt_possible = []
+    if roi.Pos_X != 0:
+        if case_libre(roi.Pos_X - 1 , roi.Pos_Y) and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y):
+            mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y)]
+        else:
+            if case_color(roi.Pos_X - 1 , roi.Pos_Y) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y):
+                mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y)]
+        if roi.Pos_Y != 0:
+                if case_libre(roi.Pos_X - 1 , roi.Pos_Y - 1) and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y - 1):
+                    mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y - 1)]
+                else:
+                    if case_color(roi.Pos_X - 1 , roi.Pos_Y - 1) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y - 1):
+                        mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y - 1)]
+        if roi.Pos_Y != 7:
+                if case_libre(roi.Pos_X - 1 , roi.Pos_Y + 1) and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y + 1):
+                    mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y + 1)]
+                else:
+                    if case_color(roi.Pos_X - 1 , roi.Pos_Y + 1) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y + 1):
+                        mvt_possible = mvt_possible + [(roi.Pos_X - 1 , roi.Pos_Y + 1)]
+    if roi.Pos_X != 7:
+        if case_libre(roi.Pos_X + 1 , roi.Pos_Y) and not echec_si_mouvement_du_roi(roi.Pos_X + 1 , roi.Pos_Y):
+            mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y)]
+        else:
+            if case_color(roi.Pos_X + 1 , roi.Pos_Y) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X + 1 , roi.Pos_Y):
+                mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y)]
+        if roi.Pos_Y != 0:
+                if case_libre(roi.Pos_X + 1 , roi.Pos_Y - 1) and not echec_si_mouvement_du_roi(roi.Pos_X + 1 , roi.Pos_Y - 1):
+                    mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y - 1)]
+                else:
+                    if case_color(roi.Pos_X + 1 , roi.Pos_Y - 1) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X - 1 , roi.Pos_Y - 1):
+                        mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y - 1)]
+        if roi.Pos_Y != 7:
+                if case_libre(roi.Pos_X + 1 , roi.Pos_Y + 1) and not echec_si_mouvement_du_roi(roi.Pos_X + 1 , roi.Pos_Y + 1):
+                    mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y + 1)]
+                else:
+                    if case_color(roi.Pos_X + 1 , roi.Pos_Y + 1) != roi.Color and not echec_si_mouvement_du_roi(roi.Pos_X + 1 , roi.Pos_Y + 1):
+                        mvt_possible = mvt_possible + [(roi.Pos_X + 1 , roi.Pos_Y + 1)]
+    if roi.Pos_Y != 0:
+        if case_libre(roi.Pos_X , roi.Pos_Y - 1) and not echec_si_mouvement_du_roi(roi.Pos_X , roi.Pos_Y - 1):
+            mvt_possible = mvt_possible + [(roi.Pos_X , roi.Pos_Y - 1)]
+        else : 
+            if case_color(roi.Pos_X , roi.Pos_Y - 1) != roi.color and not echec_si_mouvement_du_roi(roi.Pos_X , roi.Pos_Y - 1):
+                mvt_possible = mvt_possible + [(roi.Pos_X , roi.Pos_Y - 1)]
+    if roi.Pos_Y != 7:
+        if case_libre(roi.Pos_X , roi.Pos_Y + 1) and not echec_si_mouvement_du_roi(roi.Pos_X , roi.Pos_Y + 1):
+            mvt_possible = mvt_possible + [(roi.Pos_X , roi.Pos_Y + 1)]
+        else : 
+            if case_color(roi.Pos_X , roi.Pos_Y + 1) != roi.color and not echec_si_mouvement_du_roi(roi.Pos_X , roi.Pos_Y + 1):
+                mvt_possible = mvt_possible + [(roi.Pos_X , roi.Pos_Y + 1)]
+
+
+def echec_si_mvt(piece , x, y):
+    newplateau = copy.deepcopy(plateau)
+    newplateau((piece.Pos_X , piece.Pos_Y)) = ''
+    newplateau((x,y)) = piece
+    echec_si_mvt = False
     
 
 
-    """if fou.pos_X < 8 and fou.Pos_Y >= 0:
-        while fou.Pos_X + ihautgauche < 8 and fou.Pos_Y - ihautgauche >=0 and case_libre(fou.Pos_X + ihautgauche , fou.Pos_Y - ihautgauche):
-            mvt_possible = mvt_possible + (fou.Pos_X + ihautgauche , fou.Pos_Y - ihautgauche)
-            a revoir toujours le meme oprobleme qu'avant mais sur la suite des etapes de la boucle
-            en ajoutant un test qui met fin au while si on touche le bord de la grille a la fin ce serait cool
-            ou en ajoutant une constante qui dit si on doit s"arreter comme ca la boucle continue mais on ajoute plus rien c'est pas opti mais a voir
-            en ajoutant cette constante et en la mettant dans le while ca marcherait sans pour autant faire des boucles while pour rien
-            
-            il faut faire le meme changement chez la tour
-            """
 
-
-
-
-"""ce serait bien de sauver l'historique des mvts
+'''ce serait bien de sauver l'historique des mvts
 ca eviterait d'implementer plein de variables poursavoir si le roi a deja bougé pour pouvoir faire un roque
 chaque mouvement est un objet dans l'historique
 genre une liste qui donne les coups effectués
 
-en plus ca permettrait de rejouer la partie a partir d'une certaine etape"""
+en plus ca permettrait de rejouer la partie a partir d'une certaine etape
+'''
