@@ -1,3 +1,6 @@
+from Jeu.Move import mvt_possible_tour
+
+
 class Pion:
     def __init__(self, X, color):
         """Définit le pion
@@ -154,13 +157,13 @@ class Roi:
 
         self.Moved = True
 
-    def rock(self, d):
-        """Rock du roi
+    def roque(self, d):
+        """Roque du roi
 
         Arguments
         ---------
         d : chaîne de caractères
-            Direction du rock : 'd' ou 'g'
+            Direction du roque : 'd' ou 'g'
 
         Sortie
         ------
@@ -216,8 +219,8 @@ class Tour:
         self.name = 'tour'
         self.points = 5
 
-    def petit_rock(self):
-        """Petit rock de la tour
+    def petit_roque(self):
+        """Petit roque de la tour
 
         Arguments
         ---------
@@ -228,12 +231,12 @@ class Tour:
         Aucune
         """
 
-        if self.Moved == False:  # and Condition roi pas mis en échec et pas de pièce sur le chemin
+        if self.Moved == False:  
             self.Pos_X = 5
             self.Moved = True
 
-    def grand_rock(self):
-        """Grand rock de la tour
+    def grand_roque(self):
+        """Grand roque de la tour
 
         Arguments
         ---------
@@ -244,7 +247,7 @@ class Tour:
         Aucune
         """
 
-        if self.Moved == False:  # and Condition roi pas mis en échec et pas de pièce sur le chemin
+        if self.Moved == False: 
             self.Pos_X = 3
             self.Moved = True
 
@@ -264,9 +267,9 @@ class Tour:
         Aucune
         """
 
-        if direction == 'horizontale':  # and pas de pièce en chemin
+        if direction == 'horizontale':  
             self.Pos_X += valeur
-        elif direction == 'verticale':  # and pas de pièce en chemin
+        elif direction == 'verticale':  
             self.Pos_Y += valeur
         self.Moved = True
 
@@ -289,24 +292,25 @@ class Dame:
         self.points = 9
     # longueur dans [|-7;7|], direction = horizontale ou verticale
     def move_normal(self, valeur, direction):
-        if direction == 'horizontale':  # and pas de pièce en chemin
+        if direction == 'horizontale':  
             self.Pos_X += valeur
-        elif direction == 'verticale':  # and pas de pièce en chemin
+        elif direction == 'verticale':  
             self.Pos_Y += valeur
 
     def move_diagonal(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
-        if direction == 'h_d':  # and pas de pièce en chemin
+        if direction == 'h_d':  
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
-        elif direction == 'h_g':  # and pas de pièce en chemin
+        elif direction == 'h_g':
             self.Pos_X -= valeur
             self.Pos_Y += valeur
 
-        elif direction == 'b_d':  # and pas de pièce en chemin
+        elif direction == 'b_d':  
             self.Pos_X += valeur
             self.Pos_Y -= valeur
-        elif direction == 'b_g':  # and pas de pièce en chemin
+
+        elif direction == 'b_g':  
             self.Pos_X -= valeur
             self.Pos_Y -= valeur
 
@@ -332,18 +336,18 @@ class Fou:
         self.points = 3
 
     def move(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
-        if direction == 'h_d':  # and pas de pièce en chemin
+        if direction == 'h_d':  
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
-        elif direction == 'h_g':  # and pas de pièce en chemin
+        elif direction == 'h_g':  
             self.Pos_X -= valeur
             self.Pos_Y += valeur
 
-        elif direction == 'b_d':  # and pas de pièce en chemin
+        elif direction == 'b_d':  
             self.Pos_X += valeur
             self.Pos_Y -= valeur
-        elif direction == 'b_g':  # and pas de pièce en chemin
+        elif direction == 'b_g':  
             self.Pos_X -= valeur
             self.Pos_Y -= valeur
 
@@ -374,24 +378,31 @@ class Cavalier:
         if direction == 'h_d_d':
             self.Pos_X += 2
             self.Pos_Y += 1
+
         elif direction == 'h_g_g':
             self.Pos_X -= 2
             self.Pos_Y += 1
+
         elif direction == 'h_h_g':
             self.Pos_X -= 1
             self.Pos_Y += 2
+
         elif direction == 'h_h_d':
             self.Pos_X += 1
             self.Pos_Y += 2
+
         elif direction == 'b_d_d':
             self.Pos_X += 2
             self.Pos_Y -= 1
+
         elif direction == 'b_g_g':
             self.Pos_X -= 2
             self.Pos_Y -= 1
+
         elif direction == 'b_b_g':
             self.Pos_X -= 1
             self.Pos_Y -= 2
+
         elif direction == 'b_b_d':
             self.Pos_X += 1
             self.Pos_Y -= 2
