@@ -61,15 +61,15 @@ class Roi:
 
         # Mouvements normaux
         if d[0] == 'd':
-            self.Pos_X -= 1
+            self.Pos_X += 1
 
         elif d[0] == 'g':
-            self.Pos_X += 1
+            self.Pos_X -= 1
 
         elif d[0] == 'h':
             self.Pos_Y += 1
 
-        else:
+        elif d[0] == 'b':
             self.Pos_Y -= 1
 
         # Puis mouvements diagonaux
@@ -77,7 +77,7 @@ class Roi:
         if len(d) == 3:
             if d[2] == 'h':
                 self.Pos_Y += 1
-            else:
+            elif d[2] == 'b':
                 self.Pos_Y -= 1
 
         self.Moved = True
@@ -86,7 +86,7 @@ class Roi:
         if not self.Checked and not self.Moved:
             if d == 'd':
                 self.Pos_X += 2
-            else:
+            elif d == 'g':
                 self.Pos_X -= 2
 
 
