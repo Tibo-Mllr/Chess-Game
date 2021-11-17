@@ -8,6 +8,9 @@ pygame.init()
 
 clock= pygame.time.Clock()
 
+def var_name(var, dir=locals()):	#retourne le nom de la première variable par ordre de création qui possède la valeur de var
+    return [key for key, val in dir.items() if id(val) == id(var)]
+
 def Echiquier():
 	#Création de la fenêtre
 	fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
@@ -91,7 +94,6 @@ def Echiquier():
 			pass
 		else :
 			fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-
 		#Rafraichissement
 		pygame.display.flip()
 
@@ -106,6 +108,7 @@ def Echiquier():
 					if plateau[int(mouse[0]/80), int(mouse[1]/80)] =='':
 						pass
 					else:
+						fenetre.blit(plateau[int(mouse[0]/80), int(mouse[1]/80)], (int(mouse[0]/80)*80, int(mouse[1]/80)*80))
 						event_happened = False
 						while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
 							event = pygame.event.wait()
@@ -146,7 +149,7 @@ def MenuStart():
 	pygame.draw.rect(Menu, (0,0,0) , (175-100, 10 , 350, 35 ) , 1)
 	pygame.font.init()		#On initialise la création de texte sur pygame
 	TexteSurface = pygame.font.SysFont('Times New Roman', 30)	#On choisit la police d'écriture et la taille de la police du texte
-	TexteMenu, TextRectMenu = CréationTexte('Garry Kasparov simulator', TexteSurface , (0, 0, 0))
+	TexteMenu, TextRectMenu = CréationTexte('échec et mat', TexteSurface , (0, 0, 0))
 	TextRectMenu.center = ((500/2),(25)) #On centre le texte
 	Menu.blit(TexteMenu, TextRectMenu)
 	while True:
