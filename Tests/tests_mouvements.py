@@ -15,4 +15,6 @@ def test_mvt_pion():
     Pion1 = Pion(1, 'White')
     plateau[(Pion1.Pos_X, Pion1.Pos_Y)] = Pion1
     print(mvt_possible_pion(Pion1, plateau))
-    #assert mvt_possible_pion(Pion1, plateau) == [(1, 2), (1, 3)]
+    assert len(mvt_possible_pion(Pion1, plateau)) == 2
+    assert mvt_possible_pion(Pion1, plateau) == [(
+        1, 2), (1, 3)] or mvt_possible_pion(Pion1, plateau) == [(1, 3), (1, 2)]
