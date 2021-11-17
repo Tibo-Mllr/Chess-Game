@@ -43,13 +43,11 @@ def mvt_possible_pion(pion):  # Renvoie une liste de coup possible d'un pion don
         if pion.Pos_Y != 7:  # verifie si le pion peut manger à sa gauche
             if case_libre(pion.Pos_X - 1, pion.Pos_Y + 1):
                 if case_color(pion.Pos_X - 1, pion.Pos_Y + 1):
-                    mvt_possible = mvt_possible + \
-                        [(pion.Pos_X - 1, pion.Pos_Y + 1)]
-        # verifie si le pion peut avancé de 2 si il n'a pas encore bougé
-        if pion.Pos_X == 6 and case_libre(pion.Pos_X - 1, pion.Pos_Y) and case_libre(pion.Pos_X - 2, pion.Pos_Y):
-            mvt_possible = mvt_possible + [(pion.Pos_X - 2, pion.Pos_Y)]
-        if case_libre(pion.Pos_X - 1, pion.Pos_Y):  # verifie si le pion peut avancer de 1
-            mvt_possible = mvt_possible + [(pion.Pos_X - 1, pion.Pos_Y)]
+                    mvt_possible = mvt_possible + [(pion.Pos_X - 1, pion.Pos_Y + 1)]
+        if pion.Pos_X == 6 and case_libre(pion.Pos_X - 1 , pion.Pos_Y) and case_libre(pion.Pos_X - 2 , pion.Pos_Y): #verifie si le pion peut avancé de 2 si il n'a pas encore bougé
+            mvt_possible = mvt_possible + [(pion.Pos_X - 2 , pion.Pos_Y)]
+        if case_libre(pion.Pos_X - 1 , pion.Pos_Y): #verifie si le pion peut avancer de 1
+            mvt_possible = mvt_possible + [(pion.Pos_X - 1 , pion.Pos_Y)]
     return mvt_possible
 
 
@@ -348,8 +346,8 @@ def mvt_possible_gen(piece):
 
 def roi_en_echec(roi):
     echec = False
-    for piece in plateau:
-        if (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece):
+    for piece in plateau.values():
+        if (roi.Pos_X , roi.Pos_Y) in mvt_possible_gen(piece):
             echec = True
     return echec
 
@@ -359,9 +357,10 @@ def echec_si_mouvement_du_roi(roi, x, y):  # a revoir
     newplateau((roi.Pos_X, roi.Pos_Y)) = ''
     newplateau((x, y)) = roi
     echec_si_mvt = False
-    for piece in newplateau:
-        if (x, y) in mvt_possible_gen(piece):
-            echec = True
+    for piece in newplateau.values():
+        if piece != '':
+            if (x , y) in mvt_possible_gen(piece):
+                echec = True
     return echec_si_mvt
 
 
@@ -423,9 +422,71 @@ def mvt_possible_roi(roi):
 
 def echec_si_mvt(piece, x, y):
     newplateau = copy.deepcopy(plateau)
-    newplateau((piece.Pos_X, piece.Pos_Y)) = ''
-    newplateau((x, y)) = piece
-    echec_si_mvt = False
+    newplateau((piece.Pos_X , piece.Pos_Y)) = ''
+    newplateau((x,y)) = piece
+    if piece.color == 'White':
+        echec_blanc = False
+        for i in newplateau.values():
+                if i != '':
+                    if (roiblanc.Pos_X , roiblanc.Pos_Y) in mvt_possible_gen(i): #REVOIR LE NOM DU ROI BLANC
+                        echec_blanc = True
+        return echec_blanc
+    if piece.color == 'Black':
+        echec_noir = False
+        for i in newplateau.values():
+            if i != '':
+                if (roinoir.Pos_X , roinoir.Pos_Y) in mvt_possible_gen(i): #REVOIR LE NOM DU ROI BLANC
+                    echec_noir = True
+        return echec_noir
+"""
+def mvt_final_pion(pion):
+    mvt_final = []
+    for (x,y) in mvt_possible_pion(pion):
+        if echec_si_mvt(pion , x, y) == False:
+            mvt_final = mvt_final + [(x,y)]
+    return mvt_final
+
+def mvt_final_tour(tour):
+    mvt_final = []
+    for (x,y) in mvt_possible_tour(tour):
+        if echec_si_mvt(tour , x, y) == False:
+            mvt_final = mvt_final + [(x,y)]
+    return mvt_final
+
+def mvt_final_dame(dame):
+    mvt_final = []
+    for (x,y) in mvt_possible_dame(dame):
+        if echec_si_mvt(dame , x, y) == False:
+            mvt_final = mvt_final + [(x,y)]
+    return mvt_final
+
+def mvt_final_fou(fou):
+    mvt_final = []
+    for (x,y) in mvt_possible_fou(fou):
+        if echec_si_mvt(fou , x, y) == False:
+            mvt_final = mvt_final + [(x,y)]
+    return mvt_final
+"""
+
+def mvt_final(piece):
+    mvt = []
+    for (x,y) in mvt_possible_gen(piece):
+        if echec_si_mvt(piece , x, y) == False:
+            mvt = mvt + [(x,y)]
+    return mvt
+    
+
+
+
+        
+#reste promotion pion
+#reste roque
+#reste echec du roi si mvt d'une autre piece
+
+#reste nul en cas de match nul
+#reste victoire
+    
+
 
 
 '''ce serait bien de sauver l'historique des mvts
