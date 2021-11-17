@@ -27,39 +27,39 @@ def case_libre(x, y, plateau):  # fonction qui dit si une case est libre
 def mvt_possible_pion(pion, plateau):
     mvt_possible = []
     if pion.Color == 'White':  # Si le pion est blanc
-        if pion.Pos_Y != 0:  # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
-            if case_libre(pion.Pos_X + 1, pion.Pos_Y - 1, plateau) == False:
-                if case_color(pion.Pos_X + 1, pion.Pos_Y - 1, plateau) == 'Black':
+        if pion.Pos_X != 0:  # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
+            if case_libre(pion.Pos_X  -1, pion.Pos_Y + 1, plateau) == False:
+                if case_color(pion.Pos_X - 1, pion.Pos_Y + 1, plateau) == 'Black':
                     mvt_possible = mvt_possible + \
-                        [(pion.Pos_X + 1, pion.Pos_Y - 1)]
-        if pion.Pos_Y != 7:  # verifie si il peut manger une piece en haut a droite si le pion n'est pas tout a droite
+                        [(pion.Pos_X - 1, pion.Pos_Y + 1)]
+        if pion.Pos_X != 7:  # verifie si il peut manger une piece en haut a droite si le pion n'est pas tout a droite
             if case_libre(pion.Pos_X + 1, pion.Pos_Y + 1, plateau) == False:
-                if case_color(pion.Pos_X + 1, pion.Pos_Y - 1, plateau) == 'Black':
+                if case_color(pion.Pos_X + 1, pion.Pos_Y + 1, plateau) == 'Black':
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X + 1, pion.Pos_Y + 1)]
         # verifie si le pion peut avancer de 2 si il n'a pas encore bougé
-        if pion.Pos_X == 1 and case_libre(pion.Pos_X + 1, pion.Pos_Y, plateau) and case_libre(pion.Pos_X + 2, pion.Pos_Y, plateau):
-            mvt_possible = mvt_possible + [(pion.Pos_X + 2, pion.Pos_Y)]
+        if pion.Pos_Y == 1 and case_libre(pion.Pos_X, pion.Pos_Y+1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y + 2, plateau):
+            mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+2)]
         # verifie si le pion peut avancer de 1
-        if case_libre(pion.Pos_X + 1, pion.Pos_Y, plateau):
-            mvt_possible = mvt_possible + [(pion.Pos_X + 1, pion.Pos_Y)]
+        if case_libre(pion.Pos_X , pion.Pos_Y+1, plateau):
+            mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+1)]
     if pion.Color == 'Black':  # si le pion est noir
-        if pion.Pos_Y != 0:  # verifie si le pion peut manger à sa droite
+        if pion.Pos_X != 0:  # verifie si le pion peut manger à sa droite
             if case_libre(pion.Pos_X - 1, pion.Pos_Y - 1, plateau):
                 if case_color(pion.Pos_X - 1, pion.Pos_Y - 1, plateau):
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X - 1, pion.Pos_Y - 1)]
         if pion.Pos_Y != 7:  # verifie si le pion peut manger à sa gauche
-            if case_libre(pion.Pos_X - 1, pion.Pos_Y + 1, plateau):
-                if case_color(pion.Pos_X - 1, pion.Pos_Y + 1, plateau):
+            if case_libre(pion.Pos_X + 1, pion.Pos_Y - 1, plateau):
+                if case_color(pion.Pos_X + 1, pion.Pos_Y - 1, plateau):
                     mvt_possible = mvt_possible + \
-                        [(pion.Pos_X - 1, pion.Pos_Y + 1)]
-        # verifie si le pion peut avancé de 2 si il n'a pas encore bougé
-        if pion.Pos_X == 6 and case_libre(pion.Pos_X - 1, pion.Pos_Y, plateau) and case_libre(pion.Pos_X - 2, pion.Pos_Y, plateau):
-            mvt_possible = mvt_possible + [(pion.Pos_X - 2, pion.Pos_Y)]
+                        [(pion.Pos_X + 1, pion.Pos_Y - 1)]
+        # verifie si le pion peut avancer de 2 si il n'a pas encore bougé
+        if pion.Pos_Y == 6 and case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y - 2, plateau):
+            mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y - 2)]
         # verifie si le pion peut avancer de 1
-        if case_libre(pion.Pos_X - 1, pion.Pos_Y, plateau):
-            mvt_possible = mvt_possible + [(pion.Pos_X - 1, pion.Pos_Y)]
+        if case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau):
+            mvt_possible = mvt_possible + [(pion.Pos_X , pion.Pos_Y - 1)]
     return mvt_possible
 
 
