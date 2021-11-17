@@ -29,7 +29,7 @@ class Pion:
         self.name = 'pion'
         self.points = 1
 
-    def move(self, c):
+    def move(self, c, d):
         """Déplace le pion
 
         Arguments
@@ -229,7 +229,7 @@ class Tour:
         Aucune
         """
 
-        if self.Moved == False:  
+        if self.Moved == False:
             self.Pos_X = 5
             self.Moved = True
 
@@ -245,7 +245,7 @@ class Tour:
         Aucune
         """
 
-        if self.Moved == False: 
+        if self.Moved == False:
             self.Pos_X = 3
             self.Moved = True
 
@@ -264,9 +264,9 @@ class Tour:
         Aucune
         """
 
-        if direction == 'horizontale':  
+        if direction == 'horizontale':
             self.Pos_X += valeur
-        elif direction == 'verticale':  
+        elif direction == 'verticale':
             self.Pos_Y += valeur
         self.Moved = True
 
@@ -325,7 +325,7 @@ class Dame:
 
         if direction == 'horizontale':  # and pas de pièce en chemin
             self.Pos_X += valeur
-        elif direction == 'verticale':  
+        elif direction == 'verticale':
             self.Pos_Y += valeur
 
     def move_diagonal(self, valeur, direction):
@@ -351,11 +351,11 @@ class Dame:
             self.Pos_X -= valeur
             self.Pos_Y += valeur
 
-        elif direction == 'b_d':  
+        elif direction == 'b_d':
             self.Pos_X += valeur
             self.Pos_Y -= valeur
 
-        elif direction == 'b_g':  
+        elif direction == 'b_g':
             self.Pos_X -= valeur
             self.Pos_Y -= valeur
 
@@ -417,14 +417,14 @@ class Fou:
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
-        elif direction == 'h_g':  
+        elif direction == 'h_g':
             self.Pos_X -= valeur
             self.Pos_Y += valeur
 
-        elif direction == 'b_d':  
+        elif direction == 'b_d':
             self.Pos_X += valeur
             self.Pos_Y -= valeur
-        elif direction == 'b_g':  
+        elif direction == 'b_g':
             self.Pos_X -= valeur
             self.Pos_Y -= valeur
 
