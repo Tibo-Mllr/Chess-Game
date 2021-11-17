@@ -12,7 +12,7 @@ Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '
 
 
 def case_color(x, y, plateau):
-    if case_libre(x, y) == False:
+    if case_libre(x, y, plateau) == False:
         return plateau[(x, y)].Color
 
 
@@ -28,7 +28,7 @@ def mvt_possible_pion(pion, plateau):
     mvt_possible = []
     if pion.Color == 'White':  # Si le pion est blanc
         if pion.Pos_X != 0:  # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
-            if case_libre(pion.Pos_X  -1, pion.Pos_Y + 1, plateau) == False:
+            if case_libre(pion.Pos_X - 1, pion.Pos_Y + 1, plateau) == False:
                 if case_color(pion.Pos_X - 1, pion.Pos_Y + 1, plateau) == 'Black':
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X - 1, pion.Pos_Y + 1)]
@@ -41,7 +41,7 @@ def mvt_possible_pion(pion, plateau):
         if pion.Pos_Y == 1 and case_libre(pion.Pos_X, pion.Pos_Y+1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y + 2, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+2)]
         # verifie si le pion peut avancer de 1
-        if case_libre(pion.Pos_X , pion.Pos_Y+1, plateau):
+        if case_libre(pion.Pos_X, pion.Pos_Y+1, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+1)]
     if pion.Color == 'Black':  # si le pion est noir
         if pion.Pos_X != 0:  # verifie si le pion peut manger à sa droite
@@ -59,7 +59,7 @@ def mvt_possible_pion(pion, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y - 2)]
         # verifie si le pion peut avancer de 1
         if case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau):
-            mvt_possible = mvt_possible + [(pion.Pos_X , pion.Pos_Y - 1)]
+            mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y - 1)]
     return mvt_possible
 
 
@@ -114,13 +114,14 @@ def mvt_possible_tour(tour, plateau):
         # et en ajoutant les coordonnées de celle-ci si on peut la manger
         for i in range(1, 8-tour.Pos_X):
             if findroite == False:
-                if case_libre(tour.Pos_X + i, tour.PosY, plateau):
-                    mvt_possible = mvt_possible + [(tour.Pos_X + i, tour.PosY)]
+                if case_libre(tour.Pos_X + i, tour.Pos_Y, plateau):
+                    mvt_possible = mvt_possible + \
+                        [(tour.Pos_X + i, tour.Pos_Y)]
                 else:
                     findroite = True
-                    if case_color(tour.Pos_X + i, tour.PosY, plateau):
+                    if case_color(tour.Pos_X + i, tour.Pos_Y, plateau) != tour.Color:
                         mvt_possible = mvt_possible + \
-                            [(tour.Pos_X + i, tour.PosY)]
+                            [(tour.Pos_X + i, tour.Pos_Y)]
     return mvt_possible
 
 
@@ -159,7 +160,7 @@ def mvt_possible_fou(fou, plateau):
             if finhautdroite == False:
                 if case_libre(fou.Pos_X + i, fou.Pos_Y + i, plateau):
                     mvt_possible = mvt_possible + \
-                        (fou.Pos_X + i, fou.Pos_Y + i)
+                        [(fou.Pos_X + i, fou.Pos_Y + i)]
                 else:
                     finhautdroite = True
                     if case_color(fou.Pos_X + i, fou.Pos_Y + i, plateau) != fou.Color:
@@ -291,7 +292,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):  # a revoir
     newplateau[(x, y)] = roi
     echec_si_mvt = False
     for piece in newplateau.values():
-        if piece != '':
+        if piece != '' and piece != roi:
             if (x, y) in mvt_possible_gen(piece, plateau):
                 echec_si_mvt = True
     return echec_si_mvt
