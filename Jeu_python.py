@@ -1,5 +1,4 @@
 from Jeu.Chess import *
-from Jeu.Move import mvt_final, roi_en_echec
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -131,11 +130,6 @@ def jeu():
                 RoiBlanc = Plateau[element]
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
                 RoiNoir = Plateau[element]
-        # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
-        if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
-            Fin = True
-        if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            Fin = True
 
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
@@ -155,6 +149,24 @@ def jeu():
             print(grid_to_string(Plateau))
         else:
             print("Ce déplacement n'est pas possible")
+
+        for element in Plateau:
+            if Plateau[element] != '':
+                print(Plateau[element].name, Plateau[element].Color,
+                      mvt_final(Plateau[element], Plateau))
+
+        # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
+        if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
+            Fin = True
+            print("Srotie Blanche")
+        if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
+            Fin = True
+            print("Sortie Noire")
+
+    egalite(RoiBlanc, Plateau)
+    egalite(RoiNoir, Plateau)
+    victoire(RoiBlanc, Plateau)
+    victoire(RoiNoir, Plateau)
 
 
 if __name__ == "__main__":

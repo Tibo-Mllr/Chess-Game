@@ -1,4 +1,3 @@
-from Chess import *
 import copy
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
@@ -283,6 +282,7 @@ def roi_en_echec(roi, plateau):
     for piece in plateau.values():
         if piece != '' and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             echec = True
+            roi.Checked = True
     return echec
 
 
@@ -478,13 +478,10 @@ def grand_roque(roi, plateau):
 # reste victoire
 
 
-'''ce serait bien de sauver l'historique des mvts
-ca eviterait d'implementer plein de variables poursavoir si le roi a deja bougé pour pouvoir faire un roque
-chaque mouvement est un objet dans l'historique
-genre une liste qui donne les coups effectués
-
+"""
+ce serait bien de sauver l'historique des mvts
 en plus ca permettrait de rejouer la partie a partir d'une certaine etape
-'''
+"""
 
 
 # roi peut pasmanger la piece qui le met en echec
