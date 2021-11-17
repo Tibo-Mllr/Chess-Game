@@ -29,13 +29,15 @@ class Pion:
         self.name = 'pion'
         self.points = 1
 
-    def move(self, c, d):
+    def move(self, x, y):
         """Déplace le pion
 
         Arguments
         ---------
-        c : entier
-            Valeur de la quelle vous voulez avancer : 1 ou 2
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
         Sortie
         ------
@@ -43,19 +45,9 @@ class Pion:
         """
 
         # Peut bouger de 2 SI ET SEULEMENT SI il n'a pas bougé
-        if not self.Moved:
-            if self.Color == 'White':
-                self.Pos_Y += min(c, 2)
-            else:
-                self.Pos_Y -= min(c, 2)
+        self.Pos_X, self.Pos_Y = x, y
 
-            self.Moved = True
-
-        else:
-            if self.Color == 'White':
-                self.Pos_Y += 1
-            else:
-                self.Pos_Y -= 1
+        self.Moved = True
 
     def eat(self, d):
         """Mange un eautre pièce en diagonale
@@ -70,11 +62,11 @@ class Pion:
         ------
         Aucune
         """
+        self.Pos_Y += 1
 
-        self.move(1)
-        if d == 'R':
+        if d == 'd':
             self.Pos_X += 1
-        else:
+        elif d == 'g':
             self.Pos_X -= 1
 
     def change(self, choice):
@@ -121,39 +113,22 @@ class Roi:
         self.Color = color
         self.name = 'roi'
 
-    def move(self, d):
+    def move(self, x, y):
         """Action
 
         Arguments
         ---------
-        d : chaîne de caractères
-            Définit les mouvements du roi : 'd', 'g', 'h', 'b' ou *_d , *_g si diagonal
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
         Sortie
         ------
         Aucune
         """
 
-        # Mouvements normaux
-        if d[0] == 'd':
-            self.Pos_X += 1
-
-        elif d[0] == 'g':
-            self.Pos_X -= 1
-
-        elif d[0] == 'h':
-            self.Pos_Y += 1
-
-        elif d[0] == 'b':
-            self.Pos_Y -= 1
-
-        # Puis mouvements diagonaux
-        # Par convention si deux mouvements : 'h' ou 'b' PUIS '_' PUIS 'd' ou 'g'
-        if len(d) == 3:
-            if d[2] == 'd':
-                self.Pos_X += 1
-            elif d[2] == 'g':
-                self.Pos_X -= 1
+        self.Pos_X, self.Pos_Y = x, y
 
         self.Moved = True
 
@@ -249,31 +224,26 @@ class Tour:
             self.Pos_X = 3
             self.Moved = True
 
-    def move(self, valeur, direction):
+    def move(self, x, y):
         """Déplace la tour
 
         Arguments
         ---------
-        valeur : entier
-            Nombre algébrique de case duquel on veut se déplacer : de -7 à 7
-        direction : chaîne de caractères
-            Direction du déplacement : 'horizontale' ou 'verticale'
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
         Sortie
         ------
         Aucune
         """
 
-        if direction == 'horizontale':
-            self.Pos_X += valeur
-        elif direction == 'verticale':
-            self.Pos_Y += valeur
+        self.Pos_X, self.Pos_Y = x, y
         self.Moved = True
 
 
 class Dame:
-
-    # color = White ou Black et on met l'argument cote pour homogénéiser entre les différentes fonctions
     def __init__(self, cote, color, Change=False, X=3, Y=3):
         """Définit la dame
 
@@ -308,56 +278,22 @@ class Dame:
         self.name = 'dame'
         self.points = 9
 
-    def move_normal(self, valeur, direction):
-        """Déplace la dame selon l'horizontale ou la verticale
+    def move(self, x, y):
+        """Déplace la dame
 
         Arguments
         ---------
-        valeur : entier
-            Nombre algébrique du nombre de case duquel on veut se déplacer : de -7 à 7
-        direction : chaîne de caractères
-            Direction du déplacement : 'horizontale' ou 'verticale'
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
         Sortie
         ------
         Aucune
         """
 
-        if direction == 'horizontale':  # and pas de pièce en chemin
-            self.Pos_X += valeur
-        elif direction == 'verticale':
-            self.Pos_Y += valeur
-
-    def move_diagonal(self, valeur, direction):
-        """Déplace la Dame selon les diagonales
-
-        Arguments
-        ---------
-        valeur : entier
-            Nombre de case duquel on veut se déplacer : de 0 à 7
-        direction : chaîne de caractères
-            Direction de la diagonale : 'h_d' ou 'h_g' ou 'b_d' ou 'b_g'
-
-        Sortie
-        ------
-        Aucune
-        """
-
-        if direction == 'h_d':  # and pas de pièce en chemin
-            self.Pos_X += valeur
-            self.Pos_Y += valeur
-
-        elif direction == 'h_g':
-            self.Pos_X -= valeur
-            self.Pos_Y += valeur
-
-        elif direction == 'b_d':
-            self.Pos_X += valeur
-            self.Pos_Y -= valeur
-
-        elif direction == 'b_g':
-            self.Pos_X -= valeur
-            self.Pos_Y -= valeur
+        self.Pos_X, self.Pos_Y = x, y
 
 
 class Fou:
@@ -398,47 +334,32 @@ class Fou:
         self.name = 'fou'
         self.points = 3
 
-    def move(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
+    def move(self, x, y):
         """Déplace le fou
 
         Arguments
         ---------
-        valeur : entier
-            Nombre de case duquel on veut se déplacer
-        direction : chaîne de caractères
-            Direction du mouvement : 'h_d', 'h_g', 'b_d', 'b_g'
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
         Sortie
         ------
         Aucune
         """
 
-        if direction == 'h_d':  # and pas de pièce en chemin
-            self.Pos_X += valeur
-            self.Pos_Y += valeur
-
-        elif direction == 'h_g':
-            self.Pos_X -= valeur
-            self.Pos_Y += valeur
-
-        elif direction == 'b_d':
-            self.Pos_X += valeur
-            self.Pos_Y -= valeur
-        elif direction == 'b_g':
-            self.Pos_X -= valeur
-            self.Pos_Y -= valeur
+        self.pos_X, self.Pos_Y = x, y
 
 
 class Cavalier:
-
-    # cote = d ou g, color = White ou Black
     def __init__(self, cote, color, Change=False, X=3, Y=3):
         """Définit le cavalier
 
         Arguments
         ---------
         cote : chaîne de caractères
-            Côté du cavalier
+            Côté du cavalier : 'd' ou 'g'
         color : chaîne de caractères
             Couleur du cavalier
         Change : booléen
@@ -469,16 +390,15 @@ class Cavalier:
         self.name = 'cavalier'
         self.points = 3
 
-    # direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
-    def move(self, valeur, direction):
+    def move(self, x, y):
         """Déplace le cavalier
 
         Arguments
         ---------
-        valeur : entier
-            Pour normaliser avec les autres fonctions
-        direction : chaîne de caractères
-            Direction du mouvement : d'abord 'h' ou 'b' puis 'd' ou 'g', le nombre de fois qu'il faut
+        x : entier
+            Abscisse voulue
+        y : entier
+            Ordonnée voulue
 
 
         Sortie
@@ -486,34 +406,4 @@ class Cavalier:
         Aucune
         """
 
-        if direction == 'h_d_d':
-            self.Pos_X += 2
-            self.Pos_Y += 1
-
-        elif direction == 'h_g_g':
-            self.Pos_X -= 2
-            self.Pos_Y += 1
-
-        elif direction == 'h_h_g':
-            self.Pos_X -= 1
-            self.Pos_Y += 2
-
-        elif direction == 'h_h_d':
-            self.Pos_X += 1
-            self.Pos_Y += 2
-
-        elif direction == 'b_d_d':
-            self.Pos_X += 2
-            self.Pos_Y -= 1
-
-        elif direction == 'b_g_g':
-            self.Pos_X -= 2
-            self.Pos_Y -= 1
-
-        elif direction == 'b_b_g':
-            self.Pos_X -= 1
-            self.Pos_Y -= 2
-
-        elif direction == 'b_b_d':
-            self.Pos_X += 1
-            self.Pos_Y -= 2
+        self.Pos_X, self.Pos_Y = x, y
