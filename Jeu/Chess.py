@@ -13,7 +13,7 @@ def egalite(roi, plateau):
 
 
 def victoire(roi, plateau):
-    if mvt_possible_roi(roi, plateau) == [] and roi_en_echec(roi, plateau):
+    if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
         print(couleur_gagnant[0] + " win !")
