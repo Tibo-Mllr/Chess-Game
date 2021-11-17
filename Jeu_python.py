@@ -1,5 +1,5 @@
 from Jeu.Chess import *
-from Jeu.Move import mvt_final, roi_en_echec
+from Jeu.Move import *
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -125,18 +125,21 @@ def jeu():
     Fin = False
     print(grid_to_string(Plateau))
 
-    while not Fin:
+    k=0
+    while k !=2:
+        if k == 3:
+            k = 1
         for element in Plateau:
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
                 RoiBlanc = Plateau[element]
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
                 RoiNoir = Plateau[element]
-        # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
+            # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
         if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
-            Fin = True
+            k=2
         if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            Fin = True
-
+            k=2
+        
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
         x2 = input("Entrez l'abscisse voulue : ")
@@ -147,15 +150,31 @@ def jeu():
 
         X2 = int(x2)
         Y2 = int(y2)
-
-        if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-            Plateau[(X, Y)].move(X2, Y2)
-            Plateau[(X2, Y2)] = Plateau[(X, Y)]
-            Plateau[(X, Y)] = ''
-            print(grid_to_string(Plateau))
-        else:
-            print("Ce déplacement n'est pas possible")
-
+        if k ==0:
+            if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau) and case_color(X, Y, Plateau)=='black':
+                if case_color(X, Y, Plateau)=='white':
+                    Plateau[(X, Y)].move(X2, Y2)
+                    Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                    Plateau[(X, Y)] = ''
+                    print(grid_to_string(Plateau))
+                    k = 3
+                if case_color(X, Y, Plateau)=='black':
+                    print("C'est au tour des pièces blanches de jouer")
+            else:
+                    print("Ce déplacement n'est pas possible")
+        if k ==1:
+            if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                if case_color(X, Y, Plateau)=='black':
+                    Plateau[(X, Y)].move(X2, Y2)
+                    Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                    Plateau[(X, Y)] = ''
+                    print(grid_to_string(Plateau))
+                    k = 0
+                if case_color(X, Y, Plateau)=='white':
+                    print("C'est au tour des pièces noires de jouer")
+            else:
+                    print("Ce déplacement n'est pas possible")
+        
 
 if __name__ == "__main__":
     jeu_init()
