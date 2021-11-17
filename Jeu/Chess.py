@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-from Classes.Pieces import Pion, Tour
-from Move import roi_en_echec,mvt_possible_roi,mvt_possible_gen
+from Move import *
 from Classes.Pieces import *
 from Interface.Graphique import *
+
 
 def egalite(roi,plateau):
     if mvt_possible_roi(roi,plateau)==[] and not roi_en_echec(roi,plateau):
@@ -23,9 +22,6 @@ def victoire(roi,plateau):
 
 
 
-=======
-from Classes.Pieces import *
->>>>>>> 12ceb3434e0a8cd1d3baa678d464f252c0846259
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
