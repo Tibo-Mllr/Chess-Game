@@ -4,8 +4,6 @@ from pygame.locals import *
 from pygame.constants import RESIZABLE
 import time
 
-
-
 pygame.init()
 
 clock= pygame.time.Clock()
@@ -109,7 +107,7 @@ def Echiquier():
 						pass
 					else:
 						event_happened = False
-						while not event_happened:
+						while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
 							event = pygame.event.wait()
 							if event.type == MOUSEBUTTONDOWN:
 								if event.button == 1:	#Si clic gauche
@@ -120,8 +118,8 @@ def Echiquier():
 	
 	
 		#Re-collage
-		fenetre.blit(Damier, (0,0))	
-		for cle, valeur in plateau.items():
+		fenetre.blit(Damier, (0,0))	#On remet le fond 
+		for cle, valeur in plateau.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
 			if valeur == '':
 					pass
 			else :
@@ -159,7 +157,7 @@ def MenuStart():
 		#Création des boutons
 		mouse = pygame.mouse.get_pos()
 		#Création du bouton démarrage de partie
-		if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2:
+		if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2: #Permet de savoir si la souris se situe au niveau du bouton
 			pygame.draw.rect(Menu, '#00FFFF' , (250-70, 275/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
 			if event.type == MOUSEBUTTONDOWN:
 				if event.button == 1:	#Si clic gauche
@@ -175,11 +173,11 @@ def MenuStart():
 		Menu.blit(TextSurf, TextRect)
 
 		#Création du bouton quitter la partie
-		if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2:
-			pygame.draw.rect(Menu, '#8B0000' , (250-70, 435/2 , 140, 30 ) )
+		if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2: #Permet de savoir si la souris se situe au niveau du bouton
+			pygame.draw.rect(Menu, '#8B0000' , (250-70, 435/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
 			if event.type == MOUSEBUTTONDOWN:
 				if event.button == 1:	#Si clic gauche
-					pygame.quit()
+					pygame.quit()		#On quitte la partie
 		else:
 			pygame.draw.rect(Menu, '#DC143C' , (250-70, 435/2 , 140, 30 ) )
 
@@ -193,4 +191,5 @@ def MenuStart():
 		pygame.display.update()
 		clock.tick(15)
 
-MenuStart()
+if __name__ == "__main__":
+	MenuStart()
