@@ -352,25 +352,26 @@ def mvt_possible_roi(roi, plateau):
         else:
             if case_color(roi.Pos_X, roi.Pos_Y + 1, plateau) != roi.color and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau):
                 mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
+    return mvt_possible
 
 
 def echec_si_mvt(piece, x, y, plateau):
     newplateau = copy.deepcopy(plateau)
     newplateau[(piece.Pos_X, piece.Pos_Y)] = ''
     newplateau[(x, y)] = piece
-    if piece.color == 'White':
+    if piece.Color == 'White':
         echec_blanc = False
         for i in newplateau.values():
             if i != '':
                 # REVOIR LE NOM DU ROI BLANC
-                if (roiblanc.Pos_X, roiblanc.Pos_Y) in mvt_possible_gen(i, plateau):
+                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, plateau):
                     echec_blanc = True
         return echec_blanc
-    if piece.color == 'Black':
+    if piece.Color == 'Black':
         echec_noir = False
         for i in newplateau.values():
             if i != '':
-                if (roinoir.Pos_X, roinoir.Pos_Y) in mvt_possible_gen(i, plateau):  # REVOIR LE NOM DU ROI BLANC
+                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, plateau):  # REVOIR LE NOM DU ROI BLANC
                     echec_noir = True
         return echec_noir
 
@@ -408,15 +409,68 @@ def mvt_final_fou(fou):
 
 def mvt_final(piece, plateau):
     mvt = []
-    for (x, y) in mvt_possible_gen(piece, plateau):
-        if echec_si_mvt(piece, x, y, plateau) == False:
-            mvt = mvt + [(x, y)]
-    return mvt
+    if piece.name == 'roi':
+        return mvt_possible_roi(piece)
+    else:
+        for (x, y) in mvt_possible_gen(piece, plateau):
+            if echec_si_mvt(piece, x, y, plateau) == False:
+                mvt = mvt + [(x, y)]
+        return mvt
+    
+def petit_roque(roi):
+    petit_roque_possible = False
+    if roi.Color == 'White':
+        if roi.Pos_X == 4 and roi.Pos_Y == 0:
+            if TourBlanche2.Pos_X == 7 and TourBlanche2.Pos_X == 0:
+                already_moved = False
+                for coup in historique:
+                    if coup[O] == roi or coup[0] == TourBlanche2:
+                        already_moved = True
+                if case_libre(5 , 0) and case_libre(6 , 0):
+                    if not echec_si_mouvement_du_roi(roi , 5 , 0) and not roi_en_echec(roi) and already_moved == False:
+                        petit_roque_possible = True
+    if roi.Color == 'Black':
+        if roi.Pos_X == 3 and roi.Pos_Y == 7:
+            if TourNoire1.Pos_X == 0 and TourNoire1.Pos_X == 7:
+                already_moved = False
+                for coup in historique:
+                    if coup[O] == roi or coup[0] == TourNoire1:
+                        already_moved = True
+                if case_libre(2 , 7) and case_libre(1 , 7):
+                    if not echec_si_mouvement_du_roi(roi , 2 , 7) and not roi_en_echec(roi) and already_moved == False:
+                        petit_roque_possible = True
+    return petit_roque_possible
 
+def grand_roque(roi):
+    if roi.Color == 'White':
+        grand_roque_possible = False
+        if roi.Pos_X == 4 and roi.Pos_Y == 0:
+            if TourBlanche1.Pos_X == 0 and TourBlanche1.Pos_X == 0:
+                already_moved = False
+                for coup in historique:
+                    if coup[O] == roi or coup[0] == TourBlanche1:
+                        already_moved = True
+                if case_libre(1 , 0) and case_libre(2 , 0) and case_libre(3 , 0):
+                    if not echec_si_mouvement_du_roi(roi , 2 , 0) and not echec_si_mouvement_du_roi(roi , 3 , 0) and not roi_en_echec(roi) and already_moved == False:
+                        grand_roque_possible = True
+    if roi.Color == 'Black':
+        grand_roque_possible = False
+        if roi.Pos_X == 3 and roi.Pos_Y == 7:
+            if TourNoire2.Pos_X == 7 and TourNoire2.Pos_X == 7:
+                already_moved = False
+                for coup in historique:
+                    if coup[O] == roi or coup[0] == TourNoire2:
+                        already_moved = True
+                if case_libre(4 , 7) and case_libre(5 , 7) and case_libre(6 , 7):
+                    if not echec_si_mouvement_du_roi(roi , 4 , 7) and not echec_si_mouvement_du_roi(roi , 3 , 7) and not roi_en_echec(roi) and already_moved == False:
+                        grand_roque_possible = True
+    return grand_roque_possible
+# a ajouter dans les fonctions de mouvements des pieces
 
-# reste promotion pion
-# reste roque
-# reste echec du roi si mvt d'une autre piece
+        
+#reste promotion pion
+#reste roque
+
 
 # reste nul en cas de match nul
 # reste victoire

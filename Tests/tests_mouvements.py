@@ -17,17 +17,35 @@ def test_mvt_Pion():
     assert len(mvt_possible_pion(Pion1, plateau)) == 2
     assert mvt_possible_pion(Pion1, plateau) == [(
         1, 2), (1, 3)] or mvt_possible_pion(Pion1, plateau) == [(1, 3), (1, 2)]
+    assert len(mvt_possible_gen(Pion1, plateau)) == 2
+    assert mvt_possible_gen(Pion1, plateau) == [(
+        1, 2), (1, 3)] or mvt_possible_gen(Pion1, plateau) == [(1, 3), (1, 2)]
+    assert len(mvt_final(Pion1, plateau)) == 2
+    assert mvt_final(Pion1, plateau) == [(
+        1, 2), (1, 3)] or mvt_final(Pion1, plateau) == [(1, 3), (1, 2)]
 
 
 def test_mvt_Roi():
     Roi1 = Roi('White')
     plateau[(Roi1.Pos_X, Roi1.Pos_Y)] = Roi1
     
+<<<<<<< HEAD
 """print(mvt_possible_roi(Roi1, plateau))
     assert len(mvt_possible_pion(Roi1, plateau)) == 5
+=======
+    assert len(mvt_possible_roi(Roi1, plateau)) == 5
+>>>>>>> 12ceb3434e0a8cd1d3baa678d464f252c0846259
     for i in range(5):
         assert mvt_possible_roi(Roi1, plateau)[i] in [
-            (3, 0), (5, 0), (3, 1), (4, 1), (5, 1)]"""
+            (3, 0), (5, 0), (3, 1), (4, 1), (5, 1)]
+    assert len(mvt_possible_gen(Roi1, plateau)) == 5
+    for i in range(5):
+        assert mvt_possible_gen(Roi1, plateau)[i] in [
+            (3, 0), (5, 0), (3, 1), (4, 1), (5, 1)]
+    assert len(mvt_final(Roi1, plateau)) == 5
+    for i in range(5):
+        assert mvt_final(Roi1, plateau)[i] in [
+            (3, 0), (5, 0), (3, 1), (4, 1), (5, 1)]
 
 
 def test_mvt_Tour():
@@ -37,6 +55,15 @@ def test_mvt_Tour():
     for i in range(10):
         assert mvt_possible_tour(Tour1, plateau)[i] in [(
             0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (1, 0), (2, 0), (3, 0)]
+    assert len(mvt_possible_gen(Tour1, plateau)) == 10
+    for i in range(10):
+        assert mvt_possible_gen(Tour1, plateau)[i] in [(
+            0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (1, 0), (2, 0), (3, 0)]
+    assert len(mvt_final(Tour1, plateau)) == 10
+    for i in range(10):
+        assert mvt_final(Tour1, plateau)[i] in [(
+            0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (1, 0), (2, 0), (3, 0)]
+
 
 
 def test_mvt_Fou():
@@ -45,6 +72,14 @@ def test_mvt_Fou():
     assert len(mvt_possible_fou(Fou1, plateau)) == 5
     for i in range(5):
         assert mvt_possible_fou(Fou1, plateau)[i] in [
+            (3, 1), (4, 2), (5, 3), (6, 4), (7, 5)]
+    assert len(mvt_possible_gen(Fou1, plateau)) == 5
+    for i in range(5):
+        assert mvt_possible_gen(Fou1, plateau)[i] in [
+            (3, 1), (4, 2), (5, 3), (6, 4), (7, 5)]
+    assert len(mvt_final(Fou1, plateau)) == 5
+    for i in range(5):
+        assert mvt_final(Fou1, plateau)[i] in [
             (3, 1), (4, 2), (5, 3), (6, 4), (7, 5)]
 
 
@@ -55,6 +90,16 @@ def test_mvt_Dame():
     for i in range(14):
         assert mvt_possible_dame(Dame1, plateau)[i] in [(3, 1), (3, 2), (3, 3), (3, 4), (
             3, 5), (3, 6), (3, 7), (2, 1), (1, 2), (0, 3), (4, 1), (5, 2), (6, 3), (7, 4)]
+    assert len(mvt_possible_gen(Dame1, plateau)) == 14
+    for i in range(14):
+        assert mvt_possible_gen(Dame1, plateau)[i] in [(3, 1), (3, 2), (3, 3), (3, 4), (
+            3, 5), (3, 6), (3, 7), (2, 1), (1, 2), (0, 3), (4, 1), (5, 2), (6, 3), (7, 4)]
+    assert len(mvt_final(Dame1, plateau)) == 14
+    for i in range(14):
+        assert mvt_final(Dame1, plateau)[i] in [(3, 1), (3, 2), (3, 3), (3, 4), (
+            3, 5), (3, 6), (3, 7), (2, 1), (1, 2), (0, 3), (4, 1), (5, 2), (6, 3), (7, 4)]
+
+
 
 
 def test_mvt_Cavalier():
@@ -63,4 +108,18 @@ def test_mvt_Cavalier():
     assert len(mvt_possible_cavalier(Cavalier1, plateau)) == 3
     for i in range(3):
         assert mvt_possible_cavalier(Cavalier1, plateau)[i] in [
+<<<<<<< HEAD
             (3, 1), (0, 2), (2, 2)]
+=======
+            (3, 1), (0, 2), (2, 2)]
+    assert len(mvt_possible_gen(Cavalier1, plateau)) == 3
+    for i in range(3):
+        assert mvt_possible_gen(Cavalier1, plateau)[i] in [
+            (3, 1), (0, 2), (2, 2)]
+    assert len(mvt_final(Cavalier1, plateau)) == 3
+    for i in range(3):
+        assert mvt_final(Cavalier1, plateau)[i] in [
+            (3, 1), (0, 2), (2, 2)]
+
+
+>>>>>>> 12ceb3434e0a8cd1d3baa678d464f252c0846259
