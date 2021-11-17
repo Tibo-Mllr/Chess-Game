@@ -70,57 +70,57 @@ def mvt_possible_tour(tour, plateau):
     finbas = False
     fingauche = False
     findroite = False
-    if tour.Pos_X != 7:
+    if tour.Pos_Y != 7:
         # on verifie les deplacements en haut et on s'arrete quand on bute sur une piece
         # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, 8 - tour.Pos_X):
+        for i in range(1, 8 - tour.Pos_Y):
             if finhaut == False:
-                if case_libre(tour.Pos_X + i, tour.Pos_y, plateau):
+                if case_libre(tour.Pos_X, tour.Pos_Y + i, plateau):
                     mvt_possible = mvt_possible + \
-                        [(tour.Pos_X + i, tour.Pos_y)]
+                        [(tour.Pos_X, tour.Pos_Y + i)]
                 else:
                     finhaut = True
-                    if case_color(tour.Pos_X + i, tour.Pos_y, plateau) != tour.Color:
+                    if case_color(tour.Pos_X, tour.Pos_Y + i, plateau) != tour.Color:
                         mvt_possible = mvt_possible + \
-                            [(tour.Pos_X + i, tour.Pos_y)]
+                            [(tour.Pos_X, tour.Pos_Y + i)]
     if tour.Pos_Y != 0:
         # on verifie les deplacements en bas et on s'arrete quand on bute sur une piece
         # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, tour.Pos_X + 1):
-            if finbas == False:
-                if case_libre(tour.Pos_X - i, tour.Pos_Y, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(tour.Pos_X - i, tour.Pos_Y)]
-                else:
-                    finbas = True
-                    if case_color(tour.Pos_X - i, tour.Pos_Y, plateau) != tour.Color:
-                        mvt_possible = mvt_possible + \
-                            [(tour.Pos_X - i, tour.Pos_Y)]
-    if tour.Pos_Y != 0:
-        # on verifie les deplacements a gauche et on s'arrete quand on bute sur une piece
-        # et en ajoutant les coordonnées de celle-ci si on peut la manger
         for i in range(1, tour.Pos_Y + 1):
-            if fingauche == False:
+            if finbas == False:
                 if case_libre(tour.Pos_X, tour.Pos_Y - i, plateau):
                     mvt_possible = mvt_possible + \
                         [(tour.Pos_X, tour.Pos_Y - i)]
                 else:
-                    fingauche = True
+                    finbas = True
                     if case_color(tour.Pos_X, tour.Pos_Y - i, plateau) != tour.Color:
                         mvt_possible = mvt_possible + \
                             [(tour.Pos_X, tour.Pos_Y - i)]
-    if tour.Pos_Y != 8:
+    if tour.Pos_X != 0:
+        # on verifie les deplacements a gauche et on s'arrete quand on bute sur une piece
+        # et en ajoutant les coordonnées de celle-ci si on peut la manger
+        for i in range(1, tour.Pos_X + 1):
+            if fingauche == False:
+                if case_libre(tour.Pos_X - i, tour.Pos_Y, plateau):
+                    mvt_possible = mvt_possible + \
+                        [(tour.Pos_X - i, tour.Pos_Y)]
+                else:
+                    fingauche = True
+                    if case_color(tour.Pos_X - i, tour.Pos_Y, plateau) != tour.Color:
+                        mvt_possible = mvt_possible + \
+                            [(tour.Pos_X - i, tour.Pos_Y)]
+    if tour.Pos_X != 7:
         # on verifie les deplacements a droite et on s'arrete quand on bute sur une piece
         # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, 8-tour.Pos_Y):
+        for i in range(1, 8-tour.Pos_X):
             if findroite == False:
-                if case_libre(tour.Pos_X, tour.PosY + i, plateau):
-                    mvt_possible = mvt_possible + [(tour.Pos_X, tour.PosY + i)]
+                if case_libre(tour.Pos_X + i, tour.PosY, plateau):
+                    mvt_possible = mvt_possible + [(tour.Pos_X + i, tour.PosY)]
                 else:
                     findroite = True
-                    if case_color(tour.Pos_X, tour.PosY + i, plateau):
+                    if case_color(tour.Pos_X + i, tour.PosY, plateau):
                         mvt_possible = mvt_possible + \
-                            [(tour.Pos_X, tour.PosY + i)]
+                            [(tour.Pos_X + i, tour.PosY)]
     return mvt_possible
 
 
@@ -130,17 +130,18 @@ def mvt_possible_fou(fou, plateau):
     finbasgauche = False
     finhautdroite = False
     finbasdroite = False
-    if fou.Pos_X != 8 and fou.Pos_Y != 0:
-        for i in range(1, min(8-fou.Pos_X, 1 + fou.Pos_Y)):
+    if fou.Pos_X != 0 and fou.Pos_Y != 7:
+        for i in range(1, min(8 - fou.Pos_Y, 1 + fou.Pos_X)):
             if finhautgauche == False:
-                if case_libre(fou.Pos_X + i, fou.Pos_Y - i, plateau):
+                if case_libre(fou.Pos_X - i, fou.Pos_Y + i, plateau):
                     mvt_possible = mvt_possible + \
-                        [(fou.Pos_X + i, fou.Pos_Y - i)]
+                        [(fou.Pos_X - i, fou.Pos_Y + i)]
                 else:
                     finhautgauche = True
-                    if case_color(fou.Pos_X + i, fou.Pos_Y - i, plateau) != fou.Color:
+                    if case_color(fou.Pos_X - i, fou.Pos_Y + i, plateau) != fou.Color:
                         mvt_possible = mvt_possible + \
-                            [(fou.Pos_X + i, fou.Pos_Y - i)]
+                            [(fou.Pos_X - i, fou.Pos_Y + i)]
+
     if fou.Pos_X != 0 and fou.Pos_Y != 0:
         for i in range(1, min(1 + fou.Pos_X, 1 + fou.Pos_Y)):
             if finbasgauche == False:
@@ -152,7 +153,8 @@ def mvt_possible_fou(fou, plateau):
                     if case_color(fou.Pos_X - i, fou.Pos_Y - i, plateau) != fou.Color:
                         mvt_possible = mvt_possible + \
                             [(fou.Pos_X - i, fou.Pos_Y - i)]
-    if fou.Pos_X != 8 and fou.Pos_Y != 8:
+
+    if fou.Pos_X != 7 and fou.Pos_Y != 7:
         for i in range(1, min(8-fou.Pos_X, 8-fou.Pos_Y)):
             if finhautdroite == False:
                 if case_libre(fou.Pos_X + i, fou.Pos_Y + i, plateau):
@@ -163,125 +165,27 @@ def mvt_possible_fou(fou, plateau):
                     if case_color(fou.Pos_X + i, fou.Pos_Y + i, plateau) != fou.Color:
                         mvt_possible = mvt_possible + \
                             [(fou.Pos_X + i, fou.Pos_Y + i)]
-    if fou.Pos_X != 0 and fou.Pos_Y != 8:
-        for i in range(1, min(1 + fou.Pos_X, 8 - fou.Pos_Y)):
+
+    if fou.Pos_X != 7 and fou.Pos_Y != 0:
+        for i in range(1, min(1 + fou.Pos_Y, 8 - fou.Pos_X)):
             if finbasdroite == False:
-                if case_libre(fou.Pos_X - i, fou.Pos_X + i, plateau):
+                if case_libre(fou.Pos_X + i, fou.Pos_Y - i, plateau):
                     mvt_possible = mvt_possible + \
-                        [(fou.Pos_X - i, fou.Pos_X + i)]
+                        [(fou.Pos_X + i, fou.Pos_X - i)]
                 else:
                     finbasdroite = True
-                    if case_color(fou.Pos_X - i, fou.Pos_X + i, plateau) != 0:
+                    if case_color(fou.Pos_X + i, fou.Pos_Y - i, plateau) != 0:
                         mvt_possible = mvt_possible + \
-                            [(fou.Pos_X - i, fou.Pos_X + i)]
+                            [(fou.Pos_X + i, fou.Pos_X - i)]
     return mvt_possible
 
 
 def mvt_possible_dame(dame, plateau):
     mvt_possible = []
-    finhaut = False  # variables qui determineront quand s'arrete la boucle for
-    finbas = False
-    fingauche = False
-    findroite = False
-    if dame.Pos_X != 7:
-        # on verifie les deplacements en haut et on s'arrete quand on bute sur une piece
-        # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, 8 - dame.Pos_X):
-            if finhaut == False:
-                if case_libre(dame.Pos_X + i, dame.Pos_y, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X + i, dame.Pos_y)]
-                else:
-                    finhaut = True
-                    if case_color(dame.Pos_X + i, dame.Pos_y, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X + i, dame.Pos_y)]
-    if dame.Pos_Y != 0:
-        # on verifie les deplacements en bas et on s'arrete quand on bute sur une piece
-        # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, dame.Pos_X + 1):
-            if finbas == False:
-                if case_libre(dame.Pos_X - i, dame.Pos_Y, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X - i, dame.Pos_Y)]
-                else:
-                    finbas = True
-                    if case_color(dame.Pos_X - i, dame.Pos_Y, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X - i, dame.Pos_Y)]
-    if dame.Pos_Y != 0:
-        # on verifie les deplacements a gauche et on s'arrete quand on bute sur une piece
-        # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, dame.Pos_Y + 1):
-            if fingauche == False:
-                if case_libre(dame.Pos_X, dame.Pos_Y - i, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X, dame.Pos_Y - i)]
-                else:
-                    fingauche = True
-                    if case_color(dame.Pos_X, dame.Pos_Y - i, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X, dame.Pos_Y - i)]
-    if dame.Pos_Y != 8:
-        # on verifie les deplacements a droite et on s'arrete quand on bute sur une piece
-        # et en ajoutant les coordonnées de celle-ci si on peut la manger
-        for i in range(1, 8-dame.Pos_Y):
-            if findroite == False:
-                if case_libre(dame.Pos_X, dame.PosY + i, plateau):
-                    mvt_possible = mvt_possible + [(dame.Pos_X, dame.PosY + i)]
-                else:
-                    findroite = True
-                    if case_color(dame.Pos_X, dame.PosY + i, plateau):
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X, dame.PosY + i)]
-    finhautgauche = False
-    finbasgauche = False
-    finhautdroite = False
-    finbasdroite = False
-    if dame.Pos_X != 8 and dame.Pos_Y != 0:
-        for i in range(1, min(8-dame.Pos_X, 1 + dame.Pos_Y)):
-            if finhautgauche == False:
-                if case_libre(dame.Pos_X + i, dame.Pos_Y - i, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X + i, dame.Pos_Y - i)]
-                else:
-                    finhautgauche = True
-                    if case_color(dame.Pos_X + i, dame.Pos_Y - i, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X + i, dame.Pos_Y - i)]
-    if dame.Pos_X != 0 and dame.Pos_Y != 0:
-        for i in range(1, min(1 + dame.Pos_X, 1 + dame.Pos_Y)):
-            if finbasgauche == False:
-                if case_libre(dame.Pos_X - i, dame.Pos_Y - i, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X - i, dame.Pos_Y - i)]
-                else:
-                    finbasgauche = True
-                    if case_color(dame.Pos_X - i, dame.Pos_Y - i, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X - i, dame.Pos_Y - i)]
-    if dame.Pos_X != 8 and dame.Pos_Y != 8:
-        for i in range(1, min(8-dame.Pos_X, 8-dame.Pos_Y)):
-            if finhautdroite == False:
-                if case_libre(dame.Pos_X + i, dame.Pos_Y + i, plateau):
-                    mvt_possible = mvt_possible + \
-                        (dame.Pos_X + i, dame.Pos_Y + i)
-                else:
-                    finhautdroite = True
-                    if case_color(dame.Pos_X + i, dame.Pos_Y + i, plateau) != dame.Color:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X + i, dame.Pos_Y + i)]
-    if dame.Pos_X != 0 and dame.Pos_Y != 8:
-        for i in range(1, min(1 + dame.Pos_X, 8 - dame.Pos_Y)):
-            if finbasdroite == False:
-                if case_libre(dame.Pos_X - i, dame.Pos_X + i, plateau):
-                    mvt_possible = mvt_possible + \
-                        [(dame.Pos_X - i, dame.Pos_X + i)]
-                else:
-                    finbasdroite = True
-                    if case_color(dame.Pos_X - i, dame.Pos_X + i, plateau) != 0:
-                        mvt_possible = mvt_possible + \
-                            [(dame.Pos_X - i, dame.Pos_X + i)]
+
+    mvt_possible = mvt_possible + mvt_possible_tour(dame, plateau)
+    mvt_possible = mvt_possible + mvt_possible_fou(dame, plateau)
+
     return mvt_possible
 
 
