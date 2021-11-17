@@ -480,10 +480,7 @@ def grand_roque(roi, plateau):
 # reste victoire
 
 
-'''ce serait bien de sauver l'historique des mvts
-ca eviterait d'implementer plein de variables poursavoir si le roi a deja bougé pour pouvoir faire un roque
-chaque mouvement est un objet dans l'historique
-genre une liste qui donne les coups effectués
-
+"""
+ce serait bien de sauver l'historique des mvts
 en plus ca permettrait de rejouer la partie a partir d'une certaine etape
-'''
+"""

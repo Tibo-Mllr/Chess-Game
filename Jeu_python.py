@@ -156,6 +156,11 @@ def jeu():
         else:
             print("Ce déplacement n'est pas possible")
 
+    egalite(RoiBlanc, Plateau)
+    egalite(RoiNoir, Plateau)
+    victoire(RoiBlanc, Plateau)
+    victoire(RoiNoir, Plateau)
+
 
 if __name__ == "__main__":
     jeu_init()
