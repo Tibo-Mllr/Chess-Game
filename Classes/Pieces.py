@@ -35,7 +35,7 @@ class Pion:
         Arguments
         ---------
         c : entier
-            valeur de la quelle vous voulez avancer : 1 ou 2
+            Valeur de la quelle vous voulez avancer : 1 ou 2
 
         Sortie
         ------
@@ -63,7 +63,7 @@ class Pion:
         Arguments
         ---------
         d : chaîne de caratère
-            direction : 'd' ou 'g'
+            Direction : 'd' ou 'g'
 
 
         Sortie
@@ -83,7 +83,7 @@ class Pion:
         Arguments
         ---------
         choice : classe
-            classe en la quelle il se transforme : Dame, Tour, Fou ou Cavalier
+            Classe en la quelle il se transforme : Dame, Tour, Fou ou Cavalier
 
         Sortie
         ------
@@ -157,13 +157,22 @@ class Roi:
 
         self.Moved = True
 
+<<<<<<< HEAD
     def roque(self, d):
         """Roque du roi
+=======
+    def roc(self, d):
+        """Roc du roi
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
         d : chaîne de caractères
+<<<<<<< HEAD
             Direction du roque : 'd' ou 'g'
+=======
+            Direction du roc : 'd' ou 'g'
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Sortie
         ------
@@ -178,15 +187,13 @@ class Roi:
 
 
 class Tour:
-
-    # cote = d ou g, color = White ou Black
     def __init__(self, cote, color, Change=False, X=3, Y=3):
         """Définit la tour
 
         Arguments
         ---------
         cote : chaîne de caractères
-            côté de la tour : 'g' ou 'd'
+            Côté de la tour : 'g' ou 'd'
         color : chaîne de caractères
             Couleur de la tour : 'White' ou 'Black'
         Change : booléen
@@ -219,8 +226,13 @@ class Tour:
         self.name = 'tour'
         self.points = 5
 
+<<<<<<< HEAD
     def petit_roque(self):
         """Petit roque de la tour
+=======
+    def petit_roc(self):
+        """Petit roc de la tour
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
@@ -235,8 +247,13 @@ class Tour:
             self.Pos_X = 5
             self.Moved = True
 
+<<<<<<< HEAD
     def grand_roque(self):
         """Grand roque de la tour
+=======
+    def grand_roc(self):
+        """Grand roc de la tour
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
@@ -251,16 +268,15 @@ class Tour:
             self.Pos_X = 3
             self.Moved = True
 
-    # longueur dans [|-7;7|], direction = horizontale ou verticale
     def move(self, valeur, direction):
         """Déplace la tour
 
         Arguments
         ---------
         valeur : entier
-            nombre de case duquel on veut se déplacer : de 0 à 7
+            Nombre algébrique de case duquel on veut se déplacer : de -7 à 7
         direction : chaîne de caractères
-            Direction algébrique du déplacement : 'horizontale' ou 'verticale'
+            Direction du déplacement : 'horizontale' ou 'verticale'
 
         Sortie
         ------
@@ -278,6 +294,26 @@ class Dame:
 
     # color = White ou Black et on met l'argument cote pour homogénéiser entre les différentes fonctions
     def __init__(self, cote, color, Change=False, X=3, Y=3):
+        """Définit la dame
+
+        Arguments
+        ---------
+        cote : châine de caractère
+            Seulement pour normaliser avec les autres
+        color : châine de caractère
+            Couleur de la dame : 'White' ou 'Black'
+        Change : booléen
+            True si vient d'une transformation d'un pion
+        X : entier
+            Position du pion transformé
+        Y : entier
+            Position du pion transformé
+
+        Sortie
+        ------
+        L'entité Dame
+        """
+
         if not Change:
             if color == 'White':
                 self.Pos_Y = 0
@@ -290,15 +326,52 @@ class Dame:
         self.Color = color
         self.name = 'dame'
         self.points = 9
-    # longueur dans [|-7;7|], direction = horizontale ou verticale
+
     def move_normal(self, valeur, direction):
+<<<<<<< HEAD
         if direction == 'horizontale':  
+=======
+        """Déplace la dame selon l'horizontale ou la verticale
+
+        Arguments
+        ---------
+        valeur : entier
+            Nombre algébrique du nombre de case duquel on veut se déplacer : de -7 à 7
+        direction : chaîne de caractères
+            Direction du déplacement : 'horizontale' ou 'verticale'
+
+        Sortie
+        ------
+        Aucune
+        """
+
+        if direction == 'horizontale':  # and pas de pièce en chemin
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
         elif direction == 'verticale':  
             self.Pos_Y += valeur
 
+<<<<<<< HEAD
     def move_diagonal(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
         if direction == 'h_d':  
+=======
+    def move_diagonal(self, valeur, direction):
+        """Déplace la Dame selon les diagonales
+
+        Arguments
+        ---------
+        valeur : entier
+            Nombre de case duquel on veut se déplacer : de 0 à 7
+        direction : chaîne de caractères
+            Direction de la diagonale : 'h_d' ou 'h_g' ou 'b_d' ou 'b_g'
+
+        Sortie
+        ------
+        Aucune
+        """
+
+        if direction == 'h_d':  # and pas de pièce en chemin
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
@@ -316,9 +389,27 @@ class Dame:
 
 
 class Fou:
-
-    # cote = d ou g, color = White ou Black
     def __init__(self, cote, color, Change=False, X=3, Y=3):
+        """Définit le fou
+
+        Arguments
+        ---------
+        cote : chaîne de caractères
+            Coté du fou
+        color :
+            Couleur du fou
+        Change : booléen
+            True si vient d'une transformation de pion
+        X : entier
+            Position du pion transformé
+        Y : entier
+            Position du pion transformé
+
+        Sortie
+        ------
+        L'entité Fou
+        """
+
         if not Change:
             if cote == 'g':
                 self.Pos_X = 2
@@ -336,7 +427,25 @@ class Fou:
         self.points = 3
 
     def move(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
+<<<<<<< HEAD
         if direction == 'h_d':  
+=======
+        """Déplace le fou
+
+        Arguments
+        ---------
+        valeur : entier
+            Nombre de case duquel on veut se déplacer
+        direction : chaîne de caractères
+            Direction du mouvement : 'h_d', 'h_g', 'b_d', 'b_g'
+
+        Sortie
+        ------
+        Aucune
+        """
+
+        if direction == 'h_d':  # and pas de pièce en chemin
+>>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
@@ -356,6 +465,26 @@ class Cavalier:
 
     # cote = d ou g, color = White ou Black
     def __init__(self, cote, color, Change=False, X=3, Y=3):
+        """Définit le cavalier
+
+        Arguments
+        ---------
+        cote : chaîne de caractères
+            Côté du cavalier
+        color : chaîne de caractères
+            Couleur du cavalier
+        Change : booléen
+            True si vient d'une transformation d'un pion
+        X : entier
+            Position du pion transformé
+        Y : entier
+            Position du pion transformé
+
+        Sortie
+        ------
+        L'entité Cavalier
+        """
+
         if not Change:
             if cote == 'g':
                 self.Pos_X = 1
@@ -374,6 +503,20 @@ class Cavalier:
 
     # direction =h_d_d ou h_g_g ou h_h_g ou h_h_d ou b_d_d ou b_g_g ou b_b_g ou b_b_d
     def move(self, valeur, direction):
+        """Déplace le cavalier
+
+        Arguments
+        ---------
+        valeur : entier
+            Pour normaliser avec les autres fonctions
+        direction : chaîne de caractères
+            Direction du mouvement : d'abord 'h' ou 'b' puis 'd' ou 'g', le nombre de fois qu'il faut
+
+
+        Sortie
+        ------
+        Aucune
+        """
 
         if direction == 'h_d_d':
             self.Pos_X += 2
