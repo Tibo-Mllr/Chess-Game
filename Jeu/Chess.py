@@ -1,4 +1,4 @@
-from Move import *
+from Jeu.Move import *
 from Classes.Pieces import *
 
 def egalite(roi,plateau):
@@ -28,7 +28,7 @@ def echec_et_mat(plateau):
             RoiNoir = plateau[element]
     for piece in plateau :
         if piece != '':
-            if piece.Colour == 'White':
+            if piece.Color == 'White':
                 mvt_possible_blanc+=mvt_final(piece,plateau)
             else: 
                 mvt_possible_noir+=mvt_final(piece,plateau)
