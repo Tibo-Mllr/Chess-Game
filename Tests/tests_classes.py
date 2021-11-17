@@ -23,13 +23,13 @@ def test_Roi():
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 1)
 
     Roi1.move('g_b')
-    assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 0)
+    assert (Roi1.Pos_X, Roi1.Pos_Y) == (5, 1)
 
     Roi1.move('h_d')
-    assert (Roi1.Pos_X, Roi1.Pos_Y) == (7, 1)
+    assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 2)
 
     Roi1.roc('g')
-    assert (Roi1.Pos_X, Roi1.Pos_Y) == (7, 1)
+    assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 2)
 
 
 def test_Tour():
