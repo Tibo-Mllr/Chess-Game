@@ -1,6 +1,5 @@
-from Move import *
+from Jeu.Move import *
 from Classes.Pieces import *
-from Interface.Graphique import *
 
 
 def egalite(roi,plateau):
