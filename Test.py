@@ -1,4 +1,5 @@
 from Tests.tests_classes import *
+from Tests.tests_mouvements import *
 
 if __name__ == "__main__":
     # Test des pièces
@@ -8,3 +9,6 @@ if __name__ == "__main__":
     test_Dame()
     test_Fou()
     test_Cavalier()
+
+    # Test des mouvements
+    test_mvt_pion()
