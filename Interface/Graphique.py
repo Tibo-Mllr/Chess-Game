@@ -14,13 +14,13 @@ def Echiquier():
 	fenetre = pygame.display.set_mode((800, 800), RESIZABLE)
 
 	#Importation du fond
-	Damier = image.load("Damier.png").convert()
+	Damier = image.load("Interface/Damier.png").convert()
 	Damier = pygame.transform.scale(Damier, (800, 800))
 	fenetre.blit(Damier, (0,0))
 
 	#Importation des poèces
 	#Importation des pièces blanches
-	PionBlanc = image.load("Pièces/PionBlanc.png").convert_alpha()
+	PionBlanc = image.load("Interface/Pièces/PionBlanc.png").convert_alpha()
 	PionBlanc1 = pygame.transform.scale(PionBlanc, (100, 100))
 	PionBlanc2 = pygame.transform.scale(PionBlanc, (100, 100))
 	PionBlanc3 = pygame.transform.scale(PionBlanc, (100, 100))
@@ -32,25 +32,25 @@ def Echiquier():
 	fenetre.blit(PionBlanc1, (0, 600))
 	fenetre.blit(PionBlanc2, (100, 600))
 
-	TourBlanche = image.load("Pièces/TourBlanche.png").convert_alpha()
+	TourBlanche = image.load("Interface/Pièces/TourBlanche.png").convert_alpha()
 	TourBlanche1 = pygame.transform.scale(TourBlanche, (100, 100))
 	TourBlanche2 = pygame.transform.scale(TourBlanche, (100, 100))
 
-	CavalierBlanc = image.load("Pièces/CavalierBlanc.png").convert_alpha()
+	CavalierBlanc = image.load("Interface/Pièces/CavalierBlanc.png").convert_alpha()
 	CavalierBlanc1 = pygame.transform.scale(CavalierBlanc, (100, 100))
 	CavalierBlanc2 = pygame.transform.scale(CavalierBlanc, (100, 100))
 
-	FouBlanc = image.load("Pièces/FouBlanc.png").convert_alpha()
+	FouBlanc = image.load("Interface/Pièces/FouBlanc.png").convert_alpha()
 	FouBlanc1 = pygame.transform.scale(FouBlanc, (100, 100))
 	FouBlanc2 = pygame.transform.scale(FouBlanc, (100, 100))
 
-	RoiBlanc = image.load("Pièces/RoiBlanc.png").convert_alpha()
+	RoiBlanc = image.load("Interface/Pièces/RoiBlanc.png").convert_alpha()
 	RoiBlanc = pygame.transform.scale(RoiBlanc, (100, 100))
 	RoiBlanc_x = 200
 	RoiBlanc_y = 200
 	fenetre.blit(RoiBlanc,(RoiBlanc_x, RoiBlanc_y))
 
-	ReineBlanche = image.load("Pièces/ReineBlanche.png").convert_alpha()
+	ReineBlanche = image.load("Interface/Pièces/ReineBlanche.png").convert_alpha()
 	ReineBlanche = pygame.transform.scale(ReineBlanche, (100,100))
 
 	pygame.display.flip()
@@ -83,7 +83,7 @@ def MenuStart():
 	Menu = pygame.display.set_mode((500, 335), RESIZABLE)
 	
 	#Importation du fond
-	Fond = image.load("FondMenu.jpg").convert()
+	Fond = image.load("Interface/FondMenu.jpg").convert()
 	Fond = pygame.transform.scale(Fond, (500, 335)) #On met la fenêtre à la bonne taille
 	Menu.blit(Fond, (0,0))
 	
@@ -136,6 +136,5 @@ def MenuStart():
 
 		pygame.display.update()
 		clock.tick(15)
-
 
 MenuStart()
