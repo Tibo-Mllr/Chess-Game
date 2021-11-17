@@ -1,4 +1,5 @@
 from Jeu.Chess import *
+from Jeu.Move import mvt_final
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -127,16 +128,22 @@ def jeu():
     while not Fin:
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
-        Dep = input("Décrivez le déplacement voulu : ")
-        L = input("Entrez la longueur du déplacement : ")
+        x2 = input("Entrez l'abscisse voulue : ")
+        y2 = input("Entrez l'ordonnée voulue : ")
 
         X = int(x)
         Y = int(y)
 
-        Plateau[(X, Y)].move(int(L), Dep)
-        Plateau[Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y] = Plateau[(X, Y)]
-        Plateau[(X, Y)] = ''
-        print(grid_to_string(Plateau))
+        X2 = int(x2)
+        Y2 = int(y2)
+
+        if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+            Plateau[(X, Y)].move(X2, Y2)
+            Plateau[(X2, Y2)] = Plateau[(X, Y)]
+            Plateau[(X, Y)] = ''
+            print(grid_to_string(Plateau))
+        else:
+            print("Ce déplacement n'est pas possible")
 
 
 if __name__ == "__main__":
