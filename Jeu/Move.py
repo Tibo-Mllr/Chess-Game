@@ -1,4 +1,3 @@
-from Chess import *
 import copy
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
@@ -172,12 +171,12 @@ def mvt_possible_fou(fou, plateau):
             if finbasdroite == False:
                 if case_libre(fou.Pos_X + i, fou.Pos_Y - i, plateau):
                     mvt_possible = mvt_possible + \
-                        [(fou.Pos_X + i, fou.Pos_X - i)]
+                        [(fou.Pos_X + i, fou.Pos_Y - i)]
                 else:
                     finbasdroite = True
-                    if case_color(fou.Pos_X + i, fou.Pos_Y - i, plateau) != 0:
+                    if case_color(fou.Pos_X + i, fou.Pos_Y - i, plateau) != fou.Color:
                         mvt_possible = mvt_possible + \
-                            [(fou.Pos_X + i, fou.Pos_X - i)]
+                            [(fou.Pos_X + i, fou.Pos_Y - i)]
     return mvt_possible
 
 
@@ -283,6 +282,7 @@ def roi_en_echec(roi, plateau):
     for piece in plateau.values():
         if piece != '' and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             echec = True
+            roi.Checked = True
     return echec
 
 
@@ -293,7 +293,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):  # a revoir
     echec_si_mvt = False
     for piece in newplateau.values():
         if piece != '' and piece != roi:
-            if (x, y) in mvt_possible_gen(piece, plateau):
+            if (x, y) in mvt_possible_gen(piece, newplateau):
                 echec_si_mvt = True
     return echec_si_mvt
 
@@ -361,27 +361,25 @@ def echec_si_mvt(piece, x, y, plateau):
     newplateau[(x, y)] = piece
 
     for element in plateau:
-        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'White':
-            RoiBlanc = plateau[element]
-        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
-            RoiNoir = plateau[element]
+        if newplateau[element] != '' and newplateau[element].name == 'roi' and newplateau[element].Color == 'White':
+            RoiBlanc = newplateau[element]
+        if newplateau[element] != '' and newplateau[element].name == 'roi' and newplateau[element].Color == 'Black':
+            RoiNoir = newplateau[element]
 
     if piece.Color == 'White':
         echec_blanc = False
         for i in newplateau.values():
             if i != '':
-                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, plateau):
+                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
                     echec_blanc = True
-                    RoiBlanc.Checked = True
         return echec_blanc
 
     if piece.Color == 'Black':
         echec_noir = False
         for i in newplateau.values():
             if i != '':
-                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, plateau):
+                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
                     echec_noir = True
-                    RoiNoir.Checked = True
         return echec_noir
 
 
@@ -480,10 +478,7 @@ def grand_roque(roi, plateau):
 # reste victoire
 
 
-'''ce serait bien de sauver l'historique des mvts
-ca eviterait d'implementer plein de variables poursavoir si le roi a deja bougé pour pouvoir faire un roque
-chaque mouvement est un objet dans l'historique
-genre une liste qui donne les coups effectués
-
+"""
+ce serait bien de sauver l'historique des mvts
 en plus ca permettrait de rejouer la partie a partir d'une certaine etape
-'''
+"""
