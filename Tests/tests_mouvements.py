@@ -22,8 +22,8 @@ def test_mvt_Pion():
 def test_mvt_Roi():
     Roi1 = Roi('White')
     plateau[(Roi1.Pos_X, Roi1.Pos_Y)] = Roi1
-    """
-    print(mvt_possible_roi(Roi1, plateau))
+    
+"""print(mvt_possible_roi(Roi1, plateau))
     assert len(mvt_possible_pion(Roi1, plateau)) == 5
     for i in range(5):
         assert mvt_possible_roi(Roi1, plateau)[i] in [
