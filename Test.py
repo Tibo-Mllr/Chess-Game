@@ -6,9 +6,14 @@ if __name__ == "__main__":
     test_Pion()
     test_Roi()
     test_Tour()
-    test_Dame()
     test_Fou()
+    test_Dame()
     test_Cavalier()
 
     # Test des mouvements
-    test_mvt_pion()
+    test_mvt_Pion()
+    test_mvt_Roi()
+    test_mvt_Tour()
+    test_mvt_Fou()
+    test_mvt_Dame()
+    test_mvt_Cavalier()

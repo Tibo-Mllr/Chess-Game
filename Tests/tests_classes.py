@@ -16,7 +16,7 @@ def test_Pion():
 
 def test_Roi():
     Roi1 = Roi('White')
-    Roi1.roc('d')
+    Roi1.roque('d')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 0)
 
     Roi1.move('h')
@@ -28,13 +28,13 @@ def test_Roi():
     Roi1.move('h_d')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 2)
 
-    Roi1.roc('g')
+    Roi1.roque('g')
     assert (Roi1.Pos_X, Roi1.Pos_Y) == (6, 2)
 
 
 def test_Tour():
     Tour1 = Tour('g', 'White')
-    Tour1.grand_roc()
+    Tour1.grand_roque()
     assert(Tour1.Pos_X, Tour1.Pos_Y) == (3, 0)
 
     Tour1.move(4, 'horizontale')
@@ -46,7 +46,7 @@ def test_Tour():
     Tour1.move(-3, 'verticale')
     assert (Tour1.Pos_X, Tour1.Pos_Y) == (7, 2)
 
-    Tour1.petit_roc()
+    Tour1.petit_roque()
     assert (Tour1.Pos_X, Tour1.Pos_Y) == (7, 2)
 
 
