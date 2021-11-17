@@ -157,22 +157,13 @@ class Roi:
 
         self.Moved = True
 
-<<<<<<< HEAD
     def roque(self, d):
         """Roque du roi
-=======
-    def roc(self, d):
-        """Roc du roi
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
         d : chaîne de caractères
-<<<<<<< HEAD
             Direction du roque : 'd' ou 'g'
-=======
-            Direction du roc : 'd' ou 'g'
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Sortie
         ------
@@ -226,13 +217,8 @@ class Tour:
         self.name = 'tour'
         self.points = 5
 
-<<<<<<< HEAD
     def petit_roque(self):
         """Petit roque de la tour
-=======
-    def petit_roc(self):
-        """Petit roc de la tour
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
@@ -247,13 +233,8 @@ class Tour:
             self.Pos_X = 5
             self.Moved = True
 
-<<<<<<< HEAD
     def grand_roque(self):
         """Grand roque de la tour
-=======
-    def grand_roc(self):
-        """Grand roc de la tour
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
 
         Arguments
         ---------
@@ -328,9 +309,6 @@ class Dame:
         self.points = 9
 
     def move_normal(self, valeur, direction):
-<<<<<<< HEAD
-        if direction == 'horizontale':  
-=======
         """Déplace la dame selon l'horizontale ou la verticale
 
         Arguments
@@ -346,15 +324,10 @@ class Dame:
         """
 
         if direction == 'horizontale':  # and pas de pièce en chemin
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
         elif direction == 'verticale':  
             self.Pos_Y += valeur
 
-<<<<<<< HEAD
-    def move_diagonal(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
-        if direction == 'h_d':  
-=======
     def move_diagonal(self, valeur, direction):
         """Déplace la Dame selon les diagonales
 
@@ -371,7 +344,6 @@ class Dame:
         """
 
         if direction == 'h_d':  # and pas de pièce en chemin
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
@@ -427,9 +399,6 @@ class Fou:
         self.points = 3
 
     def move(self, valeur, direction):  # direction =h_d ou h_g ou b_d ou b_g
-<<<<<<< HEAD
-        if direction == 'h_d':  
-=======
         """Déplace le fou
 
         Arguments
@@ -445,7 +414,6 @@ class Fou:
         """
 
         if direction == 'h_d':  # and pas de pièce en chemin
->>>>>>> b1af0ea5bd988c8b5e40f26a9c16c6cc721a01f4
             self.Pos_X += valeur
             self.Pos_Y += valeur
 
