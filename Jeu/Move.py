@@ -360,7 +360,7 @@ def echec_si_mvt(piece, x, y, plateau):
     newplateau[(piece.Pos_X, piece.Pos_Y)] = ''
     newplateau[(x, y)] = piece
 
-    for element in plateau:
+    for element in newplateau:
         if newplateau[element] != '' and newplateau[element].name == 'roi' and newplateau[element].Color == 'White':
             RoiBlanc = newplateau[element]
         if newplateau[element] != '' and newplateau[element].name == 'roi' and newplateau[element].Color == 'Black':
