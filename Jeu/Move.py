@@ -11,38 +11,73 @@ Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '
 
 
 def case_color(x, y, plateau):
+    """Renvoie la couleur de la pièce sur la case
+
+        Arguments
+        ---------
+        x : abcisse de la case (entre 0 et 7)
+        y : ordonnée de la case (entre 0 et 7)
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        Chaîne de caractère ('White' ou 'Black')
+        """
     if case_libre(x, y, plateau) == False:
         return plateau[(x, y)].Color
 
 
-def case_libre(x, y, plateau):  # fonction qui dit si une case est libre
+def case_libre(x, y, plateau):  
+    """Renvoie si une case est occupée par une pièce ou non
+
+        Arguments
+        ---------
+        x : abcisse de la case (entre 0 et 7)
+        y : ordonnée de la case (entre 0 et 7)
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+        """
     if plateau[(x, y)] == '':
         return True
     else:
         return False
 
 
-# Renvoie une liste de coup possible d'un pion donné
 def mvt_possible_pion(pion, plateau):
+    """Renvoie la liste de coups possible pour un pion donné
+        Arguments
+        ---------
+        pion : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
-    if pion.Color == 'White':  # Si le pion est blanc
-        if pion.Pos_X != 0:  # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
+    if pion.Color == 'White' and pion.Pos_Y != 7:  # Si le pion est blanc
+        # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
+        if pion.Pos_X != 0:
             if case_libre(pion.Pos_X - 1, pion.Pos_Y + 1, plateau) == False:
                 if case_color(pion.Pos_X - 1, pion.Pos_Y + 1, plateau) == 'Black':
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X - 1, pion.Pos_Y + 1)]
-        if pion.Pos_X != 7:  # verifie si il peut manger une piece en haut a droite si le pion n'est pas tout a droite
+        # verifie si il peut manger une piece en haut a droite si le pion n'est pas tout a droite
+        if pion.Pos_X != 7:
             if case_libre(pion.Pos_X + 1, pion.Pos_Y + 1, plateau) == False:
                 if case_color(pion.Pos_X + 1, pion.Pos_Y + 1, plateau) == 'Black':
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X + 1, pion.Pos_Y + 1)]
         # verifie si le pion peut avancer de 2 si il n'a pas encore bougé
-        if pion.Pos_Y == 1 and case_libre(pion.Pos_X, pion.Pos_Y+1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y + 2, plateau):
+        if not pion.Moved and case_libre(pion.Pos_X, pion.Pos_Y+1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y + 2, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+2)]
         # verifie si le pion peut avancer de 1
         if case_libre(pion.Pos_X, pion.Pos_Y+1, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+1)]
-    if pion.Color == 'Black':  # si le pion est noir
+    if pion.Color == 'Black' and pion.Pos_Y != 0:  # si le pion est noir
         if pion.Pos_X != 0:  # verifie si le pion peut manger à sa droite
             if case_libre(pion.Pos_X - 1, pion.Pos_Y - 1, plateau) == False:
                 if case_color(pion.Pos_X - 1, pion.Pos_Y - 1, plateau) == 'White':
@@ -54,7 +89,7 @@ def mvt_possible_pion(pion, plateau):
                     mvt_possible = mvt_possible + \
                         [(pion.Pos_X + 1, pion.Pos_Y - 1)]
         # verifie si le pion peut avancer de 2 si il n'a pas encore bougé
-        if pion.Pos_Y == 6 and case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y - 2, plateau):
+        if not pion.Moved and case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau) and case_libre(pion.Pos_X, pion.Pos_Y - 2, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y - 2)]
         # verifie si le pion peut avancer de 1
         if case_libre(pion.Pos_X, pion.Pos_Y - 1, plateau):
@@ -64,6 +99,16 @@ def mvt_possible_pion(pion, plateau):
 
 # nouvelle fonction de deplacement possible de la tour
 def mvt_possible_tour(tour, plateau):
+    """Renvoie la liste de coups possible pour une tour donnée
+        Arguments
+        ---------
+        tour : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
     finhaut = False  # variables qui determineront quand s'arrete la boucle for
     finbas = False
@@ -125,6 +170,16 @@ def mvt_possible_tour(tour, plateau):
 
 
 def mvt_possible_fou(fou, plateau):
+    """Renvoie la liste de coups possible pour un fou donné
+        Arguments
+        ---------
+        fou : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
     finhautgauche = False
     finbasgauche = False
@@ -181,6 +236,16 @@ def mvt_possible_fou(fou, plateau):
 
 
 def mvt_possible_dame(dame, plateau):
+    """Renvoie la liste de coups possible pour une dame donnée
+        Arguments
+        ---------
+        dame : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
 
     mvt_possible = mvt_possible + mvt_possible_tour(dame, plateau)
@@ -190,6 +255,16 @@ def mvt_possible_dame(dame, plateau):
 
 
 def mvt_possible_cavalier(cavalier, plateau):
+    """Renvoie la liste de coups possible pour un cavalier donné
+        Arguments
+        ---------
+        cavalier : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
     if cavalier.Pos_X < 6:
         if cavalier.Pos_Y != 0:
@@ -263,6 +338,16 @@ def mvt_possible_cavalier(cavalier, plateau):
 
 
 def mvt_possible_gen(piece, plateau):
+    """Renvoie la liste de coups possible pour une pièce donnée
+        Arguments
+        ---------
+        piece : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     if piece.name == 'cavalier':
         return mvt_possible_cavalier(piece, plateau)
     if piece.name == 'roi':
@@ -278,27 +363,59 @@ def mvt_possible_gen(piece, plateau):
 
 
 def roi_en_echec(roi, plateau):
+    """Renvoie si un roi donné est en echec ou non 
+        Arguments
+        ---------
+        roi : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     echec = False
     for piece in plateau.values():
-        if piece != '' and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
+        if piece != '' and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             echec = True
             roi.Checked = True
     return echec
 
 
-def echec_si_mouvement_du_roi(roi, x, y, plateau):  # a revoir
+def echec_si_mouvement_du_roi(roi, x, y, plateau): 
+    """Renvoie si le roi peut se déplacer sur une case sans se mettre en échec
+        Arguments
+        ---------
+        roi : Classe 
+        x : abcisse de la case de destination (entre 0 et 7)
+        y : ordonnée de la case de destination (entre 0 et 7)
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     newplateau = copy.deepcopy(plateau)
     newplateau[(roi.Pos_X, roi.Pos_Y)] = ''
     newplateau[(x, y)] = roi
     echec_si_mvt = False
     for piece in newplateau.values():
-        if piece != '' and piece != roi:
+        if piece != '' and piece != roi and piece.Color != roi.Color:
             if (x, y) in mvt_possible_gen(piece, newplateau):
                 echec_si_mvt = True
     return echec_si_mvt
 
 
 def mvt_possible_roi(roi, plateau):
+    """Renvoie la liste de coups possible pour un roi donné
+        Arguments
+        ---------
+        roi : Classe 
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+    """
     mvt_possible = []
     if roi.Pos_X != 0:
         if case_libre(roi.Pos_X - 1, roi.Pos_Y, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau):
@@ -356,6 +473,18 @@ def mvt_possible_roi(roi, plateau):
 
 
 def echec_si_mvt(piece, x, y, plateau):
+    """Renvoie si une pièce met en échec le roi adverse
+        Arguments
+        ---------
+        piece : Classe 
+        x : abcisse de la case de destination (entre 0 et 7)
+        y : ordonnée de la case de destination (entre 0 et 7)
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     newplateau = copy.deepcopy(plateau)
     newplateau[(piece.Pos_X, piece.Pos_Y)] = ''
     newplateau[(x, y)] = piece
@@ -369,7 +498,7 @@ def echec_si_mvt(piece, x, y, plateau):
     if piece.Color == 'White':
         echec_blanc = False
         for i in newplateau.values():
-            if i != '':
+            if i != '' and i.Color == 'Black':
                 if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
                     echec_blanc = True
         return echec_blanc
@@ -377,55 +506,47 @@ def echec_si_mvt(piece, x, y, plateau):
     if piece.Color == 'Black':
         echec_noir = False
         for i in newplateau.values():
-            if i != '':
+            if i != '' and i.Color == 'White':
                 if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
                     echec_noir = True
         return echec_noir
 
 
-"""
-def mvt_final_pion(pion):
-    mvt_final = []
-    for (x,y) in mvt_possible_pion(pion):
-        if echec_si_mvt(pion , x, y) == False:
-            mvt_final = mvt_final + [(x,y)]
-    return mvt_final
-
-def mvt_final_tour(tour):
-    mvt_final = []
-    for (x,y) in mvt_possible_tour(tour):
-        if echec_si_mvt(tour , x, y) == False:
-            mvt_final = mvt_final + [(x,y)]
-    return mvt_final
-
-def mvt_final_dame(dame):
-    mvt_final = []
-    for (x,y) in mvt_possible_dame(dame):
-        if echec_si_mvt(dame , x, y) == False:
-            mvt_final = mvt_final + [(x,y)]
-    return mvt_final
-
-def mvt_final_fou(fou):
-    mvt_final = []
-    for (x,y) in mvt_possible_fou(fou):
-        if echec_si_mvt(fou , x, y) == False:
-            mvt_final = mvt_final + [(x,y)]
-    return mvt_final
-"""
-
-
 def mvt_final(piece, plateau):
+    """Liste les mouvements faisables par une pièce (sans mettre son propre roi en échec)
+
+        Arguments
+        ---------
+        piece : classe
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        liste
+        """
     mvt = []
     if piece.name == 'roi':
         return mvt_possible_roi(piece, plateau)
     else:
-        for (x, y) in mvt_possible_gen(piece, plateau):
+        mvt = mvt_possible_gen(piece, plateau)
+        for (x, y) in mvt:
             if echec_si_mvt(piece, x, y, plateau) == False:
                 mvt = mvt + [(x, y)]
         return mvt
 
 
 def petit_roque(roi, plateau):
+    """Renvoie si le petit roque est possible
+
+        Arguments
+        ---------
+        roi : classe
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     petit_roque_possible = False
 
     for element in plateau:
@@ -448,6 +569,17 @@ def petit_roque(roi, plateau):
 
 
 def grand_roque(roi, plateau):
+    """Renvoie si le grand roque est possible
+
+        Arguments
+        ---------
+        roi : classe
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     for element in plateau:
         if plateau[element] != '' and plateau[element].name == 'tour' and plateau[element].Color == 'White' and plateau[element].Pos_X == 0:
             TourBlanche1 = plateau[element]
@@ -482,3 +614,6 @@ def grand_roque(roi, plateau):
 ce serait bien de sauver l'historique des mvts
 en plus ca permettrait de rejouer la partie a partir d'une certaine etape
 """
+
+
+# roi peut pasmanger la piece qui le met en echec

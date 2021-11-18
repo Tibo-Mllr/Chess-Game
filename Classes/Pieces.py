@@ -1,6 +1,3 @@
-from Jeu.Move import mvt_possible_tour
-
-
 class Pion:
     def __init__(self, X, color):
         """Définit le pion
@@ -50,7 +47,7 @@ class Pion:
         self.Moved = True
 
     def eat(self, d):
-        """Mange un eautre pièce en diagonale
+        """Mange une autre pièce en diagonale
 
         Arguments
         ---------

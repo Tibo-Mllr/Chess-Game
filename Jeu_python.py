@@ -126,17 +126,15 @@ def jeu_init():
 
 def jeu():
     print(grid_to_string(Plateau))
+    k = 1
 
-    k=1
-    while k !=3:
-        if k == 2:
-            k = 0
+    while not echec_et_mat(Plateau) and not egalite(Plateau):
         for element in Plateau:
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
                 RoiBlanc = Plateau[element]
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
                 RoiNoir = Plateau[element]
-       
+
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
         x2 = input("Entrez l'abscisse voulue : ")
@@ -147,8 +145,9 @@ def jeu():
 
         X2 = int(x2)
         Y2 = int(y2)
-        if k== 1:
+        if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+<<<<<<< HEAD
                 if Plateau[ (X, Y)].Color == 'White':
                     Plateau[(X, Y)].move(X2, Y2)
                     Plateau[(X2, Y2)] = Plateau[(X, Y)]
@@ -157,6 +156,18 @@ def jeu():
                     k = 2
                 else:
                     print('Ce sont aux blancs de jouer')
+=======
+                # if Plateau[(X, Y)].Color == 'White':
+                Plateau[(X, Y)].move(X2, Y2)
+                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                Plateau[(X, Y)] = ''
+                print(grid_to_string(Plateau))
+                """k = 2
+                else:
+                        print("Ce sont aux blancs de jouer")
+            else :
+                print("Ce déplacement n'est pas possible")
+>>>>>>> 9aceb85c872f8290cdd8beafd668467924b6140c
         if k==0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 if Plateau[ (X, Y)].Color == 'Black':
@@ -166,6 +177,7 @@ def jeu():
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
+<<<<<<< HEAD
                     print('Ce sont aux noires de jouer')
         else:
             print("Ce déplacement n'est pas possible")
@@ -185,6 +197,12 @@ def jeu():
 
     egalite(RoiBlanc, Plateau)
     egalite(RoiNoir, Plateau)
+=======
+                    print("Ce sont aux noirs de jouer")"""
+            else:
+                print("Ce déplacement n'est pas possible")
+
+>>>>>>> 9aceb85c872f8290cdd8beafd668467924b6140c
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
 

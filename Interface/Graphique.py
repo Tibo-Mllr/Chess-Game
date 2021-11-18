@@ -4,10 +4,10 @@ from pygame.locals import *
 from pygame.constants import RESIZABLE
 import time
 
+
 pygame.init()
 
-clock= pygame.time.Clock()
-
+clock = pygame.time.Clock()
 
 def Echiquier():
 	k = 1
@@ -134,64 +134,74 @@ def CréationTexte(text, font, couleur):
     textSurface = font.render(text, True, couleur)
     return textSurface, textSurface.get_rect()
 
+
 def MenuStart():
-	#On crée la fenêtre
-	Menu = pygame.display.set_mode((500, 335), RESIZABLE)
-	
-	#Importation du fond
-	Fond = image.load("Interface/FondMenu.jpg").convert()
-	Fond = pygame.transform.scale(Fond, (500, 335)) #On met la fenêtre à la bonne taille
-	Menu.blit(Fond, (0,0))
-	
-	#Initialisation du titre du jeu
-	pygame.draw.rect(Menu, (255,255,255) , (175-100, 10 , 350, 35 ) )
-	pygame.draw.rect(Menu, (0,0,0) , (175-100, 10 , 350, 35 ) , 1)
-	pygame.font.init()		#On initialise la création de texte sur pygame
-	TexteSurface = pygame.font.SysFont('Times New Roman', 30)	#On choisit la police d'écriture et la taille de la police du texte
-	TexteMenu, TextRectMenu = CréationTexte('échec et mat', TexteSurface , (0, 0, 0))
-	TextRectMenu.center = ((500/2),(25)) #On centre le texte
-	Menu.blit(TexteMenu, TextRectMenu)
-	while True:
-		for event in pygame.event.get():    #On parcours la liste de tous les événements reçus
-			if event.type == QUIT:    	 	#Si un de ces événements est de type QUIT
-				pygame.quit()     			#On arrête le programme
+    # On crée la fenêtre
+    Menu = pygame.display.set_mode((500, 335), RESIZABLE)
 
-		#Création des boutons
-		mouse = pygame.mouse.get_pos()
-		#Création du bouton démarrage de partie
-		if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2: #Permet de savoir si la souris se situe au niveau du bouton
-			pygame.draw.rect(Menu, '#00FFFF' , (250-70, 275/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
-			if event.type == MOUSEBUTTONDOWN:
-				if event.button == 1:	#Si clic gauche
-					pygame.quit()
-					Echiquier()
-		else:
-			pygame.draw.rect(Menu, '#0080ff' , (250-70, 275/2 , 140, 30 ) )
+    # Importation du fond
+    Fond = image.load("Interface/FondMenu.jpg").convert()
+    # On met la fenêtre à la bonne taille
+    Fond = pygame.transform.scale(Fond, (500, 335))
+    Menu.blit(Fond, (0, 0))
 
-		pygame.draw.rect(Menu, (0,0,0) , (250-70, 275/2 , 140, 30 ) , 1)
-		ButtonStart = pygame.font.SysFont('Times New Roman',15)
-		TextSurf, TextRect = CréationTexte("Démarrer une partie", ButtonStart, (0,0,0))
-		TextRect.center = ((500/2),(275/2+30/2))
-		Menu.blit(TextSurf, TextRect)
+    # Initialisation du titre du jeu
+    pygame.draw.rect(Menu, (255, 255, 255), (175-100, 10, 350, 35))
+    pygame.draw.rect(Menu, (0, 0, 0), (175-100, 10, 350, 35), 1)
+    pygame.font.init()  # On initialise la création de texte sur pygame
+    # On choisit la police d'écriture et la taille de la police du texte
+    TexteSurface = pygame.font.SysFont('Times New Roman', 30)
+    TexteMenu, TextRectMenu = CréationTexte(
+        'échec et mat', TexteSurface, (0, 0, 0))
+    TextRectMenu.center = ((500/2), (25))  # On centre le texte
+    Menu.blit(TexteMenu, TextRectMenu)
+    while True:
+        for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
+            if event.type == QUIT:  # Si un de ces événements est de type QUIT
+                pygame.quit()  # On arrête le programme
 
-		#Création du bouton quitter la partie
-		if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2: #Permet de savoir si la souris se situe au niveau du bouton
-			pygame.draw.rect(Menu, '#8B0000' , (250-70, 435/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
-			if event.type == MOUSEBUTTONDOWN:
-				if event.button == 1:	#Si clic gauche
-					pygame.quit()		#On quitte la partie
-		else:
-			pygame.draw.rect(Menu, '#DC143C' , (250-70, 435/2 , 140, 30 ) )
+        # Création des boutons
+        mouse = pygame.mouse.get_pos()
+        # Création du bouton démarrage de partie
+        # Permet de savoir si la souris se situe au niveau du bouton
+        if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2:
+            # Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
+            pygame.draw.rect(Menu, '#00FFFF', (250-70, 275/2, 140, 30))
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:  # Si clic gauche
+                    pygame.quit()
+                    Echiquier()
+        else:
+            pygame.draw.rect(Menu, '#0080ff', (250-70, 275/2, 140, 30))
 
-		pygame.draw.rect(Menu, (0,0,0) , (250-70, 435/2 , 140, 30 ) , 1)
-		ButtonStart = pygame.font.SysFont('Times New Roman',15)
-		TextSurf, TextRect = CréationTexte("Quitter le jeu", ButtonStart, (0,0,0))
-		TextRect.center = ((500/2),(435/2+30/2))
-		Menu.blit(TextSurf, TextRect)
+        pygame.draw.rect(Menu, (0, 0, 0), (250-70, 275/2, 140, 30), 1)
+        ButtonStart = pygame.font.SysFont('Times New Roman', 15)
+        TextSurf, TextRect = CréationTexte(
+            "Démarrer une partie", ButtonStart, (0, 0, 0))
+        TextRect.center = ((500/2), (275/2+30/2))
+        Menu.blit(TextSurf, TextRect)
 
+        # Création du bouton quitter la partie
+        # Permet de savoir si la souris se situe au niveau du bouton
+        if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2:
+            # Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
+            pygame.draw.rect(Menu, '#8B0000', (250-70, 435/2, 140, 30))
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:  # Si clic gauche
+                    pygame.quit()  # On quitte la partie
+        else:
+            pygame.draw.rect(Menu, '#DC143C', (250-70, 435/2, 140, 30))
 
-		pygame.display.update()
-		clock.tick(15)
+        pygame.draw.rect(Menu, (0, 0, 0), (250-70, 435/2, 140, 30), 1)
+        ButtonStart = pygame.font.SysFont('Times New Roman', 15)
+        TextSurf, TextRect = CréationTexte(
+            "Quitter le jeu", ButtonStart, (0, 0, 0))
+        TextRect.center = ((500/2), (435/2+30/2))
+        Menu.blit(TextSurf, TextRect)
+
+        pygame.display.update()
+        clock.tick(15)
+
 
 if __name__ == "__main__":
-	MenuStart()
+    MenuStart()
