@@ -48,6 +48,7 @@ def case_libre(x, y, plateau):
 
 def mvt_possible_pion(pion, plateau):
     """Renvoie la liste de coups possible pour un pion donné
+
         Arguments
         ---------
         pion : Classe 
@@ -100,6 +101,7 @@ def mvt_possible_pion(pion, plateau):
 # nouvelle fonction de deplacement possible de la tour
 def mvt_possible_tour(tour, plateau):
     """Renvoie la liste de coups possible pour une tour donnée
+
         Arguments
         ---------
         tour : Classe 
@@ -171,6 +173,7 @@ def mvt_possible_tour(tour, plateau):
 
 def mvt_possible_fou(fou, plateau):
     """Renvoie la liste de coups possible pour un fou donné
+
         Arguments
         ---------
         fou : Classe 
@@ -237,6 +240,7 @@ def mvt_possible_fou(fou, plateau):
 
 def mvt_possible_dame(dame, plateau):
     """Renvoie la liste de coups possible pour une dame donnée
+
         Arguments
         ---------
         dame : Classe 
@@ -256,6 +260,7 @@ def mvt_possible_dame(dame, plateau):
 
 def mvt_possible_cavalier(cavalier, plateau):
     """Renvoie la liste de coups possible pour un cavalier donné
+
         Arguments
         ---------
         cavalier : Classe 
@@ -339,6 +344,7 @@ def mvt_possible_cavalier(cavalier, plateau):
 
 def mvt_possible_gen(piece, plateau):
     """Renvoie la liste de coups possible pour une pièce donnée
+
         Arguments
         ---------
         piece : Classe 
@@ -364,6 +370,7 @@ def mvt_possible_gen(piece, plateau):
 
 def roi_en_echec(roi, plateau):
     """Renvoie si un roi donné est en echec ou non 
+
         Arguments
         ---------
         roi : Classe 
@@ -383,6 +390,7 @@ def roi_en_echec(roi, plateau):
 
 def echec_si_mouvement_du_roi(roi, x, y, plateau): 
     """Renvoie si le roi peut se déplacer sur une case sans se mettre en échec
+
         Arguments
         ---------
         roi : Classe 
@@ -407,6 +415,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
 
 def mvt_possible_roi(roi, plateau):
     """Renvoie la liste de coups possible pour un roi donné
+
         Arguments
         ---------
         roi : Classe 
@@ -474,6 +483,7 @@ def mvt_possible_roi(roi, plateau):
 
 def echec_si_mvt(piece, x, y, plateau):
     """Renvoie si une pièce met en échec le roi adverse
+    
         Arguments
         ---------
         piece : Classe 
