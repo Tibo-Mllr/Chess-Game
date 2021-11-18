@@ -9,19 +9,24 @@ def egalite(plateau):
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
             RoiNoir = pièce
 
-    mvt_possible_autres_pièces = []
-
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
+        mvt_possible_autres_pièces = []
         for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
-    if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
-        for pièce in plateau.values():
-            if pièce != '':
-                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+        if mvt_possible_autres_pièces == []:
+            print("Egal blanc")
+            return True
 
-    if mvt_possible_autres_pièces == []:
-        return True
+    if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
+        mvt_possible_autres_pièces = []
+        for pièce in plateau.values():
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+        if mvt_possible_autres_pièces == []:
+            print("Egal noir")
+            return True
+
     return False
 
 
@@ -58,8 +63,10 @@ def echec_et_mat(plateau):
                 mvt_possible_noir += mvt_final(piece, plateau)
     if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
         echec_et_mat = True
+        print("Echec blanc")
     if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
         echec_et_mat = True
+        print("Echec noir")
     return echec_et_mat
 
 

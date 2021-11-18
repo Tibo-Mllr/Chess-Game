@@ -280,7 +280,7 @@ def mvt_possible_gen(piece, plateau):
 def roi_en_echec(roi, plateau):
     echec = False
     for piece in plateau.values():
-        if piece != '' and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
+        if piece != '' and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             echec = True
             roi.Checked = True
     return echec
@@ -292,7 +292,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):  # a revoir
     newplateau[(x, y)] = roi
     echec_si_mvt = False
     for piece in newplateau.values():
-        if piece != '' and piece != roi:
+        if piece != '' and piece != roi and piece.Color != roi.Color:
             if (x, y) in mvt_possible_gen(piece, newplateau):
                 echec_si_mvt = True
     return echec_si_mvt
@@ -369,19 +369,17 @@ def echec_si_mvt(piece, x, y, plateau):
     if piece.Color == 'White':
         echec_blanc = False
         for i in newplateau.values():
-            if i != '':
-                if i.Color == 'Black':
-                    if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
-                        echec_blanc = True
+            if i != '' and i.Color == 'Black':
+                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
+                    echec_blanc = True
         return echec_blanc
 
     if piece.Color == 'Black':
         echec_noir = False
         for i in newplateau.values():
-            if i != '':
-                if i.Color == 'White':
-                    if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
-                        echec_noir = True
+            if i != '' and i.Color == 'White':
+                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
+                    echec_noir = True
         return echec_noir
 
 
@@ -421,7 +419,8 @@ def mvt_final(piece, plateau):
     if piece.name == 'roi':
         return mvt_possible_roi(piece, plateau)
     else:
-        for (x, y) in mvt_possible_gen(piece, plateau):
+        mvt = mvt_possible_gen(piece, plateau)
+        for (x, y) in mvt:
             if echec_si_mvt(piece, x, y, plateau) == False:
                 mvt = mvt + [(x, y)]
         return mvt

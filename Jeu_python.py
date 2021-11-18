@@ -169,13 +169,8 @@ def jeu():
             else:
                 print("Ce déplacement n'est pas possible")
 
-        # A enlever !!
-        for element in Plateau:
-            if Plateau[element] != '':
-                print(Plateau[element].name, Plateau[element].Color,
-                      mvt_final(Plateau[element], Plateau))
-
-    victoire(Plateau)
+    victoire(RoiBlanc, Plateau)
+    victoire(RoiNoir, Plateau)
 
 
 if __name__ == "__main__":
