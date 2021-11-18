@@ -1,6 +1,8 @@
 from Classes.Pieces import *
 from Jeu.Chess import *
+from Interface.Graphique import *
 
+pygame.init()
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -123,7 +125,6 @@ def jeu_init():
 
 
 def jeu():
-    Fin = False
     print(grid_to_string(Plateau))
 
     k=1
@@ -148,13 +149,13 @@ def jeu():
         Y2 = int(y2)
         if k== 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                #if Plateau[ (X, Y)].Color == 'White':
+                if Plateau[ (X, Y)].Color == 'White':
                     Plateau[(X, Y)].move(X2, Y2)
                     Plateau[(X2, Y2)] = Plateau[(X, Y)]
                     Plateau[(X, Y)] = ''
                     print(grid_to_string(Plateau))
                     k = 2
-                '''else:
+                else:
                     print('Ce sont aux blancs de jouer')
         if k==0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
@@ -165,7 +166,7 @@ def jeu():
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print('Ce sont aux noires de jouer')'''
+                    print('Ce sont aux noires de jouer')
         else:
             print("Ce déplacement n'est pas possible")
 
@@ -176,17 +177,16 @@ def jeu():
 
         # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
         if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
-            Fin = True
+            k = 3
             print("Sortie Blanche")
         if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            Fin = True
+            k = 3
             print("Sortie Noire")
 
     egalite(RoiBlanc, Plateau)
     egalite(RoiNoir, Plateau)
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
-
 
 if __name__ == "__main__":
     jeu_init()
