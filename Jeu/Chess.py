@@ -3,7 +3,7 @@ from Classes.Pieces import *
 
 
 def egalite(plateau):
-    for pièce in plateau:
+    for pièce in plateau.values():
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
@@ -11,11 +11,11 @@ def egalite(plateau):
 
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
         mvt_possible_autres_pièces = []
-        for pièce in plateau:
+        for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
     if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
-        for pièce in plateau:
+        for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
 
@@ -49,7 +49,7 @@ def echec_et_mat(plateau):
             RoiBlanc = plateau[element]
         if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
             RoiNoir = plateau[element]
-    for piece in plateau:
+    for piece in plateau.values():
         if piece != '':
             if piece.Color == 'White':
                 mvt_possible_blanc += mvt_final(piece, plateau)
