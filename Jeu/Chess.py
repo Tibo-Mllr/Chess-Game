@@ -3,6 +3,7 @@ from Classes.Pieces import *
 
 
 def egalite(plateau):
+<<<<<<< HEAD
     """Définit s'il y a égalité
 
         Argument
@@ -14,18 +15,22 @@ def egalite(plateau):
         booléen
         """
     for pièce in plateau:
+=======
+    for pièce in plateau.values():
+>>>>>>> 172f7a3bc42ecc2c0b07094cc64082aa38427084
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
             RoiNoir = pièce
 
+    mvt_possible_autres_pièces = []
+
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
-        mvt_possible_autres_pièces = []
-        for pièce in plateau:
+        for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
     if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
-        for pièce in plateau:
+        for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
 
@@ -79,7 +84,7 @@ def echec_et_mat(plateau):
             RoiBlanc = plateau[element]
         if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
             RoiNoir = plateau[element]
-    for piece in plateau:
+    for piece in plateau.values():
         if piece != '':
             if piece.Color == 'White':
                 mvt_possible_blanc += mvt_final(piece, plateau)

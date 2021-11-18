@@ -152,8 +152,10 @@ def jeu():
                 Plateau[(X, Y)] = ''
                 print(grid_to_string(Plateau))
                 """k = 2
-            else:
-                    print('Ce sont aux blancs de jouer')
+                else:
+                        print("Ce sont aux blancs de jouer")
+            else :
+                print("Ce déplacement n'est pas possible")
         if k==0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 if Plateau[ (X, Y)].Color == 'Black':
@@ -163,10 +165,11 @@ def jeu():
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print('Ce sont aux noirs de jouer')"""
-        else:
-            print("Ce déplacement n'est pas possible")
+                    print("Ce sont aux noirs de jouer")"""
+            else:
+                print("Ce déplacement n'est pas possible")
 
+        # A enlever !!
         for element in Plateau:
             if Plateau[element] != '':
                 print(Plateau[element].name, Plateau[element].Color,
