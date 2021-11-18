@@ -1,6 +1,5 @@
 from Classes.Pieces import *
 from Jeu.Chess import *
-from Interface.Graphique import *
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -146,9 +145,9 @@ def jeu():
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 # if Plateau[(X, Y)].Color == 'White':
+                roque(Plateau[(X, Y)], X2, Plateau)
                 Plateau[(X, Y)].move(X2, Y2)
                 Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
-                roque(Plateau[(X, Y)], X2, Plateau)
                 Plateau[(X, Y)] = ''
                 print(grid_to_string(Plateau))
                 """k = 2
@@ -171,6 +170,7 @@ def jeu():
 
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
+
 
 if __name__ == "__main__":
     jeu_init()

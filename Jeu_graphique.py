@@ -16,6 +16,7 @@ Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '
            (6, 0): '', (6, 1): '', (6, 2): '', (6, 3): '', (6, 4): '', (6, 5): '', (6, 6): '', (6, 7): '',
            (7, 0): '', (7, 1): '', (7, 2): '', (7, 3): '', (7, 4): '', (7, 5): '', (7, 6): '', (7, 7): ''}
 
+
 def jeu_init():
     # Pions blancs
     PionBlanc0 = Pion(0, 'White')
@@ -125,17 +126,18 @@ def jeu_init():
     CavalierNoir2 = Cavalier('d', 'Black')
     Plateau[CavalierNoir2.Pos_X, CavalierNoir2.Pos_Y] = CavalierNoir2
 
+
 def jeu_Final():
-    #Création de la fenêtre
+    # Création de la fenêtre
     fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
 
-    #Importation du fond
+    # Importation du fond
     Damier = image.load("Interface/Damier.png").convert()
     Damier = pygame.transform.scale(Damier, (640, 640))
-    fenetre.blit(Damier, (0,0))
+    fenetre.blit(Damier, (0, 0))
 
-    #Importation des poèces
-    #Importation des pièces blanches
+    # Importation des poèces
+    # Importation des pièces blanches
     PionBlanc = image.load("Interface/Pièces/PionBlanc.png").convert_alpha()
     PionBlanc1G = pygame.transform.scale(PionBlanc, (80, 80))
     PionBlanc2G = pygame.transform.scale(PionBlanc, (80, 80))
@@ -146,11 +148,13 @@ def jeu_Final():
     PionBlanc7G = pygame.transform.scale(PionBlanc, (80, 80))
     PionBlanc8G = pygame.transform.scale(PionBlanc, (80, 80))
 
-    TourBlanche = image.load("Interface/Pièces/TourBlanche.png").convert_alpha()
+    TourBlanche = image.load(
+        "Interface/Pièces/TourBlanche.png").convert_alpha()
     TourBlanche1G = pygame.transform.scale(TourBlanche, (80, 80))
     TourBlanche2G = pygame.transform.scale(TourBlanche, (80, 80))
 
-    CavalierBlanc = image.load("Interface/Pièces/CavalierBlanc.png").convert_alpha()
+    CavalierBlanc = image.load(
+        "Interface/Pièces/CavalierBlanc.png").convert_alpha()
     CavalierBlanc1G = pygame.transform.scale(CavalierBlanc, (80, 80))
     CavalierBlanc2G = pygame.transform.scale(CavalierBlanc, (80, 80))
 
@@ -161,11 +165,11 @@ def jeu_Final():
     RoiBlanc = image.load("Interface/Pièces/RoiBlanc.png").convert_alpha()
     RoiBlancG = pygame.transform.scale(RoiBlanc, (80, 80))
 
-    ReineBlanche = image.load("Interface/Pièces/ReineBlanche.png").convert_alpha()
-    ReineBlancheG = pygame.transform.scale(ReineBlanche, (80,80))
+    ReineBlanche = image.load(
+        "Interface/Pièces/ReineBlanche.png").convert_alpha()
+    ReineBlancheG = pygame.transform.scale(ReineBlanche, (80, 80))
 
-
-    #Importation des pièces noires
+    # Importation des pièces noires
     PionNoir = image.load("Interface/Pièces/PionNoir.png").convert_alpha()
     PionNoir1G = pygame.transform.scale(PionNoir, (80, 80))
     PionNoir2G = pygame.transform.scale(PionNoir, (80, 80))
@@ -180,7 +184,8 @@ def jeu_Final():
     TourNoire1G = pygame.transform.scale(TourNoire, (80, 80))
     TourNoire2G = pygame.transform.scale(TourNoire, (80, 80))
 
-    CavalierNoir = image.load("Interface/Pièces/CavalierNoir.png").convert_alpha()
+    CavalierNoir = image.load(
+        "Interface/Pièces/CavalierNoir.png").convert_alpha()
     CavalierNoir1G = pygame.transform.scale(CavalierNoir, (80, 80))
     CavalierNoir2G = pygame.transform.scale(CavalierNoir, (80, 80))
 
@@ -192,27 +197,27 @@ def jeu_Final():
     RoiNoirG = pygame.transform.scale(RoiNoir, (80, 80))
 
     ReineNoire = image.load("Interface/Pièces/ReineNoire.png").convert_alpha()
-    ReineNoireG = pygame.transform.scale(ReineNoire, (80,80))
+    ReineNoireG = pygame.transform.scale(ReineNoire, (80, 80))
 
-    PiècesGraphique = {(0, 0): TourBlanche1G, (0, 1): PionBlanc1G, (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): PionNoir1G, (0, 7): TourNoire1G, 
-            (1, 0): CavalierBlanc1G, (1, 1): PionBlanc2G, (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): PionNoir2G, (1, 7): CavalierNoir1G,
-            (2, 0): FouBlanc1G, (2, 1): PionBlanc3G, (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): PionNoir3G, (2, 7): FouNoir1G,
-            (3, 0): RoiBlancG, (3, 1): PionBlanc4G, (3, 2): '', (3, 3): '', (3, 4): '', (3, 5): '', (3, 6): PionNoir4G, (3, 7): RoiNoirG,
-            (4, 0): ReineBlancheG, (4, 1): PionBlanc5G, (4, 2): '', (4, 3): '', (4, 4): '', (4, 5): '', (4, 6): PionNoir5G, (4, 7): ReineNoireG,
-            (5, 0): FouBlanc2G, (5, 1): PionBlanc6G, (5, 2): '', (5, 3): '', (5, 4): '', (5, 5): '', (5, 6): PionNoir6G, (5, 7): FouNoir2G,
-            (6, 0): CavalierBlanc2G, (6, 1): PionBlanc7G, (6, 2): '', (6, 3): '', (6, 4): '', (6, 5): '', (6, 6): PionNoir7G, (6, 7): CavalierNoir2G,
-            (7, 0): TourBlanche2G, (7, 1): PionBlanc8G, (7, 2): '', (7, 3): '', (7, 4): '', (7, 5): '', (7, 6): PionNoir8G, (7, 7): TourNoire2G}
+    PiècesGraphique = {(0, 0): TourBlanche1G, (0, 1): PionBlanc1G, (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): PionNoir1G, (0, 7): TourNoire1G,
+                       (1, 0): CavalierBlanc1G, (1, 1): PionBlanc2G, (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): PionNoir2G, (1, 7): CavalierNoir1G,
+                       (2, 0): FouBlanc1G, (2, 1): PionBlanc3G, (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): PionNoir3G, (2, 7): FouNoir1G,
+                       (3, 0): ReineBlancheG, (3, 1): PionBlanc4G, (3, 2): '', (3, 3): '', (3, 4): '', (3, 5): '', (3, 6): PionNoir4G, (3, 7): ReineNoireG,
+                       (4, 0): RoiBlancG, (4, 1): PionBlanc5G, (4, 2): '', (4, 3): '', (4, 4): '', (4, 5): '', (4, 6): PionNoir5G, (4, 7): RoiNoirG,
+                       (5, 0): FouBlanc2G, (5, 1): PionBlanc6G, (5, 2): '', (5, 3): '', (5, 4): '', (5, 5): '', (5, 6): PionNoir6G, (5, 7): FouNoir2G,
+                       (6, 0): CavalierBlanc2G, (6, 1): PionBlanc7G, (6, 2): '', (6, 3): '', (6, 4): '', (6, 5): '', (6, 6): PionNoir7G, (6, 7): CavalierNoir2G,
+                       (7, 0): TourBlanche2G, (7, 1): PionBlanc8G, (7, 2): '', (7, 3): '', (7, 4): '', (7, 5): '', (7, 6): PionNoir8G, (7, 7): TourNoire2G}
 
     for cle, valeur in PiècesGraphique.items():
         if valeur == '':
             pass
-        else :
-            fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-		#Rafraichissement
+        else:
+            fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
+            # Rafraichissement
         pygame.display.flip()
 
-    k=1
-    while k !=3:
+    k = 1
+    while k != 3:
         if k == 2:
             k = 0
 
@@ -222,74 +227,108 @@ def jeu_Final():
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
                 RoiNoir = Plateau[element]
 
-        for event in pygame.event.get():    #On parcours la liste de tous les événements reçus
-            if event.type == QUIT:    	 	#Si un de ces événements est de type QUIT
-                pygame.quit()     			#On arrête le programme
-                #MenuStart()
+        for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
+            if event.type == QUIT:  # Si un de ces événements est de type QUIT
+                pygame.quit()  # On arrête le programme
+                # MenuStart()
             if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:	#Si clic gauche
+                if event.button == 1:  # Si clic gauche
                     mouse = event.pos
-                    X=int(mouse[0]/80)
-                    Y=int(mouse[1]/80)
-                    if Plateau[(X,Y)] =='':
+                    X = int(mouse[0]/80)
+                    Y = 7-int(mouse[1]/80)
+                    if Plateau[(X, Y)] == '':
                         pass
                     else:
-                        if k==1:
+                        if k == 1:
                             if Plateau[(X, Y)].Color == 'White':
                                 event_happened = False
-                                while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                                while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
                                     event = pygame.event.wait()
                                     if event.type == MOUSEBUTTONDOWN:
-                                        if event.button == 1:	#Si clic gauche
+                                        if event.button == 1:  # Si clic gauche
                                             mouse2 = event.pos
-                                            X2=int(mouse2[0]/80)
-                                            Y2=int(mouse2[1]/80)
+                                            X2 = int(mouse2[0]/80)
+                                            Y2 = 7-int(mouse2[1]/80)
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                                                PiècesGraphique[(X2,Y2)]= PiècesGraphique[(X, Y)]
+                                                _roque = roque(
+                                                    Plateau[(X, Y)], X2, Plateau)
+                                                if _roque == 'Petit':
+                                                    PiècesGraphique[(
+                                                        5, Y2)] = PiècesGraphique[(7, Y2)]
+                                                    PiècesGraphique[(
+                                                        7, Y2)] = ''
+                                                if _roque == 'Grand':
+                                                    PiècesGraphique[(
+                                                        3, Y2)] = PiècesGraphique[(0, Y2)]
+                                                    PiècesGraphique[(
+                                                        0, Y2)] = ''
+
+                                                Plateau[(X, Y)].move(X2, Y2)
+                                                Plateau[(X2, Y2)] = change(
+                                                    Plateau[(X, Y)])
+                                                Plateau[(X, Y)] = ''
+
+                                                PiècesGraphique[(
+                                                    X2, Y2)] = PiècesGraphique[(X, Y)]
                                                 PiècesGraphique[(X, Y)] = ''
                                                 event_happened = True
-                                                Plateau[(X, Y)].move(X2, Y2)
-                                                Plateau[(X2, Y2)] = Plateau[(X, Y)]
-                                                Plateau[(X, Y)] = ''
-                                                k=2
+                                                k = 2
                                             else:
-                                                print("Ce déplacement n'est pas possible")
+                                                print(
+                                                    "Ce déplacement n'est pas possible")
                                                 event_happened = True
                             else:
                                 print('Les pièces blanches doivent jouer')
-                        if k==0:
+                        if k == 0:
                             if Plateau[(X, Y)].Color == 'Black':
                                 event_happened = False
-                                while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                                while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
                                     event = pygame.event.wait()
                                     if event.type == MOUSEBUTTONDOWN:
-                                        if event.button == 1:	#Si clic gauche
+                                        if event.button == 1:  # Si clic gauche
                                             mouse2 = event.pos
-                                            X2=int(mouse2[0]/80)
-                                            Y2=int(mouse2[1]/80)
-                                            if (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                                                PiècesGraphique[(X2,Y2)]= PiècesGraphique[(X, Y)]
+                                            X2 = int(mouse2[0]/80)
+                                            if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                _roque = roque(
+                                                    Plateau[(X, Y)], X2, Plateau)
+                                                if _roque == 'Petit':
+                                                    PiècesGraphique[(
+                                                        5, Y2)] = PiècesGraphique[(7, Y2)]
+                                                    PiècesGraphique[(
+                                                        7, Y2)] = ''
+                                                if _roque == 'Grand':
+                                                    PiècesGraphique[(
+                                                        3, Y2)] = PiècesGraphique[(0, Y2)]
+                                                    PiècesGraphique[(
+                                                        0, Y2)] = ''
+
+                                                Plateau[(X, Y)].move(X2, Y2)
+                                                Plateau[(X2, Y2)] = change(
+                                                    Plateau[(X, Y)])
+                                                Plateau[(X, Y)] = ''
+
+                                                PiècesGraphique[(
+                                                    X2, Y2)] = PiècesGraphique[(X, Y)]
                                                 PiècesGraphique[(X, Y)] = ''
                                                 event_happened = True
-                                                Plateau[(X, Y)].move(X2, Y2)
-                                                Plateau[(X2, Y2)] = Plateau[(X, Y)]
-                                                Plateau[(X, Y)] = ''
-                                                k=1
+                                                k = 1
                                             else:
-                                                print("Ce déplacement n'est pas possible")
+                                                print(
+                                                    "Ce déplacement n'est pas possible")
                                                 event_happened = True
                             else:
                                 print('Les pièces noires doivent jouer')
-    
-        #Recollage
-        fenetre.blit(Damier, (0,0))	#On remet le fond 
-        for cle, valeur in PiècesGraphique.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
+
+        # Recollage
+        fenetre.blit(Damier, (0, 0))  # On remet le fond
+        # On reparcourt le dictionnaire pour remettre toutes les pièces en place
+        for cle, valeur in PiècesGraphique.items():
             if valeur == '':
                 pass
-            else :
-                fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-            
-        pygame.display.flip()	
+            else:
+                fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
+
+        pygame.display.flip()
 
         if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
             k = 3
@@ -303,7 +342,8 @@ def jeu_Final():
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
 
-    #A changer: La fin du jeu ne marche pas j'ai l'impression
+    # A changer: La fin du jeu ne marche pas j'ai l'impression
+
 
 if __name__ == "__main__":
     jeu_init()
