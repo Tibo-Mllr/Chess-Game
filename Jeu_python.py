@@ -145,10 +145,20 @@ def jeu():
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 # if Plateau[(X, Y)].Color == 'White':
+                print("1 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 roque(Plateau[(X, Y)], X2, Plateau)
+                print("2 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 Plateau[(X, Y)].move(X2, Y2)
+                print("3 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                print("4 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 Plateau[(X, Y)] = ''
+                print("5 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X2, Y2)].Pos_X, Plateau[(X2, Y2)].Pos_Y))
                 print(grid_to_string(Plateau))
                 """k = 2
                 else:
