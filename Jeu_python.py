@@ -125,17 +125,15 @@ def jeu_init():
 def jeu():
     Fin = False
     print(grid_to_string(Plateau))
+    k = 1
 
-    k=1
-    while k !=3:
-        if k == 2:
-            k = 0
+    while not echec_et_mat(Plateau) and not egalite(Plateau):
         for element in Plateau:
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
                 RoiBlanc = Plateau[element]
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
                 RoiNoir = Plateau[element]
-       
+
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
         x2 = input("Entrez l'abscisse voulue : ")
@@ -146,14 +144,14 @@ def jeu():
 
         X2 = int(x2)
         Y2 = int(y2)
-        if k== 1:
+        if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                #if Plateau[ (X, Y)].Color == 'White':
-                    Plateau[(X, Y)].move(X2, Y2)
-                    Plateau[(X2, Y2)] = Plateau[(X, Y)]
-                    Plateau[(X, Y)] = ''
-                    print(grid_to_string(Plateau))
-                    '''k = 2
+                # if Plateau[ (X, Y)].Color == 'White':
+                Plateau[(X, Y)].move(X2, Y2)
+                Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                Plateau[(X, Y)] = ''
+                print(grid_to_string(Plateau))
+                """k = 2
             else:
                     print('Ce sont aux blancs de jouer')
         if k==0:
@@ -165,8 +163,7 @@ def jeu():
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print('Ce sont aux noires de jouer') '''
-
+                    print('Ce sont aux noirs de jouer')"""
         else:
             print("Ce déplacement n'est pas possible")
 
@@ -175,18 +172,7 @@ def jeu():
                 print(Plateau[element].name, Plateau[element].Color,
                       mvt_final(Plateau[element], Plateau))
 
-        # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
-        if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
-            Fin = True
-            print("Sortie Blanche")
-        if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            Fin = True
-            print("Sortie Noire")
-
-    egalite(RoiBlanc, Plateau)
-    egalite(RoiNoir, Plateau)
-    victoire(RoiBlanc, Plateau)
-    victoire(RoiNoir, Plateau)
+    victoire(Plateau)
 
 
 if __name__ == "__main__":

@@ -1,14 +1,27 @@
 from Jeu.Move import *
 from Classes.Pieces import *
 
-def egalite(roi, plateau):
-    if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
+
+def egalite(plateau):
+    for pièce in plateau.values():
+        if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
+            RoiBlanc = pièce
+        if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
+            RoiNoir = pièce
+
+    if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
         mvt_possible_autres_pièces = []
-        for i in plateau.values():
-            if i != '':
-                mvt_possible_autres_pièces += mvt_final(i, plateau)
-        if mvt_possible_autres_pièces == []:
-            print("It's a draw")
+        for pièce in plateau.values():
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+    if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
+        for pièce in plateau.values():
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+
+    if mvt_possible_autres_pièces == []:
+        return True
+    return False
 
 
 def victoire(roi, plateau):
@@ -16,6 +29,15 @@ def victoire(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
         print(couleur_gagnant[0] + "Win !")
+
+    if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
+        mvt_possible_autres_pièces = []
+        for pièce in plateau:
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+
+        if mvt_possible_autres_pièces == []:
+            print("it's a draw")
 
 
 def echec_et_mat(plateau):
@@ -27,7 +49,7 @@ def echec_et_mat(plateau):
             RoiBlanc = plateau[element]
         if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
             RoiNoir = plateau[element]
-    for piece in plateau:
+    for piece in plateau.values():
         if piece != '':
             if piece.Color == 'White':
                 mvt_possible_blanc += mvt_final(piece, plateau)
