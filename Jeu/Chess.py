@@ -9,8 +9,9 @@ def egalite(plateau):
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
             RoiNoir = pièce
 
+    mvt_possible_autres_pièces = []
+
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
-        mvt_possible_autres_pièces = []
         for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
