@@ -346,7 +346,7 @@ class Fou:
         Aucune
         """
 
-        self.pos_X, self.Pos_Y = x, y
+        self.Pos_X, self.Pos_Y = x, y
 
 
 class Cavalier:

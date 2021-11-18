@@ -1,7 +1,6 @@
 from Classes.Pieces import *
 from Jeu.Chess import *
 
-
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
            (2, 0): '', (2, 1): '', (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): '', (2, 7): '',
@@ -123,7 +122,6 @@ def jeu_init():
 
 
 def jeu():
-    Fin = False
     print(grid_to_string(Plateau))
     k = 1
 
@@ -147,10 +145,20 @@ def jeu():
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 # if Plateau[(X, Y)].Color == 'White':
-                Plateau[(X, Y)].move(X2, Y2)
-                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                print("1 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 roque(Plateau[(X, Y)], X2, Plateau)
+                print("2 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
+                Plateau[(X, Y)].move(X2, Y2)
+                print("3 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
+                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                print("4 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
                 Plateau[(X, Y)] = ''
+                print("5 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
+                      (Plateau[(X2, Y2)].Pos_X, Plateau[(X2, Y2)].Pos_Y))
                 print(grid_to_string(Plateau))
                 print(mvt_final(Plateau[(X2,Y2)] , Plateau))
                 """k = 2
