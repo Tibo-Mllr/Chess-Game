@@ -47,7 +47,7 @@ class Pion:
         self.Moved = True
 
     def eat(self, d):
-        """Mange un eautre pièce en diagonale
+        """Mange une autre pièce en diagonale
 
         Arguments
         ---------
