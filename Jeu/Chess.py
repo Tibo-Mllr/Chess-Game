@@ -43,7 +43,7 @@ def victoire(roi, plateau):
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
 
         if mvt_possible_autres_pièces == []:
-            print("it's a draw")
+            print("It's a draw")
 
 
 def echec_et_mat(plateau):
@@ -152,6 +152,32 @@ def grid_to_string(plateau):
 """
 
     return L
+
+
+def change(piece):
+    if piece.name == 'pion':
+        if (piece.Color == 'White' and piece.Pos_Y == 7) or (piece.Color == 'Black' and piece.Pos_Y == 0):
+            choice = input("Veuillez entrer la pièce que vous voulez : ")
+            if choice.lower() == 'dame':
+                Changement = Dame('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() == 'fou':
+                Changement = Fou('g', piece.Color, True,
+                                 piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() == 'tour':
+                Changement = Tour('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() in ['cavalier', 'cheval']:
+                Changement = Cavalier('g', piece.Color, True,
+                                      piece.Pos_X, piece.Pos_Y)
+            else:
+                print("Ce choix n'est pas supporté")
+                return change(piece)
+            return Changement
+    return piece
 
 
 if __name__ == "__main__":

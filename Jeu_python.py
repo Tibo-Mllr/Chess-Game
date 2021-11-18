@@ -146,9 +146,9 @@ def jeu():
         Y2 = int(y2)
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                # if Plateau[ (X, Y)].Color == 'White':
+                # if Plateau[(X, Y)].Color == 'White':
                 Plateau[(X, Y)].move(X2, Y2)
-                Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
                 Plateau[(X, Y)] = ''
                 print(grid_to_string(Plateau))
                 """k = 2
