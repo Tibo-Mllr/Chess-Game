@@ -160,7 +160,11 @@ def jeu():
                 print("5 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
                       (Plateau[(X2, Y2)].Pos_X, Plateau[(X2, Y2)].Pos_Y))
                 print(grid_to_string(Plateau))
-                print(mvt_final(Plateau[(X2,Y2)] , Plateau))
+                print(echec_si_mouvement_du_roi(RoiNoir , 5 , 6, Plateau))
+                print(mvt_possible_roi(RoiNoir , Plateau))
+                print(mvt_possible_gen(RoiNoir, Plateau))
+                print(mvt_final(RoiNoir , Plateau))
+                print(mvt_final(Plateau[(0,6)] , Plateau))
                 """k = 2
                 else:
                         print("Ce sont aux blancs de jouer")

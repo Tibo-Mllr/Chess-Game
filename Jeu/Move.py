@@ -399,9 +399,10 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
     newplateau[(x, y)] = roi
     echec_si_mvt = False
     for piece in newplateau.values():
-        if piece != '' and piece != roi and piece.Color != roi.Color:
-            if (x, y) in mvt_possible_gen(piece, newplateau):
-                echec_si_mvt = True
+        if echec_si_mvt != True:
+            if piece != '' and piece != roi and piece.Color != roi.Color:
+                if (x, y) in mvt_possible_gen(piece, newplateau):
+                    echec_si_mvt = True
     return echec_si_mvt
 
 
@@ -421,53 +422,53 @@ def mvt_possible_roi(roi, plateau):
         if case_libre(roi.Pos_X - 1, roi.Pos_Y, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau):
             mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y)]
         else:
-            if case_color(roi.Pos_X - 1, roi.Pos_Y, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau):
+            if (case_color(roi.Pos_X - 1, roi.Pos_Y, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y)]
         if roi.Pos_Y != 0:
-            if case_libre(roi.Pos_X - 1, roi.Pos_Y - 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y - 1, plateau):
+            if (case_libre(roi.Pos_X - 1, roi.Pos_Y - 1, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y - 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y - 1)]
             else:
-                if case_color(roi.Pos_X - 1, roi.Pos_Y - 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y - 1, plateau):
+                if (case_color(roi.Pos_X - 1, roi.Pos_Y - 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y - 1, plateau)):
                     mvt_possible = mvt_possible + \
                         [(roi.Pos_X - 1, roi.Pos_Y - 1)]
         if roi.Pos_Y != 7:
-            if case_libre(roi.Pos_X - 1, roi.Pos_Y + 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y + 1, plateau):
+            if (case_libre(roi.Pos_X - 1, roi.Pos_Y + 1, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y + 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y + 1)]
             else:
-                if case_color(roi.Pos_X - 1, roi.Pos_Y + 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y + 1, plateau):
+                if (case_color(roi.Pos_X - 1, roi.Pos_Y + 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y + 1, plateau)):
                     mvt_possible = mvt_possible + \
                         [(roi.Pos_X - 1, roi.Pos_Y + 1)]
     if roi.Pos_X != 7:
-        if case_libre(roi.Pos_X + 1, roi.Pos_Y, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y, plateau):
+        if (case_libre(roi.Pos_X + 1, roi.Pos_Y, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y, plateau)):
             mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y)]
         else:
-            if case_color(roi.Pos_X + 1, roi.Pos_Y, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y, plateau):
+            if (case_color(roi.Pos_X + 1, roi.Pos_Y, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y)]
         if roi.Pos_Y != 0:
-            if case_libre(roi.Pos_X + 1, roi.Pos_Y - 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y - 1, plateau):
+            if (case_libre(roi.Pos_X + 1, roi.Pos_Y - 1, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y - 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y - 1)]
             else:
-                if case_color(roi.Pos_X + 1, roi.Pos_Y - 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y - 1, plateau):
+                if (case_color(roi.Pos_X + 1, roi.Pos_Y - 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y - 1, plateau)):
                     mvt_possible = mvt_possible + \
                         [(roi.Pos_X + 1, roi.Pos_Y - 1)]
         if roi.Pos_Y != 7:
-            if case_libre(roi.Pos_X + 1, roi.Pos_Y + 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y + 1, plateau):
+            if (case_libre(roi.Pos_X + 1, roi.Pos_Y + 1, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y + 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y + 1)]
             else:
-                if case_color(roi.Pos_X + 1, roi.Pos_Y + 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y + 1, plateau):
+                if (case_color(roi.Pos_X + 1, roi.Pos_Y + 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X + 1, roi.Pos_Y + 1, plateau)):
                     mvt_possible = mvt_possible + \
                         [(roi.Pos_X + 1, roi.Pos_Y + 1)]
     if roi.Pos_Y != 0:
-        if case_libre(roi.Pos_X, roi.Pos_Y - 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y - 1, plateau):
+        if (case_libre(roi.Pos_X, roi.Pos_Y - 1, plateau)) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y - 1, plateau)):
             mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y - 1)]
         else:
-            if case_color(roi.Pos_X, roi.Pos_Y - 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y - 1, plateau):
+            if (case_color(roi.Pos_X, roi.Pos_Y - 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y - 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y - 1)]
     if roi.Pos_Y != 7:
-        if case_libre(roi.Pos_X, roi.Pos_Y + 1, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau):
+        if (case_libre(roi.Pos_X, roi.Pos_Y + 1, plateau)) and not (echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau)):
             mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
         else:
-            if case_color(roi.Pos_X, roi.Pos_Y + 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau):
+            if (case_color(roi.Pos_X, roi.Pos_Y + 1, plateau) != roi.Color) and (not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau)):
                 mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
     return mvt_possible
 
@@ -541,8 +542,8 @@ def mvt_final(piece, plateau):
         mvtf = mvt_possible_gen(piece, plateau)
         for (x, y) in mvtf:
             if echec_si_mvt(piece, x, y, plateau) == False:
-                mvtf = mvtf + [(x, y)]
-        return mvtf
+                mvt = mvt + [(x, y)]
+        return mvt
 
 
 def petit_roque(roi, plateau):
