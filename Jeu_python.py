@@ -149,6 +149,7 @@ def jeu():
                 # if Plateau[(X, Y)].Color == 'White':
                 Plateau[(X, Y)].move(X2, Y2)
                 Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                roque(Plateau[(X, Y)], X2, Plateau)
                 Plateau[(X, Y)] = ''
                 print(grid_to_string(Plateau))
                 """k = 2
