@@ -3,6 +3,8 @@ from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
 import time
+from Classes.Pieces import *
+from Jeu.Chess import *
 
 pygame.init()
 

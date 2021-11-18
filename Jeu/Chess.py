@@ -1,7 +1,6 @@
 from Jeu.Move import *
 from Classes.Pieces import *
 
-
 def egalite(roi, plateau):
     if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
         mvt_possible_autres_pièces = []
@@ -13,10 +12,32 @@ def egalite(roi, plateau):
 
 
 def victoire(roi, plateau):
-    if mvt_possible_roi(roi, plateau) == [] and roi_en_echec(roi, plateau):
+    if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
-        print(couleur_gagnant[0] + " win !")
+        print(couleur_gagnant[0] + "Win !")
+
+
+def echec_et_mat(plateau):
+    echec_et_mat = False
+    mvt_possible_blanc = []
+    mvt_possible_noir = []
+    for element in plateau:
+        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'White':
+            RoiBlanc = plateau[element]
+        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
+            RoiNoir = plateau[element]
+    for piece in plateau:
+        if piece != '':
+            if piece.Color == 'White':
+                mvt_possible_blanc += mvt_final(piece, plateau)
+            else:
+                mvt_possible_noir += mvt_final(piece, plateau)
+    if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
+        echec_et_mat = True
+    if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
+        echec_et_mat = True
+    return echec_et_mat
 
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
