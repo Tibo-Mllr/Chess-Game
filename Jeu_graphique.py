@@ -303,8 +303,8 @@ def jeu_Final():
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
 
-    #A changer: La fin du jeu ne marche pas j'ai l'impression
-
+    #A changer: La fin du jeu ne marche pas j'ai l'impression et il faut mettre les blancs en bas mais c'est vraiment un détail
+ 
 if __name__ == "__main__":
     jeu_init()
     jeu_Final()
