@@ -25,7 +25,7 @@ This is *a chess game*
 ![alt text](Photos_ReadMe/Jeu_Python.png)
 
 * Jeu_graphique.py est le jeu général, sur interface graphique. C'est LE fichier à exécuter pour lancer le jeu.
-![alt text](Photos_ReadMe/Jeu_Graphique)
+![alt text](Photos_ReadMe/Jeu_Graphique.png)
 
 ### Attention :
 Nous n'avons pas trop réussit à optimiser le jeu : il peut parfois être (très) lent pour faire les calculs !
