@@ -1,6 +1,6 @@
 from Classes.Pieces import *
 from Jeu.Chess import *
-
+from Interface.Graphique import *
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -123,7 +123,6 @@ def jeu_init():
 
 
 def jeu():
-    Fin = False
     print(grid_to_string(Plateau))
     k = 1
 
@@ -172,7 +171,6 @@ def jeu():
 
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
-
 
 if __name__ == "__main__":
     jeu_init()
