@@ -344,6 +344,7 @@ def jeu_Final():
     victoire(RoiNoir, Plateau)
 
     # A changer: La fin du jeu ne marche pas j'ai l'impression
+    #Mouvement final est une liste de mouvement possible avec y = 7- mouse...
 
 
 if __name__ == "__main__":
