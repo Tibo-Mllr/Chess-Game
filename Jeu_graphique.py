@@ -1,6 +1,9 @@
 from Classes.Pieces import *
 from Jeu.Chess import *
-from Interface.Graphique import *
+import pygame
+from pygame import image
+from pygame.locals import *
+from pygame.constants import RESIZABLE
 
 pygame.init()
 
@@ -222,7 +225,7 @@ def jeu_Final():
         for event in pygame.event.get():    #On parcours la liste de tous les événements reçus
             if event.type == QUIT:    	 	#Si un de ces événements est de type QUIT
                 pygame.quit()     			#On arrête le programme
-                MenuStart()
+                #MenuStart()
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:	#Si clic gauche
                     mouse = event.pos
@@ -230,45 +233,50 @@ def jeu_Final():
                     Y=int(mouse[1]/80)
                     if Plateau[(X,Y)] =='':
                         pass
-                    if k==1:
-                        if Plateau[(X, Y)].Color == 'White':
-                            event_happened = False
-                            while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
-                                event = pygame.event.wait()
-                                if event.type == MOUSEBUTTONDOWN:
-                                    if event.button == 1:	#Si clic gauche
-                                        mouse2 = event.pos
-                                        X2=int(mouse2[0]/80)
-                                        Y2=int(mouse2[1]/80)
-                                        PiècesGraphique[(int(mouse2[0]/80),int(mouse2[1]/80))]= PiècesGraphique[(int(mouse[0]/80), int(mouse[1]/80))]
-                                        PiècesGraphique[(int(mouse[0]/80), int(mouse[1]/80))] = ''
-                                        event_happened = True
-                                        Plateau[(X, Y)].move(X2, Y2)
-                                        Plateau[(X2, Y2)] = Plateau[(X, Y)]
-                                        Plateau[(X, Y)] = ''
-                                        k=2
-                        if Plateau[(X, Y)].Color == 'Black':
-                            print('Les pièces blanches doivent jouer')
-                    if k==2:
-                        if Plateau[(X, Y)].Color == 'Black':
-                            event_happened = False
-                            while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
-                                event = pygame.event.wait()
-                                if event.type == MOUSEBUTTONDOWN:
-                                    if event.button == 1:	#Si clic gauche
-                                        mouse2 = event.pos
-                                        X2=int(mouse2[0]/80)
-                                        Y2=int(mouse2[1]/80)
-                                        PiècesGraphique[(int(mouse2[0]/80),int(mouse2[1]/80))]= PiècesGraphique[(int(mouse[0]/80), int(mouse[1]/80))]
-                                        PiècesGraphique[(int(mouse[0]/80), int(mouse[1]/80))] = ''
-                                        event_happened = True
-                                        Plateau[(X, Y)].move(X2, Y2)
-                                        Plateau[(X2, Y2)] = Plateau[(X, Y)]
-                                        Plateau[(X, Y)] = ''
-                                        k=2
-                        if Plateau[(X, Y)].Color == 'White':
-                            print('Les pièces noires doivent jouer')
-            
+                    else:
+                        if k==1:
+                            if Plateau[(X, Y)].Color == 'White':
+                                event_happened = False
+                                while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                                    event = pygame.event.wait()
+                                    if event.type == MOUSEBUTTONDOWN:
+                                        if event.button == 1:	#Si clic gauche
+                                            mouse2 = event.pos
+                                            X2=int(mouse2[0]/80)
+                                            Y2=int(mouse2[1]/80)
+                                            if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                PiècesGraphique[(X2,Y2)]= PiècesGraphique[(X, Y)]
+                                                PiècesGraphique[(X, Y)] = ''
+                                                event_happened = True
+                                                Plateau[(X, Y)].move(X2, Y2)
+                                                Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                                                Plateau[(X, Y)] = ''
+                                                k=2
+                                            else:
+                                                print("Ce déplacement n'est pas possible")
+                            else:
+                                print('Les pièces blanches doivent jouer')
+                        if k==0:
+                            if Plateau[(X, Y)].Color == 'Black':
+                                event_happened = False
+                                while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                                    event = pygame.event.wait()
+                                    if event.type == MOUSEBUTTONDOWN:
+                                        if event.button == 1:	#Si clic gauche
+                                            mouse2 = event.pos
+                                            X2=int(mouse2[0]/80)
+                                            Y2=int(mouse2[1]/80)
+                                            if (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                PiècesGraphique[(X2,Y2)]= PiècesGraphique[(X, Y)]
+                                                PiècesGraphique[(X, Y)] = ''
+                                                event_happened = True
+                                                Plateau[(X, Y)].move(X2, Y2)
+                                                Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                                                Plateau[(X, Y)] = ''
+                                                k=1
+                            else:
+                                print('Les pièces noires doivent jouer')
+                
         #Recollage
         fenetre.blit(Damier, (0,0))	#On remet le fond 
         for cle, valeur in PiècesGraphique.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
