@@ -3,12 +3,15 @@ from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
 import time
-
-
+from Classes.Pieces import *
+from Jeu.Chess import *
 
 pygame.init()
 
 clock= pygame.time.Clock()
+
+def var_name(var, dir=locals()):	#retourne le nom de la première variable par ordre de création qui possède la valeur de var
+    return [key for key, val in dir.items() if id(val) == id(var)]
 
 def Echiquier():
 	#Création de la fenêtre
@@ -93,7 +96,6 @@ def Echiquier():
 			pass
 		else :
 			fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-
 		#Rafraichissement
 		pygame.display.flip()
 
@@ -108,8 +110,9 @@ def Echiquier():
 					if plateau[int(mouse[0]/80), int(mouse[1]/80)] =='':
 						pass
 					else:
+						fenetre.blit(plateau[int(mouse[0]/80), int(mouse[1]/80)], (int(mouse[0]/80)*80, int(mouse[1]/80)*80))
 						event_happened = False
-						while not event_happened:
+						while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
 							event = pygame.event.wait()
 							if event.type == MOUSEBUTTONDOWN:
 								if event.button == 1:	#Si clic gauche
@@ -120,8 +123,8 @@ def Echiquier():
 	
 	
 		#Re-collage
-		fenetre.blit(Damier, (0,0))	
-		for cle, valeur in plateau.items():
+		fenetre.blit(Damier, (0,0))	#On remet le fond 
+		for cle, valeur in plateau.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
 			if valeur == '':
 					pass
 			else :
@@ -148,7 +151,7 @@ def MenuStart():
 	pygame.draw.rect(Menu, (0,0,0) , (175-100, 10 , 350, 35 ) , 1)
 	pygame.font.init()		#On initialise la création de texte sur pygame
 	TexteSurface = pygame.font.SysFont('Times New Roman', 30)	#On choisit la police d'écriture et la taille de la police du texte
-	TexteMenu, TextRectMenu = CréationTexte('Garry Kasparov simulator', TexteSurface , (0, 0, 0))
+	TexteMenu, TextRectMenu = CréationTexte('échec et mat', TexteSurface , (0, 0, 0))
 	TextRectMenu.center = ((500/2),(25)) #On centre le texte
 	Menu.blit(TexteMenu, TextRectMenu)
 	while True:
@@ -159,7 +162,7 @@ def MenuStart():
 		#Création des boutons
 		mouse = pygame.mouse.get_pos()
 		#Création du bouton démarrage de partie
-		if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2:
+		if 250+70 > mouse[0] > 250-70 and 275/2+30 > mouse[1] > 275/2: #Permet de savoir si la souris se situe au niveau du bouton
 			pygame.draw.rect(Menu, '#00FFFF' , (250-70, 275/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
 			if event.type == MOUSEBUTTONDOWN:
 				if event.button == 1:	#Si clic gauche
@@ -175,11 +178,11 @@ def MenuStart():
 		Menu.blit(TextSurf, TextRect)
 
 		#Création du bouton quitter la partie
-		if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2:
-			pygame.draw.rect(Menu, '#8B0000' , (250-70, 435/2 , 140, 30 ) )
+		if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2: #Permet de savoir si la souris se situe au niveau du bouton
+			pygame.draw.rect(Menu, '#8B0000' , (250-70, 435/2 , 140, 30 ) ) #Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
 			if event.type == MOUSEBUTTONDOWN:
 				if event.button == 1:	#Si clic gauche
-					pygame.quit()
+					pygame.quit()		#On quitte la partie
 		else:
 			pygame.draw.rect(Menu, '#DC143C' , (250-70, 435/2 , 140, 30 ) )
 
@@ -193,4 +196,5 @@ def MenuStart():
 		pygame.display.update()
 		clock.tick(15)
 
-MenuStart()
+if __name__ == "__main__":
+	MenuStart()

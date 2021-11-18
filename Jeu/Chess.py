@@ -1,27 +1,66 @@
-from Move import *
+from Jeu.Move import *
 from Classes.Pieces import *
-from Interface.Graphique import *
 
 
-def egalite(roi,plateau):
-    if mvt_possible_roi(roi,plateau)==[] and not roi_en_echec(roi,plateau):
-        mvt_possible_autres_pièces=[]
-        for i in [Pion,Tour,Fou,Dame,Cavalier]:
-            mvt_possible_autres_pièces+=mvt_possible_gen(i,plateau)
-        if mvt_possible_autres_pièces==[]:
-            print  ("it's a draw")
+def egalite(plateau):
+    for pièce in plateau.values():
+        if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
+            RoiBlanc = pièce
+        if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
+            RoiNoir = pièce
+
+    mvt_possible_autres_pièces = []
+
+    if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
+        for pièce in plateau.values():
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+    if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
+        for pièce in plateau.values():
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+
+    if mvt_possible_autres_pièces == []:
+        return True
+    return False
 
 
-def victoire(roi,plateau):
-    if mvt_possible_roi(roi,plateau)==[] and roi_en_echec(roi,plateau):
-        couleur_gagnant=["White","Black"]
+def victoire(roi, plateau):
+    if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
+        couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
         print(couleur_gagnant[0] + "Win !")
 
+    if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
+        mvt_possible_autres_pièces = []
+        for pièce in plateau:
+            if pièce != '':
+                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
+
+        if mvt_possible_autres_pièces == []:
+            print("it's a draw")
 
 
-
-
+def echec_et_mat(plateau):
+    echec_et_mat = False
+    mvt_possible_blanc = []
+    mvt_possible_noir = []
+    for element in plateau:
+        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'White':
+            RoiBlanc = plateau[element]
+        if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
+            RoiNoir = plateau[element]
+    for piece in plateau.values():
+        if piece != '':
+            if piece.Color == 'White':
+                mvt_possible_blanc += mvt_final(piece, plateau)
+            else:
+                mvt_possible_noir += mvt_final(piece, plateau)
+    if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
+        echec_et_mat = True
+    if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
+        echec_et_mat = True
+    return echec_et_mat
 
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
