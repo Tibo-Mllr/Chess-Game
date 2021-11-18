@@ -9,125 +9,129 @@ pygame.init()
 
 clock = pygame.time.Clock()
 
+
 def Echiquier():
-	k = 1
-	#Création de la fenêtre
-	fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
+    k = 1
+    # Création de la fenêtre
+    fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
 
-	#Importation du fond
-	Damier = image.load("Interface/Damier.png").convert()
-	Damier = pygame.transform.scale(Damier, (640, 640))
-	fenetre.blit(Damier, (0,0))
+    # Importation du fond
+    Damier = image.load("Interface/Damier.png").convert()
+    Damier = pygame.transform.scale(Damier, (640, 640))
+    fenetre.blit(Damier, (0, 0))
 
-	#Importation des poèces
-	#Importation des pièces blanches
-	PionBlanc = image.load("Interface/Pièces/PionBlanc.png").convert_alpha()
-	PionBlanc1G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc2G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc3G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc4G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc5G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc6G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc7G = pygame.transform.scale(PionBlanc, (80, 80))
-	PionBlanc8G = pygame.transform.scale(PionBlanc, (80, 80))
+    # Importation des poèces
+    # Importation des pièces blanches
+    PionBlanc = image.load("Interface/Pièces/PionBlanc.png").convert_alpha()
+    PionBlanc1G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc2G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc3G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc4G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc5G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc6G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc7G = pygame.transform.scale(PionBlanc, (80, 80))
+    PionBlanc8G = pygame.transform.scale(PionBlanc, (80, 80))
 
-	TourBlanche = image.load("Interface/Pièces/TourBlanche.png").convert_alpha()
-	TourBlanche1G = pygame.transform.scale(TourBlanche, (80, 80))
-	TourBlanche2G = pygame.transform.scale(TourBlanche, (80, 80))
+    TourBlanche = image.load(
+        "Interface/Pièces/TourBlanche.png").convert_alpha()
+    TourBlanche1G = pygame.transform.scale(TourBlanche, (80, 80))
+    TourBlanche2G = pygame.transform.scale(TourBlanche, (80, 80))
 
-	CavalierBlanc = image.load("Interface/Pièces/CavalierBlanc.png").convert_alpha()
-	CavalierBlanc1G = pygame.transform.scale(CavalierBlanc, (80, 80))
-	CavalierBlanc2G = pygame.transform.scale(CavalierBlanc, (80, 80))
+    CavalierBlanc = image.load(
+        "Interface/Pièces/CavalierBlanc.png").convert_alpha()
+    CavalierBlanc1G = pygame.transform.scale(CavalierBlanc, (80, 80))
+    CavalierBlanc2G = pygame.transform.scale(CavalierBlanc, (80, 80))
 
-	FouBlanc = image.load("Interface/Pièces/FouBlanc.png").convert_alpha()
-	FouBlanc1G = pygame.transform.scale(FouBlanc, (80, 80))
-	FouBlanc2G = pygame.transform.scale(FouBlanc, (80, 80))
+    FouBlanc = image.load("Interface/Pièces/FouBlanc.png").convert_alpha()
+    FouBlanc1G = pygame.transform.scale(FouBlanc, (80, 80))
+    FouBlanc2G = pygame.transform.scale(FouBlanc, (80, 80))
 
-	RoiBlanc = image.load("Interface/Pièces/RoiBlanc.png").convert_alpha()
-	RoiBlancG = pygame.transform.scale(RoiBlanc, (80, 80))
+    RoiBlanc = image.load("Interface/Pièces/RoiBlanc.png").convert_alpha()
+    RoiBlancG = pygame.transform.scale(RoiBlanc, (80, 80))
 
-	ReineBlanche = image.load("Interface/Pièces/ReineBlanche.png").convert_alpha()
-	ReineBlancheG = pygame.transform.scale(ReineBlanche, (80,80))
-	
-	
-	#Importation des pièces noires
-	PionNoir = image.load("Interface/Pièces/PionNoir.png").convert_alpha()
-	PionNoir1G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir2G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir3G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir4G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir5G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir6G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir7G = pygame.transform.scale(PionNoir, (80, 80))
-	PionNoir8G = pygame.transform.scale(PionNoir, (80, 80))
+    ReineBlanche = image.load(
+        "Interface/Pièces/ReineBlanche.png").convert_alpha()
+    ReineBlancheG = pygame.transform.scale(ReineBlanche, (80, 80))
 
-	TourNoire = image.load("Interface/Pièces/TourNoire.png").convert_alpha()
-	TourNoire1G = pygame.transform.scale(TourNoire, (80, 80))
-	TourNoire2G = pygame.transform.scale(TourNoire, (80, 80))
+    # Importation des pièces noires
+    PionNoir = image.load("Interface/Pièces/PionNoir.png").convert_alpha()
+    PionNoir1G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir2G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir3G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir4G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir5G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir6G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir7G = pygame.transform.scale(PionNoir, (80, 80))
+    PionNoir8G = pygame.transform.scale(PionNoir, (80, 80))
 
-	CavalierNoir = image.load("Interface/Pièces/CavalierNoir.png").convert_alpha()
-	CavalierNoir1G = pygame.transform.scale(CavalierNoir, (80, 80))
-	CavalierNoir2G = pygame.transform.scale(CavalierNoir, (80, 80))
+    TourNoire = image.load("Interface/Pièces/TourNoire.png").convert_alpha()
+    TourNoire1G = pygame.transform.scale(TourNoire, (80, 80))
+    TourNoire2G = pygame.transform.scale(TourNoire, (80, 80))
 
-	FouNoir = image.load("Interface/Pièces/FouNoir.png").convert_alpha()
-	FouNoir1G = pygame.transform.scale(FouNoir, (80, 80))
-	FouNoir2G = pygame.transform.scale(FouNoir, (80, 80))
+    CavalierNoir = image.load(
+        "Interface/Pièces/CavalierNoir.png").convert_alpha()
+    CavalierNoir1G = pygame.transform.scale(CavalierNoir, (80, 80))
+    CavalierNoir2G = pygame.transform.scale(CavalierNoir, (80, 80))
 
-	RoiNoir = image.load("Interface/Pièces/RoiNoir.png").convert_alpha()
-	RoiNoirG = pygame.transform.scale(RoiNoir, (80, 80))
+    FouNoir = image.load("Interface/Pièces/FouNoir.png").convert_alpha()
+    FouNoir1G = pygame.transform.scale(FouNoir, (80, 80))
+    FouNoir2G = pygame.transform.scale(FouNoir, (80, 80))
 
-	ReineNoire = image.load("Interface/Pièces/ReineNoire.png").convert_alpha()
-	ReineNoireG = pygame.transform.scale(ReineNoire, (80,80))
+    RoiNoir = image.load("Interface/Pièces/RoiNoir.png").convert_alpha()
+    RoiNoirG = pygame.transform.scale(RoiNoir, (80, 80))
 
-	Pièces = {(0, 0): TourBlanche1G, (0, 1): PionBlanc1G, (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): PionNoir1G, (0, 7): TourNoire1G, 
-           (1, 0): CavalierBlanc1G, (1, 1): PionBlanc2G, (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): PionNoir2G, (1, 7): CavalierNoir1G,
-           (2, 0): FouBlanc1G, (2, 1): PionBlanc3G, (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): PionNoir3G, (2, 7): FouNoir1G,
-           (3, 0): RoiBlancG, (3, 1): PionBlanc4G, (3, 2): '', (3, 3): '', (3, 4): '', (3, 5): '', (3, 6): PionNoir4G, (3, 7): ReineNoireG,
-           (4, 0): ReineBlancheG, (4, 1): PionBlanc5G, (4, 2): '', (4, 3): '', (4, 4): '', (4, 5): '', (4, 6): PionNoir5G, (4, 7): RoiNoirG,
-           (5, 0): FouBlanc2G, (5, 1): PionBlanc6G, (5, 2): '', (5, 3): '', (5, 4): '', (5, 5): '', (5, 6): PionNoir6G, (5, 7): FouNoir2G,
-           (6, 0): CavalierBlanc2G, (6, 1): PionBlanc7G, (6, 2): '', (6, 3): '', (6, 4): '', (6, 5): '', (6, 6): PionNoir7G, (6, 7): CavalierNoir2G,
-           (7, 0): TourBlanche2G, (7, 1): PionBlanc8G, (7, 2): '', (7, 3): '', (7, 4): '', (7, 5): '', (7, 6): PionNoir8G, (7, 7): TourNoire2G}
+    ReineNoire = image.load("Interface/Pièces/ReineNoire.png").convert_alpha()
+    ReineNoireG = pygame.transform.scale(ReineNoire, (80, 80))
 
-	for cle, valeur in Pièces.items():
-		if valeur == '':
-			pass
-		else :
-			fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-		#Rafraichissement
-		pygame.display.flip()
-	
-	while k !=3:
-		for event in pygame.event.get():    #On parcours la liste de tous les événements reçus
-			if event.type == QUIT:    	 	#Si un de ces événements est de type QUIT
-				pygame.quit()     			#On arrête le programme
-				MenuStart()
-			if event.type == MOUSEBUTTONDOWN:
-				if event.button == 1:	#Si clic gauche
-					mouse = event.pos
-					if Pièces[int(mouse[0]/80), int(mouse[1]/80)] =='':
-						pass
-					else:
-						event_happened = False
-						while not event_happened: #Tant que le déplacement de la pièce ne s'est pas produit, on attend
-							event = pygame.event.wait()
-							if event.type == MOUSEBUTTONDOWN:
-								if event.button == 1:	#Si clic gauche
-									mouse2 = event.pos
-									Pièces[(int(mouse2[0]/80),int(mouse2[1]/80))]= Pièces[(int(mouse[0]/80), int(mouse[1]/80))]
-									Pièces[(int(mouse[0]/80), int(mouse[1]/80))] = ''
-									event_happened = True
-	
-		
+    Pièces = {(0, 0): TourBlanche1G, (0, 1): PionBlanc1G, (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): PionNoir1G, (0, 7): TourNoire1G,
+              (1, 0): CavalierBlanc1G, (1, 1): PionBlanc2G, (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): PionNoir2G, (1, 7): CavalierNoir1G,
+              (2, 0): FouBlanc1G, (2, 1): PionBlanc3G, (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): PionNoir3G, (2, 7): FouNoir1G,
+              (3, 0): RoiBlancG, (3, 1): PionBlanc4G, (3, 2): '', (3, 3): '', (3, 4): '', (3, 5): '', (3, 6): PionNoir4G, (3, 7): ReineNoireG,
+              (4, 0): ReineBlancheG, (4, 1): PionBlanc5G, (4, 2): '', (4, 3): '', (4, 4): '', (4, 5): '', (4, 6): PionNoir5G, (4, 7): RoiNoirG,
+              (5, 0): FouBlanc2G, (5, 1): PionBlanc6G, (5, 2): '', (5, 3): '', (5, 4): '', (5, 5): '', (5, 6): PionNoir6G, (5, 7): FouNoir2G,
+              (6, 0): CavalierBlanc2G, (6, 1): PionBlanc7G, (6, 2): '', (6, 3): '', (6, 4): '', (6, 5): '', (6, 6): PionNoir7G, (6, 7): CavalierNoir2G,
+              (7, 0): TourBlanche2G, (7, 1): PionBlanc8G, (7, 2): '', (7, 3): '', (7, 4): '', (7, 5): '', (7, 6): PionNoir8G, (7, 7): TourNoire2G}
 
-		#Re-collage
-		fenetre.blit(Damier, (0,0))	#On remet le fond 
-		for cle, valeur in Pièces.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
-			if valeur == '':
-					pass
-			else :
-				fenetre.blit(valeur, (cle[0]*80, cle[1]*80))
-		#Rafraichissement
-		pygame.display.flip()						
+    for cle, valeur in Pièces.items():
+        if valeur == '':
+            pass
+        else:
+            fenetre.blit(valeur, ((7-cle[0])*80, (7-cle[1])*80))
+        # Rafraichissement
+        pygame.display.flip()
+
+    while k != 3:
+        for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
+            if event.type == QUIT:  # Si un de ces événements est de type QUIT
+                pygame.quit()  # On arrête le programme
+                MenuStart()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:  # Si clic gauche
+                    mouse = event.pos
+                    if Pièces[7-int(mouse[0]/80), 7-int(mouse[1]/80)] == '':
+                        pass
+                    else:
+                        event_happened = False
+                        while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                            event = pygame.event.wait()
+                            if event.type == MOUSEBUTTONDOWN:
+                                if event.button == 1:  # Si clic gauche
+                                    mouse2 = event.pos
+                                    Pièces[(7-int(mouse2[0]/80), 7-int(mouse2[1]/80))
+                                           ] = Pièces[(7-int(mouse[0]/80), 7-int(mouse[1]/80))]
+                                    Pièces[(7-int(mouse[0]/80),
+                                            7-int(mouse[1]/80))] = ''
+                                    event_happened = True
+
+        # Re-collage
+        fenetre.blit(Damier, (0, 0))  # On remet le fond
+        for cle, valeur in Pièces.items():  # On reparcourt le dictionnaire pour remettre toutes les pièces en place
+            if valeur == '':
+                pass
+            else:
+                fenetre.blit(valeur, ((7-cle[0])*80, (7-cle[1])*80))
+        # Rafraichissement
+        pygame.display.flip()
 
 
 def CréationTexte(text, font, couleur):
