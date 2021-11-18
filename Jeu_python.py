@@ -152,6 +152,7 @@ def jeu():
                 roque(Plateau[(X, Y)], X2, Plateau)
                 Plateau[(X, Y)] = ''
                 print(grid_to_string(Plateau))
+                print(mvt_final(Plateau[(X2,Y2)] , Plateau))
                 """k = 2
                 else:
                         print("Ce sont aux blancs de jouer")
