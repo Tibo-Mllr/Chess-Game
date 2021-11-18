@@ -254,6 +254,7 @@ def jeu_Final():
                                                 k=2
                                             else:
                                                 print("Ce déplacement n'est pas possible")
+                                                event_happened = True
                             else:
                                 print('Les pièces blanches doivent jouer')
                         if k==0:
@@ -274,9 +275,12 @@ def jeu_Final():
                                                 Plateau[(X2, Y2)] = Plateau[(X, Y)]
                                                 Plateau[(X, Y)] = ''
                                                 k=1
+                                            else:
+                                                print("Ce déplacement n'est pas possible")
+                                                event_happened = True
                             else:
                                 print('Les pièces noires doivent jouer')
-                
+    
         #Recollage
         fenetre.blit(Damier, (0,0))	#On remet le fond 
         for cle, valeur in PiècesGraphique.items(): #On reparcourt le dictionnaire pour remettre toutes les pièces en place
@@ -299,7 +303,7 @@ def jeu_Final():
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
 
-
+    #A changer: La fin du jeu ne marche pas j'ai l'impression
 
 if __name__ == "__main__":
     jeu_init()
