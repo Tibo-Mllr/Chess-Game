@@ -163,7 +163,7 @@ def jeu():
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print('Ce sont aux noires de jouer')"""
+                    print('Ce sont aux noirs de jouer')"""
         else:
             print("Ce déplacement n'est pas possible")
 
