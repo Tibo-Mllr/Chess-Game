@@ -3,6 +3,16 @@ from Classes.Pieces import *
 
 
 def egalite(plateau):
+    """Définit s'il y a égalité
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+        """
     for pièce in plateau:
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
@@ -25,6 +35,16 @@ def egalite(plateau):
 
 
 def victoire(roi, plateau):
+    """Définit s'il y a victoire ou égalité
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        chaîne de caractères
+        """
     if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
@@ -41,6 +61,16 @@ def victoire(roi, plateau):
 
 
 def echec_et_mat(plateau):
+    """Définit s'il y a échec et mat
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+        """
     echec_et_mat = False
     mvt_possible_blanc = []
     mvt_possible_noir = []
@@ -62,12 +92,6 @@ def echec_et_mat(plateau):
     return echec_et_mat
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 56cb60012915317f3679aa6391a1d3ef286fac76
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
            (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
            (2, 0): '', (2, 1): '', (2, 2): '', (2, 3): '', (2, 4): '', (2, 5): '', (2, 6): '', (2, 7): '',
