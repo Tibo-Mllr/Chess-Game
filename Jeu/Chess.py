@@ -3,6 +3,16 @@ from Classes.Pieces import *
 
 
 def egalite(plateau):
+    """Définit s'il y a égalité
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+        """
     for pièce in plateau.values():
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
@@ -31,6 +41,16 @@ def egalite(plateau):
 
 
 def victoire(roi, plateau):
+    """Définit s'il y a victoire ou égalité
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        chaîne de caractères
+        """
     if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
@@ -43,10 +63,20 @@ def victoire(roi, plateau):
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
 
         if mvt_possible_autres_pièces == []:
-            print("it's a draw")
+            print("It's a draw")
 
 
 def echec_et_mat(plateau):
+    """Définit s'il y a échec et mat
+
+        Argument
+        ---------
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+        """
     echec_et_mat = False
     mvt_possible_blanc = []
     mvt_possible_noir = []
@@ -152,6 +182,32 @@ def grid_to_string(plateau):
 """
 
     return L
+
+
+def change(piece):
+    if piece.name == 'pion':
+        if (piece.Color == 'White' and piece.Pos_Y == 7) or (piece.Color == 'Black' and piece.Pos_Y == 0):
+            choice = input("Veuillez entrer la pièce que vous voulez : ")
+            if choice.lower() == 'dame':
+                Changement = Dame('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() == 'fou':
+                Changement = Fou('g', piece.Color, True,
+                                 piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() == 'tour':
+                Changement = Tour('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice.lower() in ['cavalier', 'cheval']:
+                Changement = Cavalier('g', piece.Color, True,
+                                      piece.Pos_X, piece.Pos_Y)
+            else:
+                print("Ce choix n'est pas supporté")
+                return change(piece)
+            return Changement
+    return piece
 
 
 if __name__ == "__main__":
