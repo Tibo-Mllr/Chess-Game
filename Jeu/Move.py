@@ -558,12 +558,12 @@ def petit_roque(roi, plateau):
     petit_roque_possible = False
     if roi.Color == 'White' and roi.Moved == False and case_libre(5,0, plateau) and case_libre(6,0, plateau) and not roi_en_echec(roi , plateau):
         if not case_libre(7,0, plateau):
-            if plateau((7,0)).name == 'tour' and plateau((7,0)).Moved == False:
+            if plateau[(7,0)].name == 'tour' and plateau[(7,0)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi , 5,0 , plateau) and not echec_si_mouvement_du_roi(roi, 6, 0 , plateau):
                     petit_roque_possible == True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(5,7, plateau) and case_libre(6,7, plateau) and not roi_en_echec(roi , plateau):
         if not case_libre(7,0, plateau):
-            if plateau((7,7)).name == 'tour' and plateau((7,7)).Moved == False:
+            if plateau[(7,7)].name == 'tour' and plateau[(7,7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi , 5,7 , plateau) and not echec_si_mouvement_du_roi(roi, 6, 7 , plateau):
                     petit_roque_possible == True
     return petit_roque_possible
@@ -574,12 +574,12 @@ def grand_roque(roi, plateau):
     grand_roque_possible = False
     if roi.Color == 'White' and roi.Moved == False and case_libre(3,0, plateau) and case_libre(2,0, plateau) and case_libre(1,0, plateau) and not roi_en_echec(roi , plateau):
         if not case_libre(0,0, plateau):
-            if plateau((0,0)).name == 'tour' and plateau((0,0)).Moved == False:
+            if plateau[(0,0)].name == 'tour' and plateau[(0,0)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi , 3,0 , plateau) and not echec_si_mouvement_du_roi(roi, 2, 0 , plateau):
                     grand_roque_possible == True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(3,7, plateau) and case_libre(2,7, plateau) and case_libre(1,7, plateau) and not roi_en_echec(roi , plateau):
         if not case_libre(7,0, plateau):
-            if plateau((7,7)).name == 'tour' and plateau((7,7)).Moved == False:
+            if plateau[(7,7)].name == 'tour' and plateau[(7,7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi , 3,7 , plateau) and not echec_si_mouvement_du_roi(roi, 2, 7 , plateau):
                     grand_roque_possible == True
     return grand_roque_possible
