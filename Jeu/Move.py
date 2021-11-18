@@ -27,7 +27,7 @@ def case_color(x, y, plateau):
         return plateau[(x, y)].Color
 
 
-def case_libre(x, y, plateau):  
+def case_libre(x, y, plateau):
     """Renvoie si une case est occupée par une pièce ou non
 
         Arguments
@@ -381,7 +381,7 @@ def roi_en_echec(roi, plateau):
     return echec
 
 
-def echec_si_mouvement_du_roi(roi, x, y, plateau): 
+def echec_si_mouvement_du_roi(roi, x, y, plateau):
     """Renvoie si le roi peut se déplacer sur une case sans se mettre en échec
         Arguments
         ---------
@@ -527,14 +527,15 @@ def mvt_final(piece, plateau):
     mvt = []
     if piece.name == 'roi':
         if piece.Color == 'White' and petit_roque(piece, plateau):
-            mvt = mvt + [(6,0)]
+            mvt = mvt + [(6, 0)]
         if piece.Color == 'White' and grand_roque(piece, plateau):
-            mvt = mvt + [(2,0)]
+            print("Etape5")
+            mvt = mvt + [(2, 0)]
         if piece.Color == 'Black' and petit_roque(piece, plateau):
-            mvt = mvt + [(6,7)]
+            mvt = mvt + [(6, 7)]
         if piece.Color == 'Black' and grand_roque(piece, plateau):
-            mvt = mvt + [(2,7)]
-        return mvt + mvt_possible_roi
+            mvt = mvt + [(2, 7)]
+        return mvt + mvt_possible_roi(piece, plateau)
     else:
         mvt = mvt_possible_gen(piece, plateau)
         for (x, y) in mvt:
@@ -556,52 +557,56 @@ def petit_roque(roi, plateau):
         booléen
     """
     petit_roque_possible = False
-    if roi.Color == 'White' and roi.Moved == False and case_libre(5,0, plateau) and case_libre(6,0, plateau) and not roi_en_echec(roi , plateau):
-        if not case_libre(7,0, plateau):
-            if plateau((7,0)).name == 'tour' and plateau((7,0)).Moved == False:
-                if not echec_si_mouvement_du_roi(roi , 5,0 , plateau) and not echec_si_mouvement_du_roi(roi, 6, 0 , plateau):
+    if roi.Color == 'White' and roi.Moved == False and case_libre(5, 0, plateau) and case_libre(6, 0, plateau) and not roi_en_echec(roi, plateau):
+        if not case_libre(7, 0, plateau):
+            if plateau[(7, 0)].name == 'tour' and plateau[(7, 0)].Moved == False:
+                if not echec_si_mouvement_du_roi(roi, 5, 0, plateau) and not echec_si_mouvement_du_roi(roi, 6, 0, plateau):
                     petit_roque_possible == True
-    if roi.Color == 'Black' and roi.Moved == False and case_libre(5,7, plateau) and case_libre(6,7, plateau) and not roi_en_echec(roi , plateau):
-        if not case_libre(7,0, plateau):
-            if plateau((7,7)).name == 'tour' and plateau((7,7)).Moved == False:
-                if not echec_si_mouvement_du_roi(roi , 5,7 , plateau) and not echec_si_mouvement_du_roi(roi, 6, 7 , plateau):
+    if roi.Color == 'Black' and roi.Moved == False and case_libre(5, 7, plateau) and case_libre(6, 7, plateau) and not roi_en_echec(roi, plateau):
+        if not case_libre(7, 0, plateau):
+            if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
+                if not echec_si_mouvement_du_roi(roi, 5, 7, plateau) and not echec_si_mouvement_du_roi(roi, 6, 7, plateau):
                     petit_roque_possible == True
     return petit_roque_possible
 
 
-
 def grand_roque(roi, plateau):
     grand_roque_possible = False
-    if roi.Color == 'White' and roi.Moved == False and case_libre(3,0, plateau) and case_libre(2,0, plateau) and case_libre(1,0, plateau) and not roi_en_echec(roi , plateau):
-        if not case_libre(0,0, plateau):
-            if plateau((0,0)).name == 'tour' and plateau((0,0)).Moved == False:
-                if not echec_si_mouvement_du_roi(roi , 3,0 , plateau) and not echec_si_mouvement_du_roi(roi, 2, 0 , plateau):
+    if roi.Color == 'White' and roi.Moved == False and case_libre(3, 0, plateau) and case_libre(2, 0, plateau) and case_libre(1, 0, plateau) and not roi_en_echec(roi, plateau):
+        print("Etape1")
+        if not case_libre(0, 0, plateau):
+            print("Etape2")
+            if plateau[(0, 0)].name == 'tour' and plateau[(0, 0)].Moved == False:
+                print("Etape3")
+                if not echec_si_mouvement_du_roi(roi, 3, 0, plateau) and not echec_si_mouvement_du_roi(roi, 2, 0, plateau):
+                    print("Etape4")
                     grand_roque_possible == True
-    if roi.Color == 'Black' and roi.Moved == False and case_libre(3,7, plateau) and case_libre(2,7, plateau) and case_libre(1,7, plateau) and not roi_en_echec(roi , plateau):
-        if not case_libre(7,0, plateau):
-            if plateau((7,7)).name == 'tour' and plateau((7,7)).Moved == False:
-                if not echec_si_mouvement_du_roi(roi , 3,7 , plateau) and not echec_si_mouvement_du_roi(roi, 2, 7 , plateau):
+    if roi.Color == 'Black' and roi.Moved == False and case_libre(3, 7, plateau) and case_libre(2, 7, plateau) and case_libre(1, 7, plateau) and not roi_en_echec(roi, plateau):
+        if not case_libre(7, 0, plateau):
+            if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
+                if not echec_si_mouvement_du_roi(roi, 3, 7, plateau) and not echec_si_mouvement_du_roi(roi, 2, 7, plateau):
                     grand_roque_possible == True
     return grand_roque_possible
 
 
-def roque(piece , x, plateau):
+def roque(piece, x, plateau):
     if piece.name == 'roi':
-        if (piece.Color == 'White' and x-piece.Pos_X in [2,-2]) or (piece.Color == 'Black' and x-piece.Pos_X in [2,-2]) :
-            if x-piece.Pos_X == 2 and petit_roque(piece, plateau) :
-                Tour = plateau[(7,piece.Pos_Y)]
-                Tour.move(5,piece.Pos_Y)
-                piece.move(6,piece.Pos_Y)
-                plateau[(5,piece.Pos_Y)], plateau[(7,piece.Pos_Y)], plateau[(6,piece.Pos_Y)], plateau[(5,piece.Pos_Y)] = '', '', piece, Tour
+        if (piece.Color == 'White' and x-piece.Pos_X in [2, -2]) or (piece.Color == 'Black' and x-piece.Pos_X in [2, -2]):
+            if x-piece.Pos_X == 2 and petit_roque(piece, plateau):
+                Tour = plateau[(7, piece.Pos_Y)]
+                Tour.move(5, piece.Pos_Y)
+                piece.move(6, piece.Pos_Y)
+                plateau[(5, piece.Pos_Y)], plateau[(7, piece.Pos_Y)], plateau[(
+                    6, piece.Pos_Y)], plateau[(5, piece.Pos_Y)] = '', '', piece, Tour
 
-            if x-piece.Pos_X == -2 and grand_roque(piece, plateau) :
-                Tour = plateau[(0,piece.Pos_Y)]
-                Tour.move(3,piece.Pos_Y)
-                piece.move(2,piece.Pos_Y)
-                plateau[(5,piece.Pos_Y)], plateau[(0,piece.Pos_Y)], plateau[(2,piece.Pos_Y)], plateau[(3,piece.Pos_Y)] = '', '', piece, Tour
+            if x-piece.Pos_X == -2 and grand_roque(piece, plateau):
+                Tour = plateau[(0, piece.Pos_Y)]
+                Tour.move(3, piece.Pos_Y)
+                piece.move(2, piece.Pos_Y)
+                plateau[(5, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
+                    2, piece.Pos_Y)], plateau[(3, piece.Pos_Y)] = '', '', piece, Tour
 
 
-    
 # a ajouter dans les fonctions de mouvements des pieces
 
 
@@ -611,7 +616,6 @@ def roque(piece , x, plateau):
 
 # reste nul en cas de match nul
 # reste victoire
-
 
 """
 ce serait bien de sauver l'historique des mvts
