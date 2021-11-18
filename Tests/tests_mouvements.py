@@ -28,11 +28,6 @@ def test_mvt_Pion():
 def test_mvt_Roi():
     Roi1 = Roi('White')
     plateau[(Roi1.Pos_X, Roi1.Pos_Y)] = Roi1
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> 9dd678c979098619bcce280fa99c2a03c83b572a
     assert len(mvt_possible_roi(Roi1, plateau)) == 5
     for i in range(5):
         assert mvt_possible_roi(Roi1, plateau)[i] in [
@@ -113,8 +108,3 @@ def test_mvt_Cavalier():
     for i in range(3):
         assert mvt_final(Cavalier1, plateau)[i] in [
             (3, 1), (0, 2), (2, 2)]
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 9dd678c979098619bcce280fa99c2a03c83b572a

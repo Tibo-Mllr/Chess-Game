@@ -1,6 +1,3 @@
-from Jeu.Move import mvt_possible_tour
-
-
 class Pion:
     def __init__(self, X, color):
         """Définit le pion
