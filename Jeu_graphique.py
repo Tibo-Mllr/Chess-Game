@@ -288,6 +288,7 @@ def jeu_Final():
                                         if event.button == 1:  # Si clic gauche
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
+                                            Y2 = 7-int(mouse2[1]/80)
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)

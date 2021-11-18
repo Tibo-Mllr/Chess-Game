@@ -525,7 +525,6 @@ def mvt_final(piece, plateau):
         liste
         """
     mvt = []
-    mvtf = []
     if piece.name == 'roi':
         if piece.Color == 'White' and petit_roque(piece, plateau):
             mvt = mvt + [(6, 0)]
@@ -538,11 +537,11 @@ def mvt_final(piece, plateau):
             mvt = mvt + [(2, 7)]
         return mvt + mvt_possible_roi(piece, plateau)
     else:
-        mvt = mvt_possible_gen(piece, plateau)
-        for (x, y) in mvt:
+        mvtf = mvt_possible_gen(piece, plateau)
+        for (x, y) in mvtf:
             if echec_si_mvt(piece, x, y, plateau) == False:
-                mvtf = mvtf + [(x, y)]
-        return mvtf
+                mvt = mvt + [(x, y)]
+        return mvt
 
 
 def petit_roque(roi, plateau):
