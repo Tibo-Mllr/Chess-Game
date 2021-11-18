@@ -3,7 +3,6 @@ from Classes.Pieces import *
 
 
 def egalite(plateau):
-<<<<<<< HEAD
     """Définit s'il y a égalité
 
         Argument
@@ -14,10 +13,7 @@ def egalite(plateau):
         ------
         booléen
         """
-    for pièce in plateau:
-=======
     for pièce in plateau.values():
->>>>>>> 172f7a3bc42ecc2c0b07094cc64082aa38427084
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'Black':
