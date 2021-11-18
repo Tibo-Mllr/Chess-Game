@@ -126,12 +126,6 @@ def jeu():
     k = 1
 
     while not echec_et_mat(Plateau) and not egalite(Plateau):
-        for element in Plateau:
-            if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
-                RoiBlanc = Plateau[element]
-            if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
-                RoiNoir = Plateau[element]
-
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
         x2 = input("Entrez l'abscisse voulue : ")
@@ -144,39 +138,38 @@ def jeu():
         Y2 = int(y2)
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                # if Plateau[(X, Y)].Color == 'White':
-                print("1 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
-                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
-                roque(Plateau[(X, Y)], X2, Plateau)
-                print("2 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
-                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
-                Plateau[(X, Y)].move(X2, Y2)
-                print("3 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
-                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
-                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
-                print("4 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
-                      (Plateau[(X, Y)].Pos_X, Plateau[(X, Y)].Pos_Y))
-                Plateau[(X, Y)] = ''
-                print("5 : \n XY :", (X, Y), "XY2 :", (X2, Y2), "Pos :",
-                      (Plateau[(X2, Y2)].Pos_X, Plateau[(X2, Y2)].Pos_Y))
-                print(grid_to_string(Plateau))
-                """k = 2
+                if Plateau[(X, Y)].Color == 'White':
+                    roque(Plateau[(X, Y)], X2, Plateau)
+                    Plateau[(X, Y)].move(X2, Y2)
+                    Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                    Plateau[(X, Y)] = ''
+
+                    print(grid_to_string(Plateau))
+                    k = 2
                 else:
-                        print("Ce sont aux blancs de jouer")
-            else :
+                    print("Ce sont aux blancs de jouer")
+            else:
                 print("Ce déplacement n'est pas possible")
-        if k==0:
+
+        if k == 0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                if Plateau[ (X, Y)].Color == 'Black':
+                if Plateau[(X, Y)].Color == 'Black':
                     Plateau[(X, Y)].move(X2, Y2)
                     Plateau[(X2, Y2)] = Plateau[(X, Y)]
                     Plateau[(X, Y)] = ''
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print("Ce sont aux noirs de jouer")"""
+                    print("Ce sont aux noirs de jouer")
             else:
                 print("Ce déplacement n'est pas possible")
+
+    # print("WhaHJBVNHUGBJSEYGCVHBSJUYGVSBHJVSYGHJVNKUHSVJBJNSHUVBKSJIHJKNHVDYBJSKVNHUSJKUEGYSDJBHHJUVYGt")
+    for element in Plateau:
+        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
+            RoiBlanc = Plateau[element]
+        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
+            RoiNoir = Plateau[element]
 
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)

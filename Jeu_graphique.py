@@ -221,12 +221,6 @@ def jeu_Final():
         if k == 2:
             k = 0
 
-        for element in Plateau:
-            if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
-                RoiBlanc = Plateau[element]
-            if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
-                RoiNoir = Plateau[element]
-
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
@@ -331,15 +325,15 @@ def jeu_Final():
 
         pygame.display.flip()
 
-        if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
+        if echec_et_mat(Plateau) or egalite(Plateau):
             k = 3
-            print("Sortie Blanche")
-        if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            k = 3
-            print("Sortie Noire")
 
-    egalite(RoiBlanc, Plateau)
-    egalite(RoiNoir, Plateau)
+    for element in Plateau:
+        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
+            RoiBlanc = Plateau[element]
+        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
+            RoiNoir = Plateau[element]
+
     victoire(RoiBlanc, Plateau)
     victoire(RoiNoir, Plateau)
 

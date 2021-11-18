@@ -13,6 +13,7 @@ def egalite(plateau):
         ------
         booléen
         """
+
     for pièce in plateau.values():
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
@@ -20,23 +21,21 @@ def egalite(plateau):
             RoiNoir = pièce
 
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
-        mvt_possible_autres_pièces = []
         for pièce in plateau.values():
-            if pièce != '':
-                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
-        if mvt_possible_autres_pièces == []:
-            print("Egal blanc")
-            return True
+            if pièce != '' and mvt_final(pièce, plateau) != []:
+                # print(
+                #    "Blanchgbsgcvhbsgvjhbkgsdvjhbksvjgbkvdsbckhsdvjhcbkgsdvjc bksgvchjdsbgcvhjs bdhgc")
+                return False
+        return True
 
     if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
-        mvt_possible_autres_pièces = []
         for pièce in plateau.values():
-            if pièce != '':
-                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
-        if mvt_possible_autres_pièces == []:
-            print("Egal noir")
-            return True
-
+            if pièce != '' and mvt_final(pièce, plateau) != []:
+                # print(
+                #  "Noirgbsgcvhbsgvjhbkgsdvjhbksvjgbkvdsbckhsdvjhcbkgsdvjc bksgvchjdsbgcvhjs bdhgc")
+                return False
+        return True
+    # print("Wtfhgbcsygdbhvkjdgbfvjdfbjncbxjknvhlkbjdwnvlkbcxjnjvlhbwxkcjvhnlhcxbkj,vnjkxwbjkc")
     return False
 
 
@@ -51,6 +50,7 @@ def victoire(roi, plateau):
         ------
         chaîne de caractères
         """
+
     if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
@@ -58,7 +58,7 @@ def victoire(roi, plateau):
 
     if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
         mvt_possible_autres_pièces = []
-        for pièce in plateau:
+        for pièce in plateau.values():
             if pièce != '':
                 mvt_possible_autres_pièces += mvt_final(pièce, plateau)
 
@@ -77,7 +77,7 @@ def echec_et_mat(plateau):
         ------
         booléen
         """
-    echec_et_mat = False
+
     mvt_possible_blanc = []
     mvt_possible_noir = []
     for element in plateau:
@@ -85,19 +85,24 @@ def echec_et_mat(plateau):
             RoiBlanc = plateau[element]
         if plateau[element] != '' and plateau[element].name == 'roi' and plateau[element].Color == 'Black':
             RoiNoir = plateau[element]
-    for piece in plateau.values():
-        if piece != '':
-            if piece.Color == 'White':
-                mvt_possible_blanc += mvt_final(piece, plateau)
-            else:
-                mvt_possible_noir += mvt_final(piece, plateau)
-    if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
-        echec_et_mat = True
-        print("Echec blanc")
-    if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
-        echec_et_mat = True
-        print("Echec noir")
-    return echec_et_mat
+
+    if roi_en_echec(RoiBlanc, plateau) or roi_en_echec(RoiNoir, plateau):
+        for piece in plateau.values():
+            if piece != '':
+                if piece.Color == 'White':
+                    mvt_possible_blanc += mvt_final(piece, plateau)
+                else:
+                    mvt_possible_noir += mvt_final(piece, plateau)
+        if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
+            # print(
+            #    "Echec blancjhbnvhjsb,sj,sjkgdvjhb,sugvkbhcsugvybksjchlvgbgsckbjhlvgbfehlvgblvuhgfbkjhvuc")
+            return True
+        if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
+            # print(
+            #    "Echec noirvjhsugbhsghkcjvygusckgbhvgsukgbvhcskugbschugvgkcsbhvbgcshkscygbvjkshgkvjhcsbhjv")
+            return True
+        return False
+    return False
 
 
 Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
