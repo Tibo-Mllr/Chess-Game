@@ -125,11 +125,9 @@ def jeu_init():
 def jeu():
     Fin = False
     print(grid_to_string(Plateau))
-
     k = 1
-    while k != 3:
-        if k == 2:
-            k = 0
+
+    while not echec_et_mat(Plateau) and not egalite(Plateau):
         for element in Plateau:
             if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
                 RoiBlanc = Plateau[element]
@@ -174,18 +172,7 @@ def jeu():
                 print(Plateau[element].name, Plateau[element].Color,
                       mvt_final(Plateau[element], Plateau))
 
-        # Le roi ne peut pas manger la pièce qui le met en échec : à modifier
-        if roi_en_echec(RoiBlanc, Plateau) and mvt_final(RoiBlanc, Plateau) == []:
-            Fin = True
-            print("Sortie Blanche")
-        if roi_en_echec(RoiNoir, Plateau) and mvt_final(RoiNoir, Plateau) == []:
-            Fin = True
-            print("Sortie Noire")
-
-    egalite(RoiBlanc, Plateau)
-    egalite(RoiNoir, Plateau)
-    victoire(RoiBlanc, Plateau)
-    victoire(RoiNoir, Plateau)
+    victoire(Plateau)
 
 
 if __name__ == "__main__":
