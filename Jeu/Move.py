@@ -370,16 +370,18 @@ def echec_si_mvt(piece, x, y, plateau):
         echec_blanc = False
         for i in newplateau.values():
             if i != '':
-                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
-                    echec_blanc = True
+                if i.Color == 'Black':
+                    if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
+                        echec_blanc = True
         return echec_blanc
 
     if piece.Color == 'Black':
         echec_noir = False
         for i in newplateau.values():
             if i != '':
-                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
-                    echec_noir = True
+                if i.Color == 'White':
+                    if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
+                        echec_noir = True
         return echec_noir
 
 
@@ -482,3 +484,6 @@ def grand_roque(roi, plateau):
 ce serait bien de sauver l'historique des mvts
 en plus ca permettrait de rejouer la partie a partir d'une certaine etape
 """
+
+
+# roi peut pasmanger la piece qui le met en echec
