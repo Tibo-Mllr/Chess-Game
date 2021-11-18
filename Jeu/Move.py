@@ -544,13 +544,9 @@ def mvt_final(piece, plateau):
         if piece.Color == 'Black' and petit_roque(piece, plateau):
             mvt = mvt + [(6, 7)]
         if piece.Color == 'Black' and grand_roque(piece, plateau):
-<<<<<<< HEAD
             mvt = mvt + [(2,7)]
         return mvt + mvt_possible_roi(piece,plateau)
-=======
-            mvt = mvt + [(2, 7)]
-        return mvt + mvt_possible_roi(piece, plateau)
->>>>>>> 1f8409163da4ade86fcec37e576ae9712d078e72
+
     else:
         mvt = mvt_possible_gen(piece, plateau)
         for (x, y) in mvt:
