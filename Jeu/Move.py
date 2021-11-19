@@ -588,6 +588,17 @@ def petit_roque(roi, plateau):
 
 
 def grand_roque(roi, plateau):
+    """Renvoie si le grand roque est possible
+
+        Arguments
+        ---------
+        roi : classe
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     grand_roque_possible = False
     if roi.Color == 'White' and roi.Moved == False and case_libre(3, 0, plateau) and case_libre(2, 0, plateau) and case_libre(1, 0, plateau) and not roi_en_echec(roi, plateau):
         if not case_libre(0, 0, plateau):
@@ -603,6 +614,18 @@ def grand_roque(roi, plateau):
 
 
 def roque(piece, x, plateau):
+    """Renvoie quel roque est possible
+
+        Arguments
+        ---------
+        pièce : classe (roi)
+        x : abcisse de la case de destination
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        Chaîne de caractère : 'Petit' ou 'Grand'
+    """
     if piece.name == 'roi':
         if (piece.Color == 'White' and x-piece.Pos_X in [2, -2]) or (piece.Color == 'Black' and x-piece.Pos_X in [2, -2]):
             if x-piece.Pos_X == 2 and petit_roque(piece, plateau):
