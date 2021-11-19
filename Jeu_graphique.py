@@ -611,7 +611,7 @@ def jeu_Final():
                 event = pygame.event.wait()
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
-                        k = 3
+                        MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
                         event_happened = True
 
         if echec_et_mat(Plateau)[0]:
@@ -630,7 +630,7 @@ def jeu_Final():
                 event = pygame.event.wait()
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
-                        k = 3
+                        MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
                         event_happened = True
 
 
@@ -889,7 +889,7 @@ def jeu_FinalVS():
                 event = pygame.event.wait()
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
-                        k = 3
+                        MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
                         event_happened = True
 
         if echec_et_mat(Plateau)[0]:
@@ -908,7 +908,7 @@ def jeu_FinalVS():
                 event = pygame.event.wait()
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
-                        k = 3
+                        MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
                         event_happened = True
                         # On relance le menu
                         MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
