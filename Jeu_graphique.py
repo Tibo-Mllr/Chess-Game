@@ -316,23 +316,44 @@ def ChangeV2(piece, X, plateaugraphique, fenetre):
 def ChangeVS(piece, X, plateaugraphique, fenetre):
     if piece.name == 'pion':
         if (piece.Color == 'White' and piece.Pos_Y == 7) or (piece.Color == 'Black' and piece.Pos_Y == 0):
+            ReineNoire = image.load(
+                "Interface/Pièces/ReineNoire.png").convert_alpha()
+            ReineNoireF = pygame.transform.scale(ReineNoire, (80, 80))
+
+            CavalierNoir = image.load(
+                "Interface/Pièces/CavalierNoir.png").convert_alpha()
+            CavalierNoirF = pygame.transform.scale(CavalierNoir, (80, 80))
+
+            FouNoir = image.load(
+                "Interface/Pièces/FouNoir.png").convert_alpha()
+            FouNoirF = pygame.transform.scale(FouNoir, (80, 80))
+
+            TourNoire = image.load(
+                "Interface/Pièces/TourNoire.png").convert_alpha()
+            TourNoireF = pygame.transform.scale(TourNoire, (80, 80))
+
             P = ['dame', 'fou', 'tour', 'cavalier']
             choice = P[randint(0, 3)]
+
             if choice == 'dame':
                 Changement = Dame('g', piece.Color, True,
                                   piece.Pos_X, piece.Pos_Y)
+                plateaugraphique[(X[0], X[1])] = ReineNoireF
 
             elif choice == 'fou':
                 Changement = Fou('g', piece.Color, True,
                                  piece.Pos_X, piece.Pos_Y)
+                plateaugraphique[(X[0], X[1])] = FouNoirF
 
             elif choice == 'tour':
                 Changement = Tour('g', piece.Color, True,
                                   piece.Pos_X, piece.Pos_Y)
+                plateaugraphique[(X[0], X[1])] = TourNoireF
 
             elif choice == 'cavalier':
                 Changement = Cavalier('g', piece.Color, True,
                                       piece.Pos_X, piece.Pos_Y)
+                plateaugraphique[(X[0], X[1])] = CavalierNoirF
             return Changement
     return piece
 

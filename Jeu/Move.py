@@ -580,7 +580,7 @@ def petit_roque(roi, plateau):
                 if not echec_si_mouvement_du_roi(roi, 5, 0, plateau) and not echec_si_mouvement_du_roi(roi, 6, 0, plateau):
                     petit_roque_possible = True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(5, 7, plateau) and case_libre(6, 7, plateau) and not roi_en_echec(roi, plateau):
-        if not case_libre(7, 0, plateau):
+        if not case_libre(7, 7, plateau):
             if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 5, 7, plateau) and not echec_si_mouvement_du_roi(roi, 6, 7, plateau):
                     petit_roque_possible = True
