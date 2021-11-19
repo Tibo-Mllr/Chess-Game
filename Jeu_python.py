@@ -138,8 +138,11 @@ def jeu():
         Y2 = int(y2)
         if k == 2:
             k = 0
+
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                print("XY :", (X, Y), "Pos :", (Plateau[(X, Y)].Pos_X, Plateau[(
+                    X, Y)].Pos_Y), "Dep :", mvt_final(Plateau[(X, Y)], Plateau))
                 if Plateau[(X, Y)].Color == 'White':
                     roque(Plateau[(X, Y)], X2, Plateau)
                     Plateau[(X, Y)].move(X2, Y2)
@@ -155,10 +158,14 @@ def jeu():
 
         if k == 0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                print("XY :", (X, Y), "Pos :", (Plateau[(X, Y)].Pos_X, Plateau[(
+                    X, Y)].Pos_Y), "Dep :", mvt_final(Plateau[(X, Y)], Plateau))
                 if Plateau[(X, Y)].Color == 'Black':
+                    roque(Plateau[(X, Y)], X2, Plateau)
                     Plateau[(X, Y)].move(X2, Y2)
-                    Plateau[(X2, Y2)] = Plateau[(X, Y)]
+                    Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
                     Plateau[(X, Y)] = ''
+
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
