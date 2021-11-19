@@ -127,6 +127,54 @@ def jeu_init():
     CavalierNoir2 = Cavalier('d', 'Black')
     Plateau[CavalierNoir2.Pos_X, CavalierNoir2.Pos_Y] = CavalierNoir2
 
+def ChangeV2(piece, fenetre):
+    if piece.name == 'pion':
+        if (piece.Color == 'White' and piece.Pos_Y == 7):
+            ReineBlanche = image.load(
+        "Interface/Pièces/ReineBlanche.png").convert_alpha()
+            ReineBlancheF = pygame.transform.scale(ReineBlanche, (150, 150))
+            pygame.draw.rect(fenetre, (255,255, 255), (96, 146, 158, 158))
+            pygame.draw.rect(fenetre, (0,0,50), (100, 150, 150, 150), 2)
+            pygame.draw.rect(fenetre, (0,0,50), (96, 146, 158, 158), 2)
+            fenetre.blit(ReineBlancheF, (100, 150))
+
+            CavalierBlanc = image.load(
+        "Interface/Pièces/CavalierBlanc.png").convert_alpha()
+            CavalierBlancF = pygame.transform.scale(CavalierBlanc, (150, 150))
+            pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 146, 158, 158))
+            pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 150, 150, 150), 2)
+            pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 146, 158, 158), 2)
+            fenetre.blit(CavalierBlancF, (640-100-150, 150))
+
+            FouBlanc = image.load(
+        "Interface/Pièces/FouBlanc.png").convert_alpha()
+            pygame.draw.rect(fenetre, (255,255, 255), (96, 396, 158, 158))
+            pygame.draw.rect(fenetre, (0,0,50), (100, 400, 150, 150), 2)
+            pygame.draw.rect(fenetre, (0,0,50), (96, 396, 158, 158), 2)
+            FouBlancF = pygame.transform.scale(FouBlanc, (150, 150))
+            fenetre.blit(FouBlancF, (100, 400))
+
+            TourBlanche = image.load(
+        "Interface/Pièces/FouBlanc.png").convert_alpha()
+            pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 396, 158, 158))
+            pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 400, 150, 150), 2)
+            pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 396, 158, 158), 2)
+            TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
+            fenetre.blit(TourBlancF, (640-100-150, 400))
+            pygame.display.flip()
+            event = pygame.event.wait()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:  # Si clic gauche
+                    mouse = event.pos
+                    if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
+                        print("Vous avez choisi la Reine")
+                    if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146:
+                        print("Vous avez choisi le Cavalier")
+                    if 254 > mouse[0] > 96 and 554 > mouse[1] > 396:
+                        print("Vous avez choisi le Fou")
+                    if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
+                        print("Vous avez choisi la Tour")
+
 
 def jeu_Final():
     # Création de la fenêtre
@@ -265,7 +313,7 @@ def jeu_Final():
 
                                                 Plateau[(X, Y)].move(X2, Y2)
                                                 Plateau[(X2, Y2)] = change(
-                                                    Plateau[(X, Y)])
+                                                    Plateau[(X, Y)])    #A changer
                                                 Plateau[(X, Y)] = ''
 
                                                 PiècesGraphique[(
@@ -309,8 +357,8 @@ def jeu_Final():
                                                         0, Y2)] = ''
 
                                                 Plateau[(X, Y)].move(X2, Y2)
-                                                Plateau[(X2, Y2)] = change(
-                                                    Plateau[(X, Y)])
+                                                Plateau[(X2, Y2)] = ChangeV2(
+                                                    Plateau[(X, Y)],fenetre)
                                                 Plateau[(X, Y)] = ''
 
                                                 PiècesGraphique[(
