@@ -10,6 +10,16 @@ pygame.init()
 
 
 def jeu_init():
+    """Créer un tableau contenant les pièces avec leurs attributs
+
+        Argument
+        ---------
+        
+
+        Sortie
+        ------
+        Plateau: Un tableau
+        """
     global Plateau
     Plateau = {(0, 0): '', (0, 1): '', (0, 2): '', (0, 3): '', (0, 4): '', (0, 5): '', (0, 6): '', (0, 7): '',
                (1, 0): '', (1, 1): '', (1, 2): '', (1, 3): '', (1, 4): '', (1, 5): '', (1, 6): '', (1, 7): '',
@@ -130,8 +140,19 @@ def jeu_init():
 
 
 def ChangeV2(piece, X, plateaugraphique, fenetre):
-    if piece.name == 'pion':
-        if piece.Color == 'White' and piece.Pos_Y == 7:
+    """Permet la transformation d'un pion parmis différentes pièces si il arrive au bout du plateau
+
+        Argument
+        ---------
+        la pièce, les coordonnées de celle-ci, le tableau graphique du jeu et la fenetre pygame d'affichage
+
+        Sortie
+        ------
+        la pièce avec ses attributs. La pièce de la fenêtre graphique est modifiée
+        """
+    if piece.name == 'pion': 
+        if piece.Color == 'White' and piece.Pos_Y == 7: #On vérifie que la pièce est un pion blanc situé au bout de plateau
+            #Importations des différentes pièces utiles blanches
             ReineBlanche = image.load(
                 "Interface/Pièces/ReineBlanche.png").convert_alpha()
             pygame.draw.rect(fenetre, (255, 255, 255), (96, 146, 158, 158))
@@ -169,35 +190,35 @@ def ChangeV2(piece, X, plateaugraphique, fenetre):
                              (640-96-158, 396, 158, 158), 2)
             TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
             fenetre.blit(TourBlancF, (640-100-150, 400))
-            pygame.display.flip()
-            event_happened = False
+            pygame.display.flip()  #Le cadre de choix est affiché
+            event_happened = False  #On attend que l'utilisateur choisit sa pièce voulue
             while not event_happened:
-                event = pygame.event.wait()
-                if event.type == MOUSEBUTTONDOWN:
+                event = pygame.event.wait() #On attend un évènement
+                if event.type == MOUSEBUTTONDOWN: #Si c'est un clic de souris
                     if event.button == 1:  # Si clic gauche
                         mouse = event.pos
-                        if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
+                        if 254 > mouse[0] > 96 and 304 > mouse[1] > 146: #Le clic est situé dans le cadre du choix de la pièce Reine
                             ReineBlancheJ = pygame.transform.scale(
-                                ReineBlanche, (80, 80))
-                            Changement = Dame('g', piece.Color, True,
+                                ReineBlanche, (80, 80))             #On met la pièce aux bonnes dimensions
+                            Changement = Dame('g', piece.Color, True,      #On enregistre le changement
                                               piece.Pos_X, piece.Pos_Y)
-                            plateaugraphique[(X[0], X[1])] = ReineBlancheJ
+                            plateaugraphique[(X[0], X[1])] = ReineBlancheJ #On modifie l'apparence du pion dans la fenêtre graphique
                             event_happened = True
-                        if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146:
+                        if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146: #Le clic est situé dans le cadre du choix de la pièce Cavalier
                             CavalierBlancJ = pygame.transform.scale(
                                 CavalierBlanc, (80, 80))
                             Changement = Cavalier('g', piece.Color, True,
                                                   piece.Pos_X, piece.Pos_Y)
                             plateaugraphique[(X[0], X[1])] = CavalierBlancJ
                             event_happened = True
-                        if 254 > mouse[0] > 96 and 554 > mouse[1] > 396:
+                        if 254 > mouse[0] > 96 and 554 > mouse[1] > 396: #Le clic est situé dans le cadre de la pièce voulue
                             FouBlancJ = pygame.transform.scale(
                                 FouBlanc, (80, 80))
                             Changement = Fou('g', piece.Color, True,
                                              piece.Pos_X, piece.Pos_Y)
                             plateaugraphique[(X[0], X[1])] = FouBlancJ
                             event_happened = True
-                        if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
+                        if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396: #Le clic est situé dans le cadre de la pièce voulue
                             TourBlancheJ = pygame.transform.scale(
                                 TourBlanche, (80, 80))
                             Changement = Tour('g', piece.Color, True,
@@ -205,7 +226,8 @@ def ChangeV2(piece, X, plateaugraphique, fenetre):
                             plateaugraphique[(X[0], X[1])] = TourBlancheJ
                             event_happened = True
                         return Changement
-        if piece.Color == 'Black' and piece.Pos_Y == 0:
+        if piece.Color == 'Black' and piece.Pos_Y == 0: #On vérifie que la pièce est un pion noir situé au bout de plateau
+            #Importations des différentes pièces utiles noires
             ReineNoire = image.load(
                 "Interface/Pièces/ReineNoire.png").convert_alpha()
             pygame.draw.rect(fenetre, (255, 255, 255), (96, 146, 158, 158))
@@ -284,6 +306,12 @@ def ChangeV2(piece, X, plateaugraphique, fenetre):
 
 
 def jeu_Final():
+    """La fonction porte bien son nom, elle permet de jouer au jeu d'échec avec une interface graphique 
+
+        Sortie
+        ------
+        le jeu
+        """
     # Création de la fenêtre
     fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
 
@@ -374,7 +402,7 @@ def jeu_Final():
 
     k = 1
     while k != 3:
-        if k == 2:
+        if k == 2: #Permet de changer les tours tout en vérifiant bien qu'on vérifié si le roi est en échec, etc à chaque fois
             k = 0
 
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
@@ -390,13 +418,13 @@ def jeu_Final():
                         pass
                     else:
                         if k == 1:
-                            if Plateau[(X, Y)].Color == 'White':
+                            if Plateau[(X, Y)].Color == 'White': #C'est le tour des blancs
                                 Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
                                 pygame.draw.rect(
-                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5)
+                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5) #On trace l'emplacement de la pièce
                                 for x in Mouvement:
                                     pygame.draw.rect(
-                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5)
+                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5) #On trace les mouvements possibles
                                 pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
@@ -406,7 +434,7 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
-
+                                            #On vérifie si le mouvement est possible et si c'est un coup spécial
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
@@ -424,28 +452,28 @@ def jeu_Final():
                                                 Plateau[(X, Y)].move(
                                                     X2, Y2)
                                                 Plateau[(X2, Y2)] = ChangeV2(
-                                                    Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)
+                                                    Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre) #Le pion est arrivé au bout du plateau
                                                 Plateau[(X, Y)] = ''
-
+                                                #Déplacement de la pièce graphique
                                                 PiècesGraphique[(
                                                     X2, Y2)] = PiècesGraphique[(X, Y)]
                                                 PiècesGraphique[(X, Y)] = ''
                                                 event_happened = True
-                                                k = 2
+                                                k = 2 #C'est au tour des noirs de jouer
                                             else:
                                                 print(
                                                     "Ce déplacement n'est pas possible")
                                                 event_happened = True
                             else:
-                                print('Les pièces blanches doivent jouer')
+                                print('Les pièces blanches doivent jouer') #Le joueur a selectionné une pièce noire
                         if k == 0:
-                            if Plateau[(X, Y)].Color == 'Black':
+                            if Plateau[(X, Y)].Color == 'Black': #C'est au tour des noires de jouer
                                 Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
                                 pygame.draw.rect(
-                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5)
+                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5) #On trace la position de la pièce sélectionnée
                                 for x in Mouvement:
                                     pygame.draw.rect(
-                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5)
+                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5) #On trace les mouvements possibles
                                 pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
@@ -455,7 +483,7 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
-
+                                            #On vérifie si le mouvement est possible et si c'est un coup spécial
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
@@ -473,14 +501,14 @@ def jeu_Final():
                                                 Plateau[(X, Y)].move(
                                                     X2, Y2)
                                                 Plateau[(X2, Y2)] = ChangeV2(
-                                                    Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)
+                                                    Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre) #Le pion est arrivé au bout de plateau
                                                 Plateau[(X, Y)] = ''
-
+                                                #Déplacement de la pièce graphique
                                                 PiècesGraphique[(
                                                     X2, Y2)] = PiècesGraphique[(X, Y)]
                                                 PiècesGraphique[(X, Y)] = ''
                                                 event_happened = True
-                                                k = 1
+                                                k = 1 #C'est au tour des blancs de jouer
                                             else:
                                                 print(
                                                     "Ce déplacement n'est pas possible")
@@ -497,7 +525,8 @@ def jeu_Final():
             else:
                 fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
 
-        for piece in Plateau.values():
+        #Affichage si le roi est en échec
+        for piece in Plateau.values(): 
             if piece != '' and piece.name == 'roi' and piece.Color == 'White':
                 RoiBlancP = piece
                 if roi_en_echec(RoiBlancP, Plateau):

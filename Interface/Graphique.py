@@ -11,6 +11,12 @@ clock = pygame.time.Clock()
 
 
 def Echiquier():
+    """Espace d'expérimentations de pygame et de ses affichages graphiques. Inutile au code
+
+        Sortie
+        ------
+        Expérimentations
+        """
     k = 1
     # Création de la fenêtre
     fenetre = pygame.display.set_mode((640, 640), RESIZABLE)
@@ -131,30 +137,6 @@ def Echiquier():
             else:
                 fenetre.blit(valeur, ((7-cle[0])*80, (7-cle[1])*80))
         # Rafraichissement
-        pygame.draw.rect(fenetre, (255,255, 255), (96, 146, 158, 158))
-        pygame.draw.rect(fenetre, (0,0,50), (100, 150, 150, 150), 2)
-        pygame.draw.rect(fenetre, (0,0,50), (96, 146, 158, 158), 2)
-        ReineBlancheF = pygame.transform.scale(ReineBlanche, (150, 150))
-        fenetre.blit(ReineBlancheF, (100, 150))
-
-        pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 146, 158, 158))
-        pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 150, 150, 150), 2)
-        pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 146, 158, 158), 2)
-        CavalierBlancF = pygame.transform.scale(CavalierBlanc, (150, 150))
-        fenetre.blit(CavalierBlancF, (640-100-150, 150))
-
-        pygame.draw.rect(fenetre, (255,255, 255), (96, 396, 158, 158))
-        pygame.draw.rect(fenetre, (0,0,50), (100, 400, 150, 150), 2)
-        pygame.draw.rect(fenetre, (0,0,50), (96, 396, 158, 158), 2)
-        FouBlancF = pygame.transform.scale(FouBlanc, (150, 150))
-        fenetre.blit(FouBlancF, (100, 400))
-
-        pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 396, 158, 158))
-        pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 400, 150, 150), 2)
-        pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 396, 158, 158), 2)
-        TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
-        fenetre.blit(TourBlancF, (640-100-150, 400))
-        pygame.display.flip()
         mouse = pygame.mouse.get_pos()
         if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
             print("Vous avez choisi la Reine")
@@ -166,11 +148,30 @@ def Echiquier():
             print("Vous avez choisi la Tour")
 
 def CréationTexte(text, font, couleur):
+    """La fonction permet de faciliter l'affichage d'un texte
+        Argument
+        ------
+        Le text, la page d'affichage et une couleur
+
+        Sortie
+        ------
+        Un pygame.surface et ses coordonées
+        """
     textSurface = font.render(text, True, couleur)
     return textSurface, textSurface.get_rect()
 
 
 def MenuStart(fonction1,fonction2):
+    """La fonction affiche un menu avec deux boutons. Le premier permet d'initialiser deux fonctions
+    Le second permet de quitter le jeu
+        Argument
+        ------
+        Deux fonctions
+
+        Sortie
+        ------
+        Deux fonctions qui s'initialisent si on appuie sur le bouton. La fermeture de la page sinon
+        """
     # On crée la fenêtre
     Menu = pygame.display.set_mode((500, 335), RESIZABLE)
 
