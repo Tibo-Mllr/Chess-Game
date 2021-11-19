@@ -499,9 +499,9 @@ def jeu_Final():
 
         for piece in Plateau.values():
             if piece != '' and piece.name == 'roi' and piece.Color == 'White':
-                RoiBlanc = piece
-            if piece != '' and piece.name == 'roi' and piece.Color == 'White':
-                RoiBlanc = piece
+                RoiBlancP = piece
+            if piece != '' and piece.name == 'roi' and piece.Color == 'Black':
+                RoiNoirP = piece
 
         pygame.display.flip()
 
