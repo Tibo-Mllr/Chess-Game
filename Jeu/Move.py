@@ -58,6 +58,7 @@ def mvt_possible_pion(pion, plateau):
         ------
         liste
     """
+
     mvt_possible = []
     if pion.Color == 'White' and pion.Pos_Y != 7:  # Si le pion est blanc
         # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
@@ -112,6 +113,7 @@ def mvt_possible_tour(tour, plateau):
         ------
         liste
     """
+
     mvt_possible = []
     finhaut = False  # variables qui determineront quand s'arrete la boucle for
     finbas = False
@@ -184,6 +186,7 @@ def mvt_possible_fou(fou, plateau):
         ------
         liste
     """
+
     mvt_possible = []
     finhautgauche = False
     finbasgauche = False
@@ -251,6 +254,7 @@ def mvt_possible_dame(dame, plateau):
         ------
         liste
     """
+
     mvt_possible = []
 
     mvt_possible = mvt_possible + mvt_possible_tour(dame, plateau)
@@ -271,6 +275,7 @@ def mvt_possible_cavalier(cavalier, plateau):
         ------
         liste
     """
+
     mvt_possible = []
     if cavalier.Pos_X < 6:
         if cavalier.Pos_Y != 0:
@@ -355,6 +360,7 @@ def mvt_possible_gen(piece, plateau):
         ------
         liste
     """
+
     if piece.name == 'cavalier':
         return mvt_possible_cavalier(piece, plateau)
     if piece.name == 'roi':
@@ -381,6 +387,7 @@ def roi_en_echec(roi, plateau):
         ------
         booléen
     """
+
     for piece in plateau.values():
         if piece != '' and piece != roi and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             return True
@@ -401,6 +408,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
         ------
         booléen
     """
+
     newplateau = copy.deepcopy(plateau)
     newplateau[(roi.Pos_X, roi.Pos_Y)] = ''
     newplateau[(x, y)] = roi
@@ -423,6 +431,7 @@ def mvt_possible_roi(roi, plateau):
         ------
         liste
     """
+
     mvt_possible = []
     if roi.Pos_X != 0:
         if case_libre(roi.Pos_X - 1, roi.Pos_Y, plateau):
@@ -481,6 +490,7 @@ def mvt_possible_roi(roi, plateau):
 
 def echec_si_mvt(piece, x, y, plateau):
     """Renvoie si une pièce met en échec le roi adverse
+
         Arguments
         ---------
         piece : Classe 
@@ -492,6 +502,7 @@ def echec_si_mvt(piece, x, y, plateau):
         ------
         booléen
     """
+
     newplateau = copy.deepcopy(plateau)
     newplateau[(piece.Pos_X, piece.Pos_Y)] = ''
     newplateau[(x, y)] = piece
@@ -521,7 +532,9 @@ def mvt_final(piece, plateau):
         ------
         liste
         """
+
     mvt = []
+
     if piece.name == 'roi':
         mvtf = mvt_possible_roi(piece, plateau)
         for (x, y) in mvtf:
@@ -565,16 +578,27 @@ def petit_roque(roi, plateau):
         if not case_libre(7, 0, plateau):
             if plateau[(7, 0)].name == 'tour' and plateau[(7, 0)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 5, 0, plateau) and not echec_si_mouvement_du_roi(roi, 6, 0, plateau):
-                    petit_roque_possible == True
+                    petit_roque_possible = True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(5, 7, plateau) and case_libre(6, 7, plateau) and not roi_en_echec(roi, plateau):
         if not case_libre(7, 0, plateau):
             if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 5, 7, plateau) and not echec_si_mouvement_du_roi(roi, 6, 7, plateau):
-                    petit_roque_possible == True
+                    petit_roque_possible = True
     return petit_roque_possible
 
 
 def grand_roque(roi, plateau):
+    """Renvoie si le grand roque est possible
+
+        Arguments
+        ---------
+        roi : classe
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        booléen
+    """
     grand_roque_possible = False
     if roi.Color == 'White' and roi.Moved == False and case_libre(3, 0, plateau) and case_libre(2, 0, plateau) and case_libre(1, 0, plateau) and not roi_en_echec(roi, plateau):
         if not case_libre(0, 0, plateau):
@@ -585,11 +609,23 @@ def grand_roque(roi, plateau):
         if not case_libre(7, 0, plateau):
             if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 3, 7, plateau) and not echec_si_mouvement_du_roi(roi, 2, 7, plateau):
-                    grand_roque_possible == True
+                    grand_roque_possible = True
     return grand_roque_possible
 
 
 def roque(piece, x, plateau):
+    """Renvoie quel roque est possible
+
+        Arguments
+        ---------
+        pièce : classe (roi)
+        x : abcisse de la case de destination
+        plateau : dictionnaire
+
+        Sortie
+        ------
+        Chaîne de caractère : 'Petit' ou 'Grand'
+    """
     if piece.name == 'roi':
         if (piece.Color == 'White' and x-piece.Pos_X in [2, -2]) or (piece.Color == 'Black' and x-piece.Pos_X in [2, -2]):
             if x-piece.Pos_X == 2 and petit_roque(piece, plateau):
@@ -598,6 +634,7 @@ def roque(piece, x, plateau):
                 piece.move(6, piece.Pos_Y)
                 plateau[(4, piece.Pos_Y)], plateau[(7, piece.Pos_Y)], plateau[(
                     6, piece.Pos_Y)], plateau[(5, piece.Pos_Y)] = '', '', piece, Tour
+                return "Petit"
 
             if x-piece.Pos_X == -2 and grand_roque(piece, plateau):
                 Tour = plateau[(0, piece.Pos_Y)]
@@ -605,22 +642,4 @@ def roque(piece, x, plateau):
                 piece.move(2, piece.Pos_Y)
                 plateau[(4, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
                     2, piece.Pos_Y)], plateau[(3, piece.Pos_Y)] = '', '', piece, Tour
-
-
-# a ajouter dans les fonctions de mouvements des pieces
-
-
-# reste promotion pion
-# reste roque
-
-
-# reste nul en cas de match nul
-# reste victoire
-
-"""
-ce serait bien de sauver l'historique des mvts
-en plus ca permettrait de rejouer la partie a partir d'une certaine etape
-"""
-
-
-# roi peut pasmanger la piece qui le met en echec
+                return "Grand"
