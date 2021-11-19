@@ -78,6 +78,7 @@ def mvt_possible_pion(pion, plateau):
         # verifie si le pion peut avancer de 1
         if case_libre(pion.Pos_X, pion.Pos_Y+1, plateau):
             mvt_possible = mvt_possible + [(pion.Pos_X, pion.Pos_Y+1)]
+
     if pion.Color == 'Black' and pion.Pos_Y != 0:  # si le pion est noir
         if pion.Pos_X != 0:  # verifie si le pion peut manger à sa droite
             if case_libre(pion.Pos_X - 1, pion.Pos_Y - 1, plateau) == False:
@@ -380,12 +381,19 @@ def roi_en_echec(roi, plateau):
         ------
         booléen
     """
+<<<<<<< HEAD
     echec = False
+=======
+
+    # A enlever
+    # print("Echec roi")
+
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
     for piece in plateau.values():
-        if piece != '' and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
-            echec = True
+        if piece != '' and piece != roi and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             roi.Checked = True
-    return echec
+            return True
+    return False
 
 
 def echec_si_mouvement_du_roi(roi, x, y, plateau):
@@ -405,12 +413,20 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
     newplateau = copy.deepcopy(plateau)
     newplateau[(roi.Pos_X, roi.Pos_Y)] = ''
     newplateau[(x, y)] = roi
+<<<<<<< HEAD
     echec_si_mvt = False
     for piece in newplateau.values():
         if piece != '' and piece != roi and piece.Color != roi.Color:
             if (x, y) in mvt_possible_gen(piece, newplateau):
                 echec_si_mvt = True
     return echec_si_mvt
+=======
+
+    for piece in plateau.values():
+        if piece != '' and piece != roi and piece.Color != roi.Color and (x, y) in mvt_possible_gen(piece, plateau):
+            return True
+    return False
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
 
 
 def mvt_possible_roi(roi, plateau):
@@ -427,9 +443,10 @@ def mvt_possible_roi(roi, plateau):
     """
     mvt_possible = []
     if roi.Pos_X != 0:
-        if case_libre(roi.Pos_X - 1, roi.Pos_Y, plateau) and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau):
+        if case_libre(roi.Pos_X - 1, roi.Pos_Y, plateau):
             mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y)]
         else:
+<<<<<<< HEAD
             if case_color(roi.Pos_X - 1, roi.Pos_Y, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X - 1, roi.Pos_Y, plateau):
                 mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y)]
         if roi.Pos_Y != 0:
@@ -477,13 +494,66 @@ def mvt_possible_roi(roi, plateau):
             mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
         else:
             if case_color(roi.Pos_X, roi.Pos_Y + 1, plateau) != roi.Color and not echec_si_mouvement_du_roi(roi, roi.Pos_X, roi.Pos_Y + 1, plateau):
+=======
+            if case_color(roi.Pos_X - 1, roi.Pos_Y, plateau) != roi.Color:
+                mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y)]
+        if roi.Pos_Y != 0:
+            if case_libre(roi.Pos_X - 1, roi.Pos_Y - 1, plateau):
+                mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y - 1)]
+            else:
+                if case_color(roi.Pos_X - 1, roi.Pos_Y - 1, plateau) != roi.Color:
+                    mvt_possible = mvt_possible + \
+                        [(roi.Pos_X - 1, roi.Pos_Y - 1)]
+        if roi.Pos_Y != 7:
+            if case_libre(roi.Pos_X - 1, roi.Pos_Y + 1, plateau):
+                mvt_possible = mvt_possible + [(roi.Pos_X - 1, roi.Pos_Y + 1)]
+            else:
+                if case_color(roi.Pos_X - 1, roi.Pos_Y + 1, plateau) != roi.Color:
+                    mvt_possible = mvt_possible + \
+                        [(roi.Pos_X - 1, roi.Pos_Y + 1)]
+    if roi.Pos_X != 7:
+        if case_libre(roi.Pos_X + 1, roi.Pos_Y, plateau):
+            mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y)]
+        else:
+            if case_color(roi.Pos_X + 1, roi.Pos_Y, plateau) != roi.Color:
+                mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y)]
+        if roi.Pos_Y != 0:
+            if case_libre(roi.Pos_X + 1, roi.Pos_Y - 1, plateau):
+                mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y - 1)]
+            else:
+                if case_color(roi.Pos_X + 1, roi.Pos_Y - 1, plateau) != roi.Color:
+                    mvt_possible = mvt_possible + \
+                        [(roi.Pos_X + 1, roi.Pos_Y - 1)]
+        if roi.Pos_Y != 7:
+            if case_libre(roi.Pos_X + 1, roi.Pos_Y + 1, plateau):
+                mvt_possible = mvt_possible + [(roi.Pos_X + 1, roi.Pos_Y + 1)]
+            else:
+                if case_color(roi.Pos_X + 1, roi.Pos_Y + 1, plateau) != roi.Color:
+                    mvt_possible = mvt_possible + \
+                        [(roi.Pos_X + 1, roi.Pos_Y + 1)]
+    if roi.Pos_Y != 0:
+        if case_libre(roi.Pos_X, roi.Pos_Y - 1, plateau):
+            mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y - 1)]
+        else:
+            if case_color(roi.Pos_X, roi.Pos_Y - 1, plateau) != roi.Color:
+                mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y - 1)]
+    if roi.Pos_Y != 7:
+        if case_libre(roi.Pos_X, roi.Pos_Y + 1, plateau):
+            mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
+        else:
+            if case_color(roi.Pos_X, roi.Pos_Y + 1, plateau) != roi.Color:
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
                 mvt_possible = mvt_possible + [(roi.Pos_X, roi.Pos_Y + 1)]
     return mvt_possible
 
 
 def echec_si_mvt(piece, x, y, plateau):
     """Renvoie si une pièce met en échec le roi adverse
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
         Arguments
         ---------
         piece : Classe 
@@ -506,20 +576,10 @@ def echec_si_mvt(piece, x, y, plateau):
             RoiNoir = newplateau[element]
 
     if piece.Color == 'White':
-        echec_blanc = False
-        for i in newplateau.values():
-            if i != '' and i.Color == 'Black':
-                if (RoiBlanc.Pos_X, RoiBlanc.Pos_Y) in mvt_possible_gen(i, newplateau):
-                    echec_blanc = True
-        return echec_blanc
+        return roi_en_echec(RoiBlanc, newplateau)
 
     if piece.Color == 'Black':
-        echec_noir = False
-        for i in newplateau.values():
-            if i != '' and i.Color == 'White':
-                if (RoiNoir.Pos_X, RoiNoir.Pos_Y) in mvt_possible_gen(i, newplateau):
-                    echec_noir = True
-        return echec_noir
+        return roi_en_echec(RoiNoir, newplateau)
 
 
 def mvt_final(piece, plateau):
@@ -535,7 +595,16 @@ def mvt_final(piece, plateau):
         liste
         """
     mvt = []
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
     if piece.name == 'roi':
+        mvtf = mvt_possible_roi(piece, plateau)
+        for (x, y) in mvtf:
+            if not echec_si_mouvement_du_roi(piece, x, y, plateau):
+                mvt = mvt + [(x, y)]
+
         if piece.Color == 'White' and petit_roque(piece, plateau):
             mvt = mvt + [(6, 0)]
         if piece.Color == 'White' and grand_roque(piece, plateau):
@@ -543,8 +612,14 @@ def mvt_final(piece, plateau):
         if piece.Color == 'Black' and petit_roque(piece, plateau):
             mvt = mvt + [(6, 7)]
         if piece.Color == 'Black' and grand_roque(piece, plateau):
+<<<<<<< HEAD
             mvt = mvt + [(2,7)]
         return mvt + mvt_possible_roi(piece,plateau)
+=======
+            mvt = mvt + [(2, 7)]
+
+        return mvt
+>>>>>>> d4949ff2ef68bae58a7cfa2678089e4f6d3b51df
 
     else:
         mvtf = mvt_possible_gen(piece, plateau)

@@ -249,7 +249,10 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
+                                            print(
+                                                mvt_final(Plateau[(X, Y)], Plateau))
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                print("Calculating")
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
                                                 if _roque == 'Petit':
@@ -294,7 +297,10 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
+                                            print(
+                                                mvt_final(Plateau[(X, Y)], Plateau))
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                print("Calculating")
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
                                                 if _roque == 'Petit':
