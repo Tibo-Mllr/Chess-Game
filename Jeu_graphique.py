@@ -497,6 +497,12 @@ def jeu_Final():
             else:
                 fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
 
+        for piece in Plateau.values():
+            if piece != '' and piece.name == 'roi' and piece.Color == 'White':
+                RoiBlanc = piece
+            if piece != '' and piece.name == 'roi' and piece.Color == 'White':
+                RoiBlanc = piece
+
         pygame.display.flip()
 
         if echec_et_mat(Plateau) or egalite(Plateau):
