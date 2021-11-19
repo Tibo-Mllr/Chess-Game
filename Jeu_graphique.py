@@ -273,7 +273,7 @@ def jeu_Final():
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
-                MenuStart(jeu_init,jeu_Final) #On relance le menu
+                MenuStart(jeu_init, jeu_Final)  # On relance le menu
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     mouse = event.pos
@@ -284,10 +284,12 @@ def jeu_Final():
                     else:
                         if k == 1:
                             if Plateau[(X, Y)].Color == 'White':
-                                Mouvement=mvt_final(Plateau[(X, Y)], Plateau)
-                                pygame.draw.rect(fenetre, '#008000', (X*80,(7-Y)*80,80,80) , 5)
+                                Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
+                                pygame.draw.rect(
+                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5)
                                 for x in Mouvement:
-                                    pygame.draw.rect(fenetre, '#FFFF00', (x[0]*80,(7-x[1])*80,80,80) , 5)
+                                    pygame.draw.rect(
+                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5)
                                 pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
@@ -297,7 +299,9 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
+
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                print("Calculating")
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
                                                 if _roque == 'Petit':
@@ -329,10 +333,12 @@ def jeu_Final():
                                 print('Les pièces blanches doivent jouer')
                         if k == 0:
                             if Plateau[(X, Y)].Color == 'Black':
-                                Mouvement=mvt_final(Plateau[(X, Y)], Plateau)
-                                pygame.draw.rect(fenetre, '#008000', (X*80,(7-Y)*80,80,80) , 5)
+                                Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
+                                pygame.draw.rect(
+                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5)
                                 for x in Mouvement:
-                                    pygame.draw.rect(fenetre, '#FFFF00', (x[0]*80,(7-x[1])*80,80,80) , 5)
+                                    pygame.draw.rect(
+                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5)
                                 pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
@@ -342,7 +348,9 @@ def jeu_Final():
                                             mouse2 = event.pos
                                             X2 = int(mouse2[0]/80)
                                             Y2 = 7-int(mouse2[1]/80)
+
                                             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
+                                                print("Calculating")
                                                 _roque = roque(
                                                     Plateau[(X, Y)], X2, Plateau)
                                                 if _roque == 'Petit':
@@ -386,18 +394,6 @@ def jeu_Final():
 
         if echec_et_mat(Plateau) or egalite(Plateau):
             k = 3
-
-    for element in Plateau:
-        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
-            RoiBlanc = Plateau[element]
-        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
-            RoiNoir = Plateau[element]
-
-    victoire(RoiBlanc, Plateau)
-    victoire(RoiNoir, Plateau)
-
-    # A changer: La fin du jeu ne marche pas j'ai l'impression
-
 
 
 if __name__ == "__main__":
