@@ -4,7 +4,7 @@ from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
 from random import *
-from Interface.Graphique import MenuStart
+from Interface.Graphique import MenuStart, CréationTexte
 
 pygame.init()
 
@@ -594,8 +594,44 @@ def jeu_Final():
 
         pygame.display.flip()
 
-        if echec_et_mat(Plateau) or egalite(Plateau):
-            k = 3
+        if egalite(Plateau):
+            pygame.draw.rect(fenetre, '#606060', (640/2-70, 300, 140, 40))
+            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-70, 300, 140, 4), 1)
+            pygame.font.init()  # On initialise la création de texte sur pygame
+            # On choisit la police d'écriture et la taille de la police du texte
+            TexteSurface = pygame.font.SysFont('Times New Roman', 25)
+            TexteMenu, TextRectMenu = CréationTexte(
+            'Egalité', TexteSurface, (0, 0, 0))
+            TextRectMenu.center = ((640/2), (320))  # On centre le texte
+            fenetre.blit(TexteMenu, TextRectMenu)
+            pygame.display.flip()
+            event_happened = False
+            while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                event = pygame.event.wait()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        k=3
+                        event_happened = True
+        
+        if echec_et_mat(Plateau):
+            pygame.draw.rect(fenetre, '#606060', (640/2-70, 300, 140, 40))
+            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-70, 300, 140, 4), 1)
+            pygame.font.init()  # On initialise la création de texte sur pygame
+            # On choisit la police d'écriture et la taille de la police du texte
+            TexteSurface = pygame.font.SysFont('Times New Roman', 25)
+            TexteMenu, TextRectMenu = CréationTexte(
+            'Egalité', TexteSurface, (0, 0, 0))
+            TextRectMenu.center = ((640/2), (320))  # On centre le texte
+            fenetre.blit(TexteMenu, TextRectMenu)
+            pygame.display.flip()
+            event_happened = False
+            while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
+                event = pygame.event.wait()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        k=3
+                        event_happened = True
+
 
 def jeu_FinalVS():
     """La fonction porte bien son nom, elle permet de jouer au jeu d'échec avec une interface graphique contre un bot
