@@ -59,9 +59,6 @@ def mvt_possible_pion(pion, plateau):
         liste
     """
 
-    # A enlever
-    # print("Pion")
-
     mvt_possible = []
     if pion.Color == 'White' and pion.Pos_Y != 7:  # Si le pion est blanc
         # verifie si il peut manger une piece en haut a gauche si le pion n'est pas tout a gauche
@@ -116,9 +113,6 @@ def mvt_possible_tour(tour, plateau):
         ------
         liste
     """
-
-    # A enlever
-    # print("Tour")
 
     mvt_possible = []
     finhaut = False  # variables qui determineront quand s'arrete la boucle for
@@ -193,9 +187,6 @@ def mvt_possible_fou(fou, plateau):
         liste
     """
 
-    # A enlever
-    # print("Fou")
-
     mvt_possible = []
     finhautgauche = False
     finbasgauche = False
@@ -264,9 +255,6 @@ def mvt_possible_dame(dame, plateau):
         liste
     """
 
-    # A enlever
-    # print("Dame")
-
     mvt_possible = []
 
     mvt_possible = mvt_possible + mvt_possible_tour(dame, plateau)
@@ -287,9 +275,6 @@ def mvt_possible_cavalier(cavalier, plateau):
         ------
         liste
     """
-
-    # A enlever
-    # print("Cavalier")
 
     mvt_possible = []
     if cavalier.Pos_X < 6:
@@ -376,9 +361,6 @@ def mvt_possible_gen(piece, plateau):
         liste
     """
 
-    # A enlever
-    # print("Général")
-
     if piece.name == 'cavalier':
         return mvt_possible_cavalier(piece, plateau)
     if piece.name == 'roi':
@@ -406,9 +388,6 @@ def roi_en_echec(roi, plateau):
         booléen
     """
 
-    # A enlever
-    # print("Echec roi")
-
     for piece in plateau.values():
         if piece != '' and piece != roi and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
             roi.Checked = True
@@ -430,9 +409,6 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
         ------
         booléen
     """
-
-    # A enlever
-    # print("Echec mouvement roi")
 
     newplateau = copy.deepcopy(plateau)
     newplateau[(roi.Pos_X, roi.Pos_Y)] = ''
@@ -456,9 +432,6 @@ def mvt_possible_roi(roi, plateau):
         ------
         liste
     """
-
-    # A enlever
-    # print("Roi")
 
     mvt_possible = []
     if roi.Pos_X != 0:
@@ -531,9 +504,6 @@ def echec_si_mvt(piece, x, y, plateau):
         booléen
     """
 
-    # A enlever
-    # print("Echec mouvement")
-
     newplateau = copy.deepcopy(plateau)
     newplateau[(piece.Pos_X, piece.Pos_Y)] = ''
     newplateau[(x, y)] = piece
@@ -563,9 +533,6 @@ def mvt_final(piece, plateau):
         ------
         liste
         """
-
-    # A enlever
-    # print("Mouvement final")
 
     mvt = []
 
@@ -653,22 +620,3 @@ def roque(piece, x, plateau):
                 plateau[(5, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
                     2, piece.Pos_Y)], plateau[(3, piece.Pos_Y)] = '', '', piece, Tour
                 return "Grand"
-
-
-# a ajouter dans les fonctions de mouvements des pieces
-
-
-# reste promotion pion
-# reste roque
-
-
-# reste nul en cas de match nul
-# reste victoire
-
-"""
-ce serait bien de sauver l'historique des mvts
-en plus ca permettrait de rejouer la partie a partir d'une certaine etape
-"""
-
-
-# roi peut pasmanger la piece qui le met en echec

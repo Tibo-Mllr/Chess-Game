@@ -23,47 +23,18 @@ def egalite(plateau):
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
         for pièce in plateau.values():
             if pièce != '' and mvt_final(pièce, plateau) != []:
-                # print(
-                #    "Blanchgbsgcvhbsgvjhbkgsdvjhbksvjgbkvdsbckhsdvjhcbkgsdvjc bksgvchjdsbgcvhjs bdhgc")
                 return False
+        print("Pat du roi blanc ! Egalité.")
         return True
 
     if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
         for pièce in plateau.values():
             if pièce != '' and mvt_final(pièce, plateau) != []:
-                # print(
-                #  "Noirgbsgcvhbsgvjhbkgsdvjhbksvjgbkvdsbckhsdvjhcbkgsdvjc bksgvchjdsbgcvhjs bdhgc")
                 return False
+        print("Pat du roi noir ! Egalité.")
         return True
-    # print("Wtfhgbcsygdbhvkjdgbfvjdfbjncbxjknvhlkbjdwnvlkbcxjnjvlhbwxkcjvhnlhcxbkj,vnjkxwbjkc")
+
     return False
-
-
-def victoire(roi, plateau):
-    """Définit s'il y a victoire ou égalité
-
-        Argument
-        ---------
-        plateau : dictionnaire
-
-        Sortie
-        ------
-        chaîne de caractères
-        """
-
-    if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
-        couleur_gagnant = ["White", "Black"]
-        couleur_gagnant.remove(roi.Color)
-        print(couleur_gagnant[0] + "Win !")
-
-    if mvt_final(roi, plateau) == [] and not roi_en_echec(roi, plateau):
-        mvt_possible_autres_pièces = []
-        for pièce in plateau.values():
-            if pièce != '':
-                mvt_possible_autres_pièces += mvt_final(pièce, plateau)
-
-        if mvt_possible_autres_pièces == []:
-            print("It's a draw")
 
 
 def echec_et_mat(plateau):
@@ -94,12 +65,10 @@ def echec_et_mat(plateau):
                 else:
                     mvt_possible_noir += mvt_final(piece, plateau)
         if mvt_final(RoiBlanc, plateau) == [] and roi_en_echec(RoiBlanc, plateau) and mvt_possible_blanc == []:
-            # print(
-            #    "Echec blancjhbnvhjsb,sj,sjkgdvjhb,sugvkbhcsugvybksjchlvgbgsckbjhlvgbfehlvgblvuhgfbkjhvuc")
+            print("Echec et mat ! Victoire des noirs.")
             return True
         if mvt_final(RoiNoir, plateau) == [] and roi_en_echec(RoiNoir, plateau) and mvt_possible_noir == []:
-            # print(
-            #    "Echec noirvjhsugbhsghkcjvygusckgbhvgsukgbvhcskugbschugvgkcsbhvbgcshkscygbvjkshgkvjhcsbhjv")
+            print("Echec et mat ! Victoire des blancs.")
             return True
         return False
     return False
