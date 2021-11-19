@@ -164,16 +164,6 @@ def jeu():
             else:
                 print("Ce déplacement n'est pas possible")
 
-    # print("WhaHJBVNHUGBJSEYGCVHBSJUYGVSBHJVSYGHJVNKUHSVJBJNSHUVBKSJIHJKNHVDYBJSKVNHUSJKUEGYSDJBHHJUVYGt")
-    for element in Plateau:
-        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'White':
-            RoiBlanc = Plateau[element]
-        if Plateau[element] != '' and Plateau[element].name == 'roi' and Plateau[element].Color == 'Black':
-            RoiNoir = Plateau[element]
-
-    victoire(RoiBlanc, Plateau)
-    victoire(RoiNoir, Plateau)
-
 
 if __name__ == "__main__":
     jeu_init()
