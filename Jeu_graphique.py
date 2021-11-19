@@ -502,12 +502,12 @@ def jeu_Final():
                 RoiBlancP = piece
                 if roi_en_echec(RoiBlancP, Plateau):
                     pygame.draw.rect(
-                                    fenetre, (255,0,0), (RoiBlancP.Pos_X*80, (7-RoiBlancP.Pos_Y)*80, 80, 80), 5)
+                        fenetre, (255, 0, 0), (RoiBlancP.Pos_X*80, (7-RoiBlancP.Pos_Y)*80, 80, 80), 5)
             if piece != '' and piece.name == 'roi' and piece.Color == 'Black':
                 RoiBlackP = piece
                 if roi_en_echec(RoiBlackP, Plateau):
                     pygame.draw.rect(
-                                    fenetre, (255,0,0), (RoiBlackP.Pos_X*80, (7-RoiBlackP.Pos_Y)*80, 80, 80), 5)
+                        fenetre, (255, 0, 0), (RoiBlackP.Pos_X*80, (7-RoiBlackP.Pos_Y)*80, 80, 80), 5)
 
         pygame.display.flip()
 
