@@ -1,6 +1,7 @@
 
 from Interface.Graphique import MenuStart
 from Jeu.Chess import *
+from Jeu_graphique import ChangeVS
 import pygame
 from pygame import image
 from pygame.locals import *
@@ -505,8 +506,9 @@ def jeu_Final():
 
             Plateau[(X, Y)].move(
                 X2, Y2)
-            Plateau[(X2, Y2)] = ChangeV2(
-                Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)  # Le pion est arrivé au bout de plateau
+            # Le pion est arrivé au bout de plateau
+            Plateau[(X2, Y2)] = ChangeVS(Plateau[(X, Y)],
+                                         (X, Y), PiècesGraphique, fenetre)
             Plateau[(X, Y)] = ''
             # Déplacement de la pièce graphique
             PiècesGraphique[(

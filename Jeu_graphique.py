@@ -5,6 +5,7 @@ import pygame
 from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
+from random import *
 
 pygame.init()
 
@@ -309,6 +310,30 @@ def ChangeV2(piece, X, plateaugraphique, fenetre):
                             event_happened = True
                         return Changement
         return piece
+    return piece
+
+
+def ChangeVS(piece, X, plateaugraphique, fenetre):
+    if piece.name == 'pion':
+        if (piece.Color == 'White' and piece.Pos_Y == 7) or (piece.Color == 'Black' and piece.Pos_Y == 0):
+            P = ['dame', 'fou', 'tour', 'cavalier']
+            choice = P[randint(0, 3)]
+            if choice == 'dame':
+                Changement = Dame('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice == 'fou':
+                Changement = Fou('g', piece.Color, True,
+                                 piece.Pos_X, piece.Pos_Y)
+
+            elif choice == 'tour':
+                Changement = Tour('g', piece.Color, True,
+                                  piece.Pos_X, piece.Pos_Y)
+
+            elif choice == 'cavalier':
+                Changement = Cavalier('g', piece.Color, True,
+                                      piece.Pos_X, piece.Pos_Y)
+            return Changement
     return piece
 
 
