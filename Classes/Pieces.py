@@ -106,7 +106,6 @@ class Roi:
             self.Pos_Y = 7
 
         self.Moved = False
-        self.Checked = False
         self.Color = color
         self.name = 'roi'
 
@@ -142,7 +141,7 @@ class Roi:
         Aucune
         """
 
-        if not self.Checked and not self.Moved:
+        if not self.Moved:
             if d == 'd':
                 self.Pos_X += 2
             elif d == 'g':
