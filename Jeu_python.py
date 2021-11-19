@@ -136,6 +136,8 @@ def jeu():
 
         X2 = int(x2)
         Y2 = int(y2)
+        if k == 2:
+            k = 0
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
                 if Plateau[(X, Y)].Color == 'White':

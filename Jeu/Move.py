@@ -414,7 +414,7 @@ def echec_si_mouvement_du_roi(roi, x, y, plateau):
     newplateau[(x, y)] = roi
 
     for piece in plateau.values():
-        if piece != '' and piece != roi and piece.Color != roi.Color and (x, y) in mvt_possible_gen(piece, plateau):
+        if piece != '' and piece != roi and piece.Color != roi.Color and (x, y) in mvt_possible_gen(piece, newplateau):
             return True
     return False
 
