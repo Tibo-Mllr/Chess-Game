@@ -155,7 +155,15 @@ def Echiquier():
         TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
         fenetre.blit(TourBlancF, (640-100-150, 400))
         pygame.display.flip()
-
+        mouse = pygame.mouse.get_pos()
+        if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
+            print("Vous avez choisi la Reine")
+        if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146:
+            print("Vous avez choisi le Cavalier")
+        if 254 > mouse[0] > 96 and 554 > mouse[1] > 396:
+            print("Vous avez choisi le Fou")
+        if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
+            print("Vous avez choisi la Tour")
 
 def CréationTexte(text, font, couleur):
     textSurface = font.render(text, True, couleur)
