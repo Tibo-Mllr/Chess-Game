@@ -161,7 +161,7 @@ def CréationTexte(text, font, couleur):
     return textSurface, textSurface.get_rect()
 
 
-def MenuStart(fonction1,fonction2):
+def MenuStart(fonction1,fonction2, fonction3):
     """La fonction affiche un menu avec deux boutons. Le premier permet d'initialiser deux fonctions
     Le second permet de quitter le jeu
         Argument
@@ -218,22 +218,42 @@ def MenuStart(fonction1,fonction2):
         TextRect.center = ((500/2), (275/2+30/2))
         Menu.blit(TextSurf, TextRect)
 
-        # Création du bouton quitter la partie
+        # Création du bouton jouer contre une IA
         # Permet de savoir si la souris se situe au niveau du bouton
-        if 250+70 > mouse[0] > 250-70 and 435/2+30 > mouse[1] > 435/2:
+        if 250+120 > mouse[0] > 250-120 and 375/2+30 > mouse[1] > 375/2:
             # Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
-            pygame.draw.rect(Menu, '#8B0000', (250-70, 435/2, 140, 30))
+            pygame.draw.rect(Menu, '#00FFFF', (250-120, 375/2, 240, 30))
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
-                    pygame.quit()  # On quitte la partie
+                    pygame.quit()
+                    fonction1()
+                    fonction3()
         else:
-            pygame.draw.rect(Menu, '#DC143C', (250-70, 435/2, 140, 30))
+            pygame.draw.rect(Menu, '#0080ff', (250-120, 375/2, 240, 30))
 
-        pygame.draw.rect(Menu, (0, 0, 0), (250-70, 435/2, 140, 30), 1)
+        pygame.draw.rect(Menu, (0, 0, 0), (250-120, 375/2, 240, 30), 1)
+        ButtonStart = pygame.font.SysFont('Times New Roman', 15)
+        TextSurf, TextRect = CréationTexte(
+            "Démarrer une partie contre un IA", ButtonStart, (0, 0, 0))
+        TextRect.center = ((500/2), (375/2+30/2))
+        Menu.blit(TextSurf, TextRect)
+
+        # Création du bouton jouer contre une IA
+        # Permet de savoir si la souris se situe au niveau du bouton
+        if 250+70 > mouse[0] > 250-70 and 475/2+30 > mouse[1] > 475/2:
+            # Pour le mettre en évidence, le bouton change de couleur quand la souris est dessus
+            pygame.draw.rect(Menu, '#FF0000', (250-70, 475/2, 140, 30))
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:  # Si clic gauche
+                    pygame.quit()
+        else:
+            pygame.draw.rect(Menu, '#DC143C', (250-70, 475/2, 140, 30))
+
+        pygame.draw.rect(Menu, (0, 0, 0), (250-70, 475/2, 140, 30), 1)
         ButtonStart = pygame.font.SysFont('Times New Roman', 15)
         TextSurf, TextRect = CréationTexte(
             "Quitter le jeu", ButtonStart, (0, 0, 0))
-        TextRect.center = ((500/2), (435/2+30/2))
+        TextRect.center = ((500/2), (475/2+30/2))
         Menu.blit(TextSurf, TextRect)
 
         pygame.display.update()

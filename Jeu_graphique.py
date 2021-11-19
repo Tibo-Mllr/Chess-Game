@@ -1,5 +1,3 @@
-
-from Interface.Graphique import MenuStart
 from Jeu.Chess import *
 import pygame
 from pygame import image
@@ -415,7 +413,7 @@ def jeu_Final():
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
-                MenuStart(jeu_init, jeu_Final)  # On relance le menu
+                MenuStart()  # On relance le 
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     mouse = event.pos
@@ -553,5 +551,3 @@ def jeu_Final():
             k = 3
 
 
-if __name__ == "__main__":
-    MenuStart(jeu_init, jeu_Final)
