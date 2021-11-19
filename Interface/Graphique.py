@@ -147,6 +147,7 @@ def Echiquier():
         if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
             print("Vous avez choisi la Tour")
 
+
 def CréationTexte(text, font, couleur):
     """La fonction permet de faciliter l'affichage d'un texte
         Argument
@@ -161,7 +162,7 @@ def CréationTexte(text, font, couleur):
     return textSurface, textSurface.get_rect()
 
 
-def MenuStart(fonction1,fonction2):
+def MenuStart(fonction1, fonction2):
     """La fonction affiche un menu avec deux boutons. Le premier permet d'initialiser deux fonctions
     Le second permet de quitter le jeu
         Argument
@@ -188,7 +189,7 @@ def MenuStart(fonction1,fonction2):
     # On choisit la police d'écriture et la taille de la police du texte
     TexteSurface = pygame.font.SysFont('Times New Roman', 30)
     TexteMenu, TextRectMenu = CréationTexte(
-        'échec et mat', TexteSurface, (0, 0, 0))
+        'Echec et mat', TexteSurface, (0, 0, 0))
     TextRectMenu.center = ((500/2), (25))  # On centre le texte
     Menu.blit(TexteMenu, TextRectMenu)
     while True:
