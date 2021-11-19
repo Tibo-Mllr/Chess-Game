@@ -606,8 +606,8 @@ def grand_roque(roi, plateau):
                 if not echec_si_mouvement_du_roi(roi, 3, 0, plateau) and not echec_si_mouvement_du_roi(roi, 2, 0, plateau):
                     grand_roque_possible = True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(3, 7, plateau) and case_libre(2, 7, plateau) and case_libre(1, 7, plateau) and not roi_en_echec(roi, plateau):
-        if not case_libre(7, 0, plateau):
-            if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
+        if not case_libre(0, 7, plateau):
+            if plateau[(0, 7)].name == 'tour' and plateau[(0, 7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 3, 7, plateau) and not echec_si_mouvement_du_roi(roi, 2, 7, plateau):
                     grand_roque_possible = True
     return grand_roque_possible
