@@ -13,6 +13,7 @@ def egalite(plateau):
         ------
         booléen
         """
+
     for pièce in plateau.values():
         if pièce != '' and pièce.name == 'roi' and pièce.Color == 'White':
             RoiBlanc = pièce
@@ -49,6 +50,7 @@ def victoire(roi, plateau):
         ------
         chaîne de caractères
         """
+
     if mvt_final(roi, plateau) == [] and roi_en_echec(roi, plateau):
         couleur_gagnant = ["White", "Black"]
         couleur_gagnant.remove(roi.Color)
@@ -75,6 +77,7 @@ def echec_et_mat(plateau):
         ------
         booléen
         """
+
     mvt_possible_blanc = []
     mvt_possible_noir = []
     for element in plateau:

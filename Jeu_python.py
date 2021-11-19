@@ -138,29 +138,29 @@ def jeu():
         Y2 = int(y2)
         if k == 1:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                # if Plateau[(X, Y)].Color == 'White':
-                roque(Plateau[(X, Y)], X2, Plateau)
-                Plateau[(X, Y)].move(X2, Y2)
-                Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
-                Plateau[(X, Y)] = ''
+                if Plateau[(X, Y)].Color == 'White':
+                    roque(Plateau[(X, Y)], X2, Plateau)
+                    Plateau[(X, Y)].move(X2, Y2)
+                    Plateau[(X2, Y2)] = change(Plateau[(X, Y)])
+                    Plateau[(X, Y)] = ''
 
-                print(grid_to_string(Plateau))
-
-                """k = 2
+                    print(grid_to_string(Plateau))
+                    k = 2
                 else:
-                        print("Ce sont aux blancs de jouer")
-            else :
+                    print("Ce sont aux blancs de jouer")
+            else:
                 print("Ce déplacement n'est pas possible")
-        if k==0:
+
+        if k == 0:
             if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                if Plateau[ (X, Y)].Color == 'Black':
+                if Plateau[(X, Y)].Color == 'Black':
                     Plateau[(X, Y)].move(X2, Y2)
                     Plateau[(X2, Y2)] = Plateau[(X, Y)]
                     Plateau[(X, Y)] = ''
                     print(grid_to_string(Plateau))
                     k = 1
                 else:
-                    print("Ce sont aux noirs de jouer")"""
+                    print("Ce sont aux noirs de jouer")
             else:
                 print("Ce déplacement n'est pas possible")
 

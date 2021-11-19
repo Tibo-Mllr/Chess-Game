@@ -1,4 +1,5 @@
 from Classes.Pieces import *
+from Interface.Graphique import MenuStart
 from Jeu.Chess import *
 import pygame
 from pygame import image
@@ -214,7 +215,7 @@ def jeu_Final():
         else:
             fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
             # Rafraichissement
-        pygame.display.flip()
+    pygame.display.flip()
 
     k = 1
     while k != 3:
@@ -224,7 +225,7 @@ def jeu_Final():
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
-                # MenuStart()
+                MenuStart(jeu_init,jeu_Final) #On relance le menu
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     mouse = event.pos
@@ -235,6 +236,11 @@ def jeu_Final():
                     else:
                         if k == 1:
                             if Plateau[(X, Y)].Color == 'White':
+                                Mouvement=mvt_final(Plateau[(X, Y)], Plateau)
+                                pygame.draw.rect(fenetre, '#008000', (X*80,(7-Y)*80,80,80) , 5)
+                                for x in Mouvement:
+                                    pygame.draw.rect(fenetre, '#FFFF00', (x[0]*80,(7-x[1])*80,80,80) , 5)
+                                pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
                                     event = pygame.event.wait()
@@ -275,6 +281,11 @@ def jeu_Final():
                                 print('Les pièces blanches doivent jouer')
                         if k == 0:
                             if Plateau[(X, Y)].Color == 'Black':
+                                Mouvement=mvt_final(Plateau[(X, Y)], Plateau)
+                                pygame.draw.rect(fenetre, '#008000', (X*80,(7-Y)*80,80,80) , 5)
+                                for x in Mouvement:
+                                    pygame.draw.rect(fenetre, '#FFFF00', (x[0]*80,(7-x[1])*80,80,80) , 5)
+                                pygame.display.flip()
                                 event_happened = False
                                 while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
                                     event = pygame.event.wait()
@@ -340,6 +351,6 @@ def jeu_Final():
     # A changer: La fin du jeu ne marche pas j'ai l'impression
 
 
+
 if __name__ == "__main__":
-    jeu_init()
-    jeu_Final()
+    MenuStart(jeu_init, jeu_Final)

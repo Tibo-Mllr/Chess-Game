@@ -98,7 +98,7 @@ def Echiquier():
         else:
             fenetre.blit(valeur, ((7-cle[0])*80, (7-cle[1])*80))
         # Rafraichissement
-        pygame.display.flip()
+    pygame.display.flip()
 
     while k != 3:
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
@@ -131,6 +131,29 @@ def Echiquier():
             else:
                 fenetre.blit(valeur, ((7-cle[0])*80, (7-cle[1])*80))
         # Rafraichissement
+        pygame.draw.rect(fenetre, (255,255, 255), (96, 146, 158, 158))
+        pygame.draw.rect(fenetre, (0,0,50), (100, 150, 150, 150), 2)
+        pygame.draw.rect(fenetre, (0,0,50), (96, 146, 158, 158), 2)
+        ReineBlancheF = pygame.transform.scale(ReineBlanche, (150, 150))
+        fenetre.blit(ReineBlancheF, (100, 150))
+
+        pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 146, 158, 158))
+        pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 150, 150, 150), 2)
+        pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 146, 158, 158), 2)
+        CavalierBlancF = pygame.transform.scale(CavalierBlanc, (150, 150))
+        fenetre.blit(CavalierBlancF, (640-100-150, 150))
+
+        pygame.draw.rect(fenetre, (255,255, 255), (96, 396, 158, 158))
+        pygame.draw.rect(fenetre, (0,0,50), (100, 400, 150, 150), 2)
+        pygame.draw.rect(fenetre, (0,0,50), (96, 396, 158, 158), 2)
+        FouBlancF = pygame.transform.scale(FouBlanc, (150, 150))
+        fenetre.blit(FouBlancF, (100, 400))
+
+        pygame.draw.rect(fenetre, (255,255, 255), (640-96-158, 396, 158, 158))
+        pygame.draw.rect(fenetre, (0,0,50), (640-100-150, 400, 150, 150), 2)
+        pygame.draw.rect(fenetre, (0,0,50), (640-96-158, 396, 158, 158), 2)
+        TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
+        fenetre.blit(TourBlancF, (640-100-150, 400))
         pygame.display.flip()
 
 
@@ -139,7 +162,7 @@ def CréationTexte(text, font, couleur):
     return textSurface, textSurface.get_rect()
 
 
-def MenuStart():
+def MenuStart(fonction1,fonction2):
     # On crée la fenêtre
     Menu = pygame.display.set_mode((500, 335), RESIZABLE)
 
@@ -174,7 +197,8 @@ def MenuStart():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     pygame.quit()
-                    Echiquier()
+                    fonction1()
+                    fonction2()
         else:
             pygame.draw.rect(Menu, '#0080ff', (250-70, 275/2, 140, 30))
 
@@ -208,4 +232,4 @@ def MenuStart():
 
 
 if __name__ == "__main__":
-    MenuStart()
+    Echiquier()
