@@ -1,5 +1,6 @@
 
 from Jeu.Chess import *
+from Jeu_graphique import ChangeVS
 import pygame
 from pygame import image
 from pygame.locals import *
@@ -408,6 +409,9 @@ def jeu_Final():
     pygame.display.flip()
 
     k = 1
+    X1, Y1 = 8, 8
+    X2, Y2 = 8, 8
+
     while k != 3:
         if k == 2:  # Permet de changer les tours tout en vérifiant bien qu'on vérifié si le roi est en échec, etc à chaque fois
             k = 0
@@ -485,6 +489,7 @@ def jeu_Final():
 
             p = randint(0, len(P)-1)
             X, Y = P[p].Pos_X, P[p].Pos_Y
+            X1, Y1 = X, Y
 
             m = randint(0, len(M[p])-1)
             X2, Y2 = M[p][m][0], M[p][m][1]
@@ -504,14 +509,16 @@ def jeu_Final():
 
             Plateau[(X, Y)].move(
                 X2, Y2)
-            Plateau[(X2, Y2)] = ChangeV2(
-                Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)  # Le pion est arrivé au bout de plateau
+            # Le pion est arrivé au bout de plateau
+            Plateau[(X2, Y2)] = ChangeVS(Plateau[(X, Y)],
+                                         (X, Y), PiècesGraphique, fenetre)
             Plateau[(X, Y)] = ''
             # Déplacement de la pièce graphique
             PiècesGraphique[(
                 X2, Y2)] = PiècesGraphique[(X, Y)]
             PiècesGraphique[(X, Y)] = ''
             event_happened = True
+
             k = 1  # C'est au tour des blancs de jouer
 
         # Recollage
@@ -535,6 +542,13 @@ def jeu_Final():
                 if roi_en_echec(RoiBlackP, Plateau):
                     pygame.draw.rect(
                         fenetre, (255, 0, 0), (RoiBlackP.Pos_X*80, (7-RoiBlackP.Pos_Y)*80, 80, 80), 5)
+
+        # Affichage du mouvement de l'ordi
+        if k == 1:
+            pygame.draw.rect(fenetre, (255, 127, 0),
+                             (X1*80, (7-Y1)*80, 80, 80), 5)
+            pygame.draw.rect(fenetre, (255, 127, 0),
+                             (X2*80, (7-Y2)*80, 80, 80), 5)
 
         pygame.display.flip()
 
