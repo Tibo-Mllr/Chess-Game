@@ -5,6 +5,7 @@ import pygame
 from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
+from random import *
 
 pygame.init()
 
@@ -412,19 +413,20 @@ def jeu_Final():
         if k == 2:  # Permet de changer les tours tout en vérifiant bien qu'on vérifié si le roi est en échec, etc à chaque fois
             k = 0
 
-        for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
-            if event.type == QUIT:  # Si un de ces événements est de type QUIT
-                pygame.quit()  # On arrête le programme
-                MenuStart(jeu_init, jeu_Final)  # On relance le menu
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:  # Si clic gauche
-                    mouse = event.pos
-                    X = int(mouse[0]/80)
-                    Y = 7-int(mouse[1]/80)
-                    if Plateau[(X, Y)] == '':
-                        pass
-                    else:
-                        if k == 1:
+        if k == 1:
+
+            for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
+                if event.type == QUIT:  # Si un de ces événements est de type QUIT
+                    pygame.quit()  # On arrête le programme
+                    MenuStart(jeu_init, jeu_Final)  # On relance le menu
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        mouse = event.pos
+                        X = int(mouse[0]/80)
+                        Y = 7-int(mouse[1]/80)
+                        if Plateau[(X, Y)] == '':
+                            pass
+                        else:
                             if Plateau[(X, Y)].Color == 'White':  # C'est le tour des blancs
                                 Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
                                 pygame.draw.rect(
@@ -474,56 +476,44 @@ def jeu_Final():
                             else:
                                 # Le joueur a selectionné une pièce noire
                                 print('Les pièces blanches doivent jouer')
-                        if k == 0:
-                            # C'est au tour des noires de jouer
-                            if Plateau[(X, Y)].Color == 'Black':
-                                Mouvement = mvt_final(Plateau[(X, Y)], Plateau)
-                                pygame.draw.rect(
-                                    fenetre, '#008000', (X*80, (7-Y)*80, 80, 80), 5)  # On trace la position de la pièce sélectionnée
-                                for x in Mouvement:
-                                    pygame.draw.rect(
-                                        fenetre, '#FFFF00', (x[0]*80, (7-x[1])*80, 80, 80), 5)  # On trace les mouvements possibles
-                                pygame.display.flip()
-                                event_happened = False
-                                while not event_happened:  # Tant que le déplacement de la pièce ne s'est pas produit, on attend
-                                    event = pygame.event.wait()
-                                    if event.type == MOUSEBUTTONDOWN:
-                                        if event.button == 1:  # Si clic gauche
-                                            mouse2 = event.pos
-                                            X2 = int(mouse2[0]/80)
-                                            Y2 = 7-int(mouse2[1]/80)
-                                            # On vérifie si le mouvement est possible et si c'est un coup spécial
-                                            if Plateau[(X, Y)] != '' and (X2, Y2) in mvt_final(Plateau[(X, Y)], Plateau):
-                                                _roque = roque(
-                                                    Plateau[(X, Y)], X2, Plateau)
-                                                if _roque == 'Petit':
-                                                    PiècesGraphique[(
-                                                        5, Y2)] = PiècesGraphique[(7, Y2)]
-                                                    PiècesGraphique[(
-                                                        7, Y2)] = ''
-                                                elif _roque == 'Grand':
-                                                    PiècesGraphique[(
-                                                        3, Y2)] = PiècesGraphique[(0, Y2)]
-                                                    PiècesGraphique[(
-                                                        0, Y2)] = ''
+        if k == 0:
+            P = []
+            M = []
+            for piece in Plateau.values():
+                if piece != '' and piece.Color == 'Black' and mvt_final(piece, Plateau) != []:
+                    P.append(piece)
+                    M = M + [mvt_final(piece, Plateau)]
 
-                                                Plateau[(X, Y)].move(
-                                                    X2, Y2)
-                                                Plateau[(X2, Y2)] = ChangeV2(
-                                                    Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)  # Le pion est arrivé au bout de plateau
-                                                Plateau[(X, Y)] = ''
-                                                # Déplacement de la pièce graphique
-                                                PiècesGraphique[(
-                                                    X2, Y2)] = PiècesGraphique[(X, Y)]
-                                                PiècesGraphique[(X, Y)] = ''
-                                                event_happened = True
-                                                k = 1  # C'est au tour des blancs de jouer
-                                            else:
-                                                print(
-                                                    "Ce déplacement n'est pas possible")
-                                                event_happened = True
-                            else:
-                                print('Les pièces noires doivent jouer')
+            p = randint(0, len(P)-1)
+            X, Y = P[p].Pos_X, P[p].Pos_Y
+
+            m = randint(0, len(M[p])-1)
+            X2, Y2 = M[p][m][0], M[p][m][1]
+
+            _roque = roque(
+                Plateau[(X, Y)], X2, Plateau)
+            if _roque == 'Petit':
+                PiècesGraphique[(
+                    5, Y2)] = PiècesGraphique[(7, Y2)]
+                PiècesGraphique[(
+                    7, Y2)] = ''
+            elif _roque == 'Grand':
+                PiècesGraphique[(
+                    3, Y2)] = PiècesGraphique[(0, Y2)]
+                PiècesGraphique[(
+                    0, Y2)] = ''
+
+            Plateau[(X, Y)].move(
+                X2, Y2)
+            Plateau[(X2, Y2)] = ChangeV2(
+                Plateau[(X, Y)], (X, Y), PiècesGraphique, fenetre)  # Le pion est arrivé au bout de plateau
+            Plateau[(X, Y)] = ''
+            # Déplacement de la pièce graphique
+            PiècesGraphique[(
+                X2, Y2)] = PiècesGraphique[(X, Y)]
+            PiècesGraphique[(X, Y)] = ''
+            event_happened = True
+            k = 1  # C'est au tour des blancs de jouer
 
         # Recollage
         fenetre.blit(Damier, (0, 0))  # On remet le fond
@@ -532,7 +522,7 @@ def jeu_Final():
             if valeur == '':
                 pass
             else:
-                fenetre.blit(valeur, ((cle[0])*80, (7-cle[1])*80))
+                fenetre.blit(valeur, (cle[0]*80, (7-cle[1])*80))
 
         # Affichage si le roi est en échec
         for piece in Plateau.values():
