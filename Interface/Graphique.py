@@ -2,7 +2,6 @@ import pygame
 from pygame import image
 from pygame.locals import *
 from pygame.constants import RESIZABLE
-import time
 
 
 pygame.init()
@@ -110,7 +109,6 @@ def Echiquier():
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
-                MenuStart()
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     mouse = event.pos

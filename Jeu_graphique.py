@@ -460,7 +460,8 @@ def jeu_Final():
         for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
             if event.type == QUIT:  # Si un de ces événements est de type QUIT
                 pygame.quit()  # On arrête le programme
-                MenuStart(jeu_init, jeu_Final,jeu_Final)  # On relance le Menu
+                # On relance le Menu
+                MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:  # Si clic gauche
                     mouse = event.pos
@@ -597,6 +598,7 @@ def jeu_Final():
         if echec_et_mat(Plateau) or egalite(Plateau):
             k = 3
 
+
 def jeu_FinalVS():
     """La fonction porte bien son nom, elle permet de jouer au jeu d'échec avec une interface graphique contre un bot
 
@@ -694,7 +696,7 @@ def jeu_FinalVS():
 
     k = 1
     X1, Y1 = 8, 8
-    X2, Y2 = 8, 8
+    X3, Y3 = 8, 8
 
     while k != 3:
         if k == 2:  # Permet de changer les tours tout en vérifiant bien qu'on vérifié si le roi est en échec, etc à chaque fois
@@ -705,7 +707,8 @@ def jeu_FinalVS():
             for event in pygame.event.get():  # On parcours la liste de tous les événements reçus
                 if event.type == QUIT:  # Si un de ces événements est de type QUIT
                     pygame.quit()  # On arrête le programme
-                    MenuStart(jeu_init,jeu_Final,jeu_FinalVS)  # On relance le menu
+                    # On relance le menu
+                    MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:  # Si clic gauche
                         mouse = event.pos
@@ -772,35 +775,34 @@ def jeu_FinalVS():
                     M = M + [mvt_final(piece, Plateau)]
 
             p = randint(0, len(P)-1)
-            X, Y = P[p].Pos_X, P[p].Pos_Y
-            X1, Y1 = X, Y
+            X1, Y1 = P[p].Pos_X, P[p].Pos_Y
 
             m = randint(0, len(M[p])-1)
-            X2, Y2 = M[p][m][0], M[p][m][1]
+            X3, Y3 = M[p][m][0], M[p][m][1]
 
             _roque = roque(
-                Plateau[(X, Y)], X2, Plateau)
+                Plateau[(X1, Y1)], X3, Plateau)
             if _roque == 'Petit':
                 PiècesGraphique[(
-                    5, Y2)] = PiècesGraphique[(7, Y2)]
+                    5, Y3)] = PiècesGraphique[(7, Y3)]
                 PiècesGraphique[(
-                    7, Y2)] = ''
+                    7, Y3)] = ''
             elif _roque == 'Grand':
                 PiècesGraphique[(
-                    3, Y2)] = PiècesGraphique[(0, Y2)]
+                    3, Y3)] = PiècesGraphique[(0, Y3)]
                 PiècesGraphique[(
-                    0, Y2)] = ''
+                    0, Y3)] = ''
 
-            Plateau[(X, Y)].move(
-                X2, Y2)
+            Plateau[(X1, Y1)].move(
+                X3, Y3)
             # Le pion est arrivé au bout de plateau
-            Plateau[(X2, Y2)] = ChangeVS(Plateau[(X, Y)],
-                                         (X, Y), PiècesGraphique, fenetre)
-            Plateau[(X, Y)] = ''
+            Plateau[(X3, Y3)] = ChangeVS(Plateau[(X1, Y1)],
+                                         (X1, Y1), PiècesGraphique, fenetre)
+            Plateau[(X1, Y1)] = ''
             # Déplacement de la pièce graphique
             PiècesGraphique[(
-                X2, Y2)] = PiècesGraphique[(X, Y)]
-            PiècesGraphique[(X, Y)] = ''
+                X3, Y3)] = PiècesGraphique[(X1, Y1)]
+            PiècesGraphique[(X1, Y1)] = ''
             event_happened = True
 
             k = 1  # C'est au tour des blancs de jouer
@@ -832,12 +834,13 @@ def jeu_FinalVS():
             pygame.draw.rect(fenetre, (255, 127, 0),
                              (X1*80, (7-Y1)*80, 80, 80), 5)
             pygame.draw.rect(fenetre, (255, 127, 0),
-                             (X2*80, (7-Y2)*80, 80, 80), 5)
+                             (X3*80, (7-Y3)*80, 80, 80), 5)
 
         pygame.display.flip()
 
         if echec_et_mat(Plateau) or egalite(Plateau):
             k = 3
 
+
 if __name__ == "__main__":
-    MenuStart(jeu_init,jeu_Final,jeu_FinalVS)
+    MenuStart(jeu_init, jeu_Final, jeu_FinalVS)
