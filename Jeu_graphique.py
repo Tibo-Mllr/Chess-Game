@@ -127,7 +127,7 @@ def jeu_init():
     CavalierNoir2 = Cavalier('d', 'Black')
     Plateau[CavalierNoir2.Pos_X, CavalierNoir2.Pos_Y] = CavalierNoir2
 
-def ChangeV2(piece, fenetre):
+def ChangeV2(piece, X , plateaugraphique ,fenetre):
     if piece.name == 'pion':
         if (piece.Color == 'White' and piece.Pos_Y == 7):
             ReineBlanche = image.load(
@@ -162,19 +162,38 @@ def ChangeV2(piece, fenetre):
             TourBlancF = pygame.transform.scale(TourBlanche, (150, 150))
             fenetre.blit(TourBlancF, (640-100-150, 400))
             pygame.display.flip()
-            event = pygame.event.wait()
-            if event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:  # Si clic gauche
-                    mouse = event.pos
-                    if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
-                        print("Vous avez choisi la Reine")
-                    if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146:
-                        print("Vous avez choisi le Cavalier")
-                    if 254 > mouse[0] > 96 and 554 > mouse[1] > 396:
-                        print("Vous avez choisi le Fou")
-                    if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
-                        print("Vous avez choisi la Tour")
-
+            event_happened = False
+            while not event_happened:
+                event = pygame.event.wait()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Si clic gauche
+                        mouse = event.pos
+                        if 254 > mouse[0] > 96 and 304 > mouse[1] > 146:
+                            ReineBlancheG = pygame.transform.scale(ReineBlanche, (80, 80))
+                            Changement = Dame('g', piece.Color, True,
+                                    piece.Pos_X, piece.Pos_Y)
+                            plateaugraphique[(X[0],X[1])] = ReineBlancheG
+                            event_happened= True
+                        if 640-96 > mouse[0] > 640-254 and 304 > mouse[1] > 146:
+                            CavalierBlancG = pygame.transform.scale(CavalierBlanc, (80, 80))
+                            Changement = Cavalier('g', piece.Color, True,
+                                    piece.Pos_X, piece.Pos_Y)
+                            plateaugraphique[(X[0],X[1])] = CavalierBlancG
+                            event_happened= True
+                        if 254 > mouse[0] > 96 and 554 > mouse[1] > 396:
+                            FouBlancG = pygame.transform.scale(FouBlanc, (80, 80))
+                            Changement = Fou('g', piece.Color, True,
+                                        piece.Pos_X, piece.Pos_Y)
+                            plateaugraphique[(X[0],X[1])] = FouBlancG
+                            event_happened= True
+                        if 640-96 > mouse[0] > 640-254 and 554 > mouse[1] > 396:
+                            TourBlancheG = pygame.transform.scale(TourBlanche, (80, 80))
+                            Changement = Fou('g', piece.Color, True,
+                                    piece.Pos_X, piece.Pos_Y)
+                            plateaugraphique[(X[0],X[1])] = TourBlancheG
+                            event_happened= True
+                        return Changement
+        return piece
 
 def jeu_Final():
     # Création de la fenêtre
@@ -317,9 +336,7 @@ def jeu_Final():
 
                                                 Plateau[(X, Y)].move(X2, Y2)
                                                 Plateau[(X2, Y2)] = change(
-                                                    Plateau[(X, Y)])    #A changer
-                                                Plateau[(X, Y)] = ''
-
+                                                    Plateau[(X, Y)])
                                                 PiècesGraphique[(
                                                     X2, Y2)] = PiècesGraphique[(X, Y)]
                                                 PiècesGraphique[(X, Y)] = ''
@@ -365,8 +382,8 @@ def jeu_Final():
                                                         0, Y2)] = ''
 
                                                 Plateau[(X, Y)].move(X2, Y2)
-                                                Plateau[(X2, Y2)] = ChangeV2(
-                                                    Plateau[(X, Y)],fenetre)
+                                                Plateau[(X2, Y2)] = change(
+                                                    Plateau[(X, Y)])
                                                 Plateau[(X, Y)] = ''
 
                                                 PiècesGraphique[(
