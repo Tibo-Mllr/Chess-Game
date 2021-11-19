@@ -265,13 +265,13 @@ def jeu_Final():
                                                         3, Y2)] = PiècesGraphique[(0, Y2)]
                                                     PiècesGraphique[(
                                                         0, Y2)] = ''
-                                                else:
-                                                    Plateau[(X, Y)].move(
-                                                        X2, Y2)
 
-                                                    Plateau[(X2, Y2)] = change(
-                                                        Plateau[(X, Y)])
-                                                    Plateau[(X, Y)] = ''
+                                                Plateau[(X, Y)].move(
+                                                    X2, Y2)
+
+                                                Plateau[(X2, Y2)] = change(
+                                                    Plateau[(X, Y)])
+                                                Plateau[(X, Y)] = ''
 
                                                 PiècesGraphique[(
                                                     X2, Y2)] = PiècesGraphique[(X, Y)]
@@ -315,13 +315,13 @@ def jeu_Final():
                                                         3, Y2)] = PiècesGraphique[(0, Y2)]
                                                     PiècesGraphique[(
                                                         0, Y2)] = ''
-                                                else:
-                                                    Plateau[(X, Y)].move(
-                                                        X2, Y2)
 
-                                                    Plateau[(X2, Y2)] = change(
-                                                        Plateau[(X, Y)])
-                                                    Plateau[(X, Y)] = ''
+                                                Plateau[(X, Y)].move(
+                                                    X2, Y2)
+
+                                                Plateau[(X2, Y2)] = change(
+                                                    Plateau[(X, Y)])
+                                                Plateau[(X, Y)] = ''
 
                                                 PiècesGraphique[(
                                                     X2, Y2)] = PiècesGraphique[(X, Y)]

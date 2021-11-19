@@ -595,28 +595,29 @@ def grand_roque(roi, plateau):
                 if not echec_si_mouvement_du_roi(roi, 3, 0, plateau) and not echec_si_mouvement_du_roi(roi, 2, 0, plateau):
                     grand_roque_possible = True
     if roi.Color == 'Black' and roi.Moved == False and case_libre(3, 7, plateau) and case_libre(2, 7, plateau) and case_libre(1, 7, plateau) and not roi_en_echec(roi, plateau):
-        if not case_libre(7, 0, plateau):
-            if plateau[(7, 7)].name == 'tour' and plateau[(7, 7)].Moved == False:
+        if not case_libre(0, 7, plateau):
+            if plateau[(0, 7)].name == 'tour' and plateau[(0, 7)].Moved == False:
                 if not echec_si_mouvement_du_roi(roi, 3, 7, plateau) and not echec_si_mouvement_du_roi(roi, 2, 7, plateau):
                     grand_roque_possible = True
     return grand_roque_possible
 
 
 def roque(piece, x, plateau):
+    print("Etape1")
     if piece.name == 'roi':
         if (piece.Color == 'White' and x-piece.Pos_X in [2, -2]) or (piece.Color == 'Black' and x-piece.Pos_X in [2, -2]):
             if x-piece.Pos_X == 2 and petit_roque(piece, plateau):
                 Tour = plateau[(7, piece.Pos_Y)]
                 Tour.move(5, piece.Pos_Y)
-                piece.move(6, piece.Pos_Y)
-                plateau[(4, piece.Pos_Y)], plateau[(7, piece.Pos_Y)], plateau[(
-                    6, piece.Pos_Y)], plateau[(5, piece.Pos_Y)] = '', '', piece, Tour
+                plateau[(5, piece.Pos_Y)] = Tour
+                plateau[(7, piece.Pos_Y)] = ''
+                print("Etape2")
                 return "Petit"
 
             if x-piece.Pos_X == -2 and grand_roque(piece, plateau):
                 Tour = plateau[(0, piece.Pos_Y)]
                 Tour.move(3, piece.Pos_Y)
-                piece.move(2, piece.Pos_Y)
-                plateau[(4, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
-                    2, piece.Pos_Y)], plateau[(3, piece.Pos_Y)] = '', '', piece, Tour
+                plateau[(3, piece.Pos_Y)] = Tour
+                plateau[(0, piece.Pos_Y)] = ''
+                print("Etape3")
                 return "Grand"
