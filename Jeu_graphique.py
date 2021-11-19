@@ -875,7 +875,7 @@ def jeu_FinalVS():
 
         if egalite(Plateau):
             pygame.draw.rect(fenetre, '#606060', (640/2-70, 300, 140, 40))
-            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-70, 300, 140, 4), 1)
+            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-70, 300, 140, 40), 1)
             pygame.font.init()  # On initialise la création de texte sur pygame
             # On choisit la police d'écriture et la taille de la police du texte
             TexteSurface = pygame.font.SysFont('Times New Roman', 25)
@@ -893,8 +893,8 @@ def jeu_FinalVS():
                         event_happened = True
 
         if echec_et_mat(Plateau)[0]:
-            pygame.draw.rect(fenetre, '#606060', (640/2-70, 300, 140, 40))
-            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-70, 300, 140, 4), 1)
+            pygame.draw.rect(fenetre, '#606060', (640/2-160, 300, 320, 40))
+            pygame.draw.rect(fenetre, (0, 0, 0), (640/2-160, 300, 320, 40), 1)
             pygame.font.init()  # On initialise la création de texte sur pygame
             # On choisit la police d'écriture et la taille de la police du texte
             TexteSurface = pygame.font.SysFont('Times New Roman', 25)
