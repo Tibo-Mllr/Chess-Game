@@ -128,7 +128,7 @@ def jeu():
     print(grid_to_string(Plateau))
     k = 1
 
-    while not echec_et_mat(Plateau) and not egalite(Plateau):
+    while not echec_et_mat(Plateau)[0] and not egalite(Plateau):
         x = input("Entrez l'abscisse de la pièce que vous voulez déplacer : ")
         y = input("Entrez l'ordonnée de la pièce que vous voulez déplacer : ")
         x2 = input("Entrez l'abscisse voulue : ")
