@@ -383,7 +383,6 @@ def roi_en_echec(roi, plateau):
     """
     for piece in plateau.values():
         if piece != '' and piece != roi and piece.Color != roi.Color and (roi.Pos_X, roi.Pos_Y) in mvt_possible_gen(piece, plateau):
-            roi.Checked = True
             return True
     return False
 
@@ -560,6 +559,7 @@ def petit_roque(roi, plateau):
         ------
         booléen
     """
+
     petit_roque_possible = False
     if roi.Color == 'White' and roi.Moved == False and case_libre(5, 0, plateau) and case_libre(6, 0, plateau) and not roi_en_echec(roi, plateau):
         if not case_libre(7, 0, plateau):
@@ -596,14 +596,14 @@ def roque(piece, x, plateau):
                 Tour = plateau[(7, piece.Pos_Y)]
                 Tour.move(5, piece.Pos_Y)
                 piece.move(6, piece.Pos_Y)
-                plateau[(5, piece.Pos_Y)], plateau[(7, piece.Pos_Y)], plateau[(
+                plateau[(4, piece.Pos_Y)], plateau[(7, piece.Pos_Y)], plateau[(
                     6, piece.Pos_Y)], plateau[(5, piece.Pos_Y)] = '', '', piece, Tour
 
             if x-piece.Pos_X == -2 and grand_roque(piece, plateau):
                 Tour = plateau[(0, piece.Pos_Y)]
                 Tour.move(3, piece.Pos_Y)
                 piece.move(2, piece.Pos_Y)
-                plateau[(5, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
+                plateau[(4, piece.Pos_Y)], plateau[(0, piece.Pos_Y)], plateau[(
                     2, piece.Pos_Y)], plateau[(3, piece.Pos_Y)] = '', '', piece, Tour
 
 
