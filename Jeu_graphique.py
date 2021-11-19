@@ -899,7 +899,7 @@ def jeu_FinalVS():
             # On choisit la police d'écriture et la taille de la police du texte
             TexteSurface = pygame.font.SysFont('Times New Roman', 25)
             TexteMenu, TextRectMenu = CréationTexte(
-                'Egalité', TexteSurface, (0, 0, 0))
+                echec_et_mat(Plateau)[1], TexteSurface, (0, 0, 0))
             TextRectMenu.center = ((640/2), (320))  # On centre le texte
             fenetre.blit(TexteMenu, TextRectMenu)
             pygame.display.flip()
