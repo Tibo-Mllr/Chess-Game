@@ -22,16 +22,16 @@ def egalite(plateau):
 
     if mvt_final(RoiBlanc, plateau) == [] and not roi_en_echec(RoiBlanc, plateau):
         for pièce in plateau.values():
-            if pièce != '' and mvt_final(pièce, plateau) != []:
+            if pièce != '' and pièce.Color=='White' and mvt_final(pièce, plateau) != []:
                 return False
-        print("Pat du roi blanc ! Egalité.")
+        print("Pat")
         return True
 
     if mvt_final(RoiNoir, plateau) == [] and not roi_en_echec(RoiNoir, plateau):
         for pièce in plateau.values():
-            if pièce != '' and mvt_final(pièce, plateau) != []:
+            if pièce != '' and pièce.Color=='Black' and mvt_final(pièce, plateau) != []:
                 return False
-        print("Pat du roi noir ! Egalité.")
+        print("Pat")
         return True
 
     return False

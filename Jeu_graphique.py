@@ -1,4 +1,4 @@
-from Classes.Pieces import *
+
 from Interface.Graphique import MenuStart
 from Jeu.Chess import *
 import pygame
@@ -500,8 +500,14 @@ def jeu_Final():
         for piece in Plateau.values():
             if piece != '' and piece.name == 'roi' and piece.Color == 'White':
                 RoiBlancP = piece
+                if roi_en_echec(RoiBlancP, Plateau):
+                    pygame.draw.rect(
+                        fenetre, (255, 0, 0), (RoiBlancP.Pos_X*80, (7-RoiBlancP.Pos_Y)*80, 80, 80), 5)
             if piece != '' and piece.name == 'roi' and piece.Color == 'Black':
-                RoiNoirP = piece
+                RoiBlackP = piece
+                if roi_en_echec(RoiBlackP, Plateau):
+                    pygame.draw.rect(
+                        fenetre, (255, 0, 0), (RoiBlackP.Pos_X*80, (7-RoiBlackP.Pos_Y)*80, 80, 80), 5)
 
         pygame.display.flip()
 
