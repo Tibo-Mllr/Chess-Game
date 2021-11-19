@@ -1,4 +1,4 @@
-from Classes.Pieces import *
+
 from Interface.Graphique import MenuStart
 from Jeu.Chess import *
 import pygame
