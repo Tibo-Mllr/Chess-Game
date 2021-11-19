@@ -22,7 +22,7 @@ This is *a chess game*
 * Jeu_python.py est le jeu général, sans interface graphique, mais dans le terminal. C'est LE fichier à exécuter pour lancer le MVP.
 ![alt text](Photos_ReadMe/Jeu_Python.png)
 
-* Jeu.py est le jeu général, sur interface graphique. C'est LE fichier à exécuter pour lancer le jeu.
+* Jeu_graphique.py est le jeu général, sur interface graphique. C'est LE fichier à exécuter pour lancer le jeu.
 ![alt text](Photos_ReadMe/Menu_Graphique.png)
 ![alt text](Photos_ReadMe/Jeu_Graphique.png)
 
